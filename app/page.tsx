@@ -24,16 +24,17 @@ export default async function Home() {
     .select("roles(role)")
     .eq("id", user!.id)
     .single();
-
+    console.log(data)
     const userRole = data.data?.roles.role;
+    console.log(userRole)
 
     if (userRole === 'teacher') {
       revalidatePath("/", "layout");
-      redirect("/teacher");
+      redirect("/dashboard/teacher");
     }
 
     if (userRole === 'student') {
       revalidatePath("/", "layout");
-      redirect("/student");
+      redirect("/dashboard/student");
     }
 }
