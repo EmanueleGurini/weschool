@@ -1,22 +1,23 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
 import { type User } from "@supabase/supabase-js";
 import Avatar from "./avatar";
+import { useRouter } from "next/navigation";
+import { createClient } from "utils/supabase/client";
 
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
   const [fullname, setFullname] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
-  const [website, setWebsite] = useState<string | null>(null);
   const [avatar_url, setAvatarUrl] = useState<string | null>(null);
+  const router = useRouter();
 
   const getProfile = useCallback(async () => {
     try {
       setLoading(true);
 
-      const { data, error, status } = await supabase.from("profiles").select(`full_name, username, website, avatar_url`).eq("id", user?.id).single();
+      const { data, error, status } = await supabase.from("profiles").select(`full_name, username, avatar_url`).eq("id", user?.id).single();
 
       if (error && status !== 406) {
         console.log(error);
@@ -26,7 +27,6 @@ export default function AccountForm({ user }: { user: User | null }) {
       if (data) {
         setFullname(data.full_name);
         setUsername(data.username);
-        setWebsite(data.website);
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
@@ -42,12 +42,10 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   async function updateProfile({
     username,
-    website,
     avatar_url,
   }: {
     username: string | null;
     fullname: string | null;
-    website: string | null;
     avatar_url: string | null;
   }) {
     try {
@@ -57,7 +55,6 @@ export default function AccountForm({ user }: { user: User | null }) {
         id: user?.id as string,
         full_name: fullname,
         username,
-        website,
         avatar_url,
         updated_at: new Date().toISOString(),
       });
@@ -71,6 +68,7 @@ export default function AccountForm({ user }: { user: User | null }) {
   }
 
   return (
+    <>
     <div className="form-widget">
       <div className="form-widget">
         {/* Add to the body */}
@@ -80,7 +78,7 @@ export default function AccountForm({ user }: { user: User | null }) {
           size={150}
           onUpload={(url) => {
             setAvatarUrl(url);
-            updateProfile({ fullname, username, website, avatar_url: url });
+            updateProfile({ fullname, username, avatar_url: url });
           }}
         />
         {/* ... */}
@@ -99,11 +97,10 @@ export default function AccountForm({ user }: { user: User | null }) {
       </div>
 
       <div>
-        <button className="button primary block" onClick={() => updateProfile({ fullname, username, website, avatar_url })} disabled={loading}>
+        <button className="button primary block" onClick={() => updateProfile({ fullname, username, avatar_url })} disabled={loading}>
           {loading ? "Loading ..." : "Update"}
         </button>
       </div>
-
       <div>
         <form action="/auth/signout" method="post">
           <button className="button block" type="submit">
@@ -112,5 +109,7 @@ export default function AccountForm({ user }: { user: User | null }) {
         </form>
       </div>
     </div>
+    <button onClick={() => router.back()}>Torna alla Home</button>
+    </>
   );
 }

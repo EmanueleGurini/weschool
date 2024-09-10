@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { createClient } from "@/utils/supabase/client";
 import Image from "next/image";
+import { createClient } from "utils/supabase/client";
 
 export default function Avatar({ uid, url, size, onUpload }: { uid: string | null; url: string | null; size: number; onUpload: (url: string) => void }) {
   const supabase = createClient();
