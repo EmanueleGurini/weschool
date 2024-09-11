@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar"; 
 import Link from "next/link";
+import Header from "@/components/Header";
 
 interface Class {
     id: number;
@@ -56,22 +57,7 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ classes }) => {
     return (
         <div className="dashboard-container min-h-screen bg-gray-100">
             <Navbar /> 
-            <header className="p-6 flex justify-between items-center">
-                <div className="flex items-center space-x-4">
-                    <img
-                        src="/images/profile.png"
-                        alt="Profile"
-                        className="profile-image w-16 h-16 rounded-full"
-                    />
-                    <div>
-                        <h1 className="text-xl font-bold">Ciao, Chris!</h1>
-                        <p>Spero tu abbia avuto un'ottima giornata...</p>
-                    </div>
-                </div>
-                <div className="header-info text-lg font-semibold">
-                    <p>Data: {formattedDate}</p>
-                </div>
-            </header>
+            <Header greeting={"Salve Prof!"} text={"Spero abbiate avuto una buona giornata..."}/>
 
             <main className="p-6">
                 <section className="total-students mb-6">
