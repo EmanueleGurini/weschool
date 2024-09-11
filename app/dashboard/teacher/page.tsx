@@ -22,7 +22,7 @@ const TeacherDashboard: React.FC<TeacherDashboardProps> = ({ classes }) => {
 
     const fetchStudentsForClasses = async () => {
         try {
-            const response = await fetch("https://jsonplaceholder.typicode.com/posts"); // API fittizia
+            const response = await fetch("https://jsonplaceholder.typicode.com/posts"); 
             const data = await response.json();
 
             const updatedClasses = classes.map((classItem, index) => ({
