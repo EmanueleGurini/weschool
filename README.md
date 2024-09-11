@@ -10,8 +10,8 @@ All'interno della root del progetto, è necessario creare un file `.env.local` c
 2. Inserisci al suo interno le seguenti stringhe:
 
 ```bash
-   NEXT_PUBLIC_SUPABASE_URL=https://ihymhmvbzbgzrnlusnxj.supabase.co
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFobXZiemJnenJubHVzbnhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU4Nzk2MzMsImV4cCI6MjA0MTQ1NTYzM30._mtUPXpudpf1-zMBK2gDk0ddvZJmVch4G3MSd9e6V6E
+   NEXT_PUBLIC_SUPABASE_URL=https://ihymhmvbzbgzrnlusnxj.supabase.co/
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloeW1obXZiemJnenJubHVzbnhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU4Nzk2MzMsImV4cCI6MjA0MTQ1NTYzM30._mtUPXpudpf1-zMBK2gDk0ddvZJmVch4G3MSd9e6V6E
 ```
 
 ### 2. Installazione delle dipendenze
