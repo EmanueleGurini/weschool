@@ -2,7 +2,7 @@ import Link from "next/link";
 
 interface CardProps {
   title: string;
-  description: string;
+  description: React.ReactNode;
   href: string;
 }
 
