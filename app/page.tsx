@@ -3,7 +3,7 @@ import { revalidatePath } from "next/cache";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { createClient } from "utils/supabase/server";
 
-interface IRole {
+export interface IRole {
   roles: {
     role: string;
   }
