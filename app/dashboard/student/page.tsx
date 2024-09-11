@@ -1,6 +1,11 @@
 import Card from "@/components/Card";
 import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createClient } from "utils/supabase/server";
+import { IRole } from "app/page";
 
 const formattedDate = new Intl.DateTimeFormat("it-IT", {
   day: "2-digit",
@@ -8,7 +13,32 @@ const formattedDate = new Intl.DateTimeFormat("it-IT", {
   year: "numeric",
 }).format(new Date());
 
-function studentPage() {
+async function studentPage() {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  if (user) {
+    const data: PostgrestSingleResponse<IRole> = await supabase
+    .from("profile_roles")
+    .select("roles(role)")
+    .eq("id", user!.id)
+    .single();
+    
+    const userRole = data.data?.roles.role;
+
+    if (userRole === 'teacher') {
+      revalidatePath("/", "layout");
+      redirect("/dashboard/teacher");
+    }
+  }
+
   return (
     <div>
       <Navbar />

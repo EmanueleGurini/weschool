@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import Navbar from "@/components/Navbar";
-import Link from "next/link";
-import { createClient } from "utils/supabase/client";
 import TeacherDashboard from "./class/[id]/components/teacher-dashboard";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createClient } from "utils/supabase/server";
+import { IRole } from "app/page";
 
 interface Class {
   id: number;
@@ -30,6 +30,31 @@ const getData = async () => {
 
 export default async function Page() {
   const data = await getData();
+
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/login");
+  }
+
+  if (user) {
+    const data: PostgrestSingleResponse<IRole> = await supabase
+    .from("profile_roles")
+    .select("roles(role)")
+    .eq("id", user!.id)
+    .single();
+    
+    const userRole = data.data?.roles.role;
+
+    if (userRole === 'student') {
+      revalidatePath("/", "layout");
+      redirect("/dashboard/student");
+    }
+  }
 
   return <TeacherDashboard classes={data.courses} />;
 }
