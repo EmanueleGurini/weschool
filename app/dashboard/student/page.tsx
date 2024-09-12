@@ -6,7 +6,9 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import { IRole } from "app/page";
-import ProgressBar from "@/components/ProgressBar";
+import PureComponent from "./component/Chart";
+import Table from "@/components/ui/Table";
+import Link from "next/link";
 
 interface StudentData {
   studentName: string;
@@ -17,6 +19,34 @@ interface StudentData {
     courseLength: number;
   };
 }
+
+// PASSO DATI STATICI A TABLE
+// intestazioni tabella
+const headers = ["Data", "Voto", "Note"];
+
+// dati tabella
+const tableData = [
+  { date: "2024-09-08", voto: "8", note: "Buona performance" },
+  { date: "2024-09-09", voto: "7", note: "Discreto" },
+  { date: "2024-09-10", voto: "9", note: "Ottima performance" },
+  { date: "2024-09-11", voto: "8", note: "Buona performance" },
+  { date: "2024-09-12", voto: "7", note: "Discreto" },
+];
+
+// rendering righe
+const renderRow = (item: any) => (
+  <>
+    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      {item.date}
+    </td>
+    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      {item.voto}
+    </td>
+    <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+      {item.note}
+    </td>
+  </>
+);
 
 const fetchData = async () => {
   try {
@@ -68,19 +98,27 @@ async function StudentPage() {
       <div className="flex flex-col items-center space-y-4 p-4">
         <h1 className="text-3xl font-bold mb-6">Student Page</h1>
         <div className="flex items-center p-4 gap-5">
-          <Card
+          {/* <Card
             title="Compagni"
             description={`La tua classe ha ${data?.classmates} compagni`}
           />
           <ProgressBar
             title="Assenze"
             description={`Presenze: ${data?.hours.presences} / ${data?.hours.courseLength} ore`}
-          />
+          /> */}
         </div>
-        {/* <div>
-          <Table
-           headers={headers} data={students} renderRow={renderRow}/>
-        </div> */}
+        <div className="flex flex-row w-full space-x-4">
+          <Link href="/chart-page" className="w-1/2 h-96 ">
+            <div className="w-full h-full cursor-pointer">
+              <PureComponent />
+            </div>
+          </Link>
+          <Link href="/table-page" className="w-1/2 h-96">
+            <div className="w-full h-full cursor-pointer">
+              <Table headers={headers} data={tableData} renderRow={renderRow} />
+            </div>
+          </Link>
+        </div>
       </div>
     </div>
   );
