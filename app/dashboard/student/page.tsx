@@ -1,12 +1,12 @@
 import Card from "@/components/Card";
 import Header from "@/components/Header";
-import Navbar from "@/components/Navbar";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import { IRole } from "app/page";
 import ProgressBar from "@/components/ProgressBar";
+import LayoutAfterLogin from "../layoutAfterLogin";
 
 interface StudentData {
   studentName: string;
@@ -57,8 +57,7 @@ async function StudentPage() {
   }
 
   return (
-    <div>
-      <Navbar />
+    <LayoutAfterLogin>
       <div>
         <Header
           greeting={`ciao ${data?.studentName}`}
@@ -79,10 +78,10 @@ async function StudentPage() {
         </div>
         {/* <div>
           <Table
-           headers={headers} data={students} renderRow={renderRow}/>
+            headers={headers} data={students} renderRow={renderRow}/>
         </div> */}
       </div>
-    </div>
+    </LayoutAfterLogin>
   );
 }
 

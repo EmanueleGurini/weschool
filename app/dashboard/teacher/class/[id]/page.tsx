@@ -5,6 +5,7 @@ import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { IRole } from "app/page";
 import { revalidatePath } from "next/cache";
 import { getStudentsList } from "app/api/supabase/actions";
+import LayoutAfterLogin from "@/dashboard/layoutAfterLogin";
 
 interface SinglePageClassProps {
   params: { id: string };
@@ -33,5 +34,11 @@ export default async function SinglePageClass({ params }: SinglePageClassProps) 
   }
   const classData = await getStudentsList(id);
   console.log(classData);
-  return <ClassDetailPage />;
+  return (
+    <LayoutAfterLogin>
+          <ClassDetailPage />
+    </LayoutAfterLogin>
+  )
+  
+
 }

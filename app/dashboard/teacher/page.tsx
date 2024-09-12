@@ -1,17 +1,19 @@
-import TeacherDashboard from "./class/[id]/components/teacher-dashboard";
+import TeacherDashboard from "./components/teacher-dashboard";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import { IRole } from "app/page";
 import { getTeacherDataByID } from "app/api/supabase/actions";
+import LayoutAfterLogin from "../layoutAfterLogin";
+
 interface Class {
   id: number;
   name: string;
   students: number;
 }
 
-export default async function Page() {
+export default async function TeacherPage() {
   const data = await getTeacherDataByID();
 
   const supabase = createClient();
@@ -36,8 +38,8 @@ export default async function Page() {
   }
 
   return (
-    <div>
+    <LayoutAfterLogin>
       <TeacherDashboard classes={data.courses} />
-    </div>
+    </LayoutAfterLogin>
   );
 }
