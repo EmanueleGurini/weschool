@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { login } from "./actions";
 import Image from "next/image";
 
@@ -56,7 +57,12 @@ export default function LoginPage() {
                 />
               </div>
             </div>
-
+            <Link 
+              href="/retrievePasswordEmail"
+              className="text-sm font-medium text-blue-500 underline"
+            >
+              Retrieve Password
+            </Link>
             <div>
               <button
                 formAction={login}
