@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import { IRole } from "app/page";
+import ProgressBar from "@/components/ProgressBar";
 
 interface StudentData {
   studentName: string;
@@ -70,24 +71,16 @@ async function StudentPage() {
           <Card
             title="Compagni"
             description={`La tua classe ha ${data?.classmates} compagni`}
-            href="stringa vuota"
           />
-          <Card
+          <ProgressBar
             title="Assenze"
-            description={`Percentuale assenze ${data?.hours}`}
-            href="stringa vuota"
+            description={`Presenze: ${data?.hours.presences} / ${data?.hours.courseLength} ore`}
           />
         </div>
-      </div>
-
-      <div className="w-full max-w-sm">
-        <h2 className="text-lg font-bold">Ore di Presenza</h2>
-        <div className="w-full bg-gray-200 rounded-full h-4">
-          <div className="bg-green-500 h-4 rounded-full" />
-        </div>
-        <p className="text-sm mt-2">
-          Presenze: {data?.hours.presences} / {data?.hours.courseLength} ore
-        </p>
+        {/* <div>
+          <Table
+           headers={headers} data={students} renderRow={renderRow}/>
+        </div> */}
       </div>
     </div>
   );
