@@ -7,13 +7,29 @@ import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import { IRole } from "app/page";
 
-const formattedDate = new Intl.DateTimeFormat("it-IT", {
-  day: "2-digit",
-  month: "2-digit",
-  year: "numeric",
-}).format(new Date());
+interface StudentData {
+  studentName: string;
+  classmates: number;
+  hours: {
+    absences: number;
+    presences: number;
+    courseLength: number;
+  };
+}
 
-async function studentPage() {
+const fetchData = async () => {
+  try {
+    const response = await fetch("apicall");
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    console.log("errore:", e);
+  }
+};
+
+async function StudentPage() {
+  const data = await fetchData();
+
   const supabase = createClient();
 
   const {
@@ -26,14 +42,14 @@ async function studentPage() {
 
   if (user) {
     const data: PostgrestSingleResponse<IRole> = await supabase
-    .from("profile_roles")
-    .select("roles(role)")
-    .eq("id", user!.id)
-    .single();
-    
+      .from("profile_roles")
+      .select("roles(role)")
+      .eq("id", user!.id)
+      .single();
+
     const userRole = data.data?.roles.role;
 
-    if (userRole === 'teacher') {
+    if (userRole === "teacher") {
       revalidatePath("/", "layout");
       redirect("/dashboard/teacher");
     }
@@ -42,21 +58,39 @@ async function studentPage() {
   return (
     <div>
       <Navbar />
-
       <div>
-        <Header greeting="Ciao studente" text="Sarai sicuramente bocciato!!" />
+        <Header
+          greeting={`ciao ${data?.studentName}`}
+          text="Sarai sicuramente bocciato!!"
+        />
       </div>
-
       <div className="flex flex-col items-center space-y-4 p-4">
         <h1 className="text-3xl font-bold mb-6">Student Page</h1>
         <div className="flex items-center p-4 gap-5">
-          <Card title="Compagni" description="La tua classe ha 23 compagni" href="stringa vuota" />
-
-          <Card title="Assenze" description="30%" href="stringa vuota" />
+          <Card
+            title="Compagni"
+            description={`La tua classe ha ${data?.classmates} compagni`}
+            href="stringa vuota"
+          />
+          <Card
+            title="Assenze"
+            description={`Percentuale assenze ${data?.hours}`}
+            href="stringa vuota"
+          />
         </div>
+      </div>
+
+      <div className="w-full max-w-sm">
+        <h2 className="text-lg font-bold">Ore di Presenza</h2>
+        <div className="w-full bg-gray-200 rounded-full h-4">
+          <div className="bg-green-500 h-4 rounded-full" />
+        </div>
+        <p className="text-sm mt-2">
+          Presenze: {data?.hours.presences} / {data?.hours.courseLength} ore
+        </p>
       </div>
     </div>
   );
 }
 
-export default studentPage;
+export default StudentPage;
