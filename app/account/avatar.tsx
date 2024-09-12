@@ -3,7 +3,17 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { createClient } from "utils/supabase/client";
 
-export default function Avatar({ uid, url, size, onUpload }: { uid: string | null; url: string | null; size: number; onUpload: (url: string) => void }) {
+export default function Avatar({
+  uid,
+  url,
+  size,
+  onUpload,
+}: {
+  uid: string | null;
+  url: string | null;
+  size: number;
+  onUpload: (url: string) => void;
+}) {
   const supabase = createClient();
   const [avatarUrl, setAvatarUrl] = useState<string | null>(url);
   const [uploading, setUploading] = useState(false);
@@ -11,7 +21,9 @@ export default function Avatar({ uid, url, size, onUpload }: { uid: string | nul
   useEffect(() => {
     async function downloadImage(path: string) {
       try {
-        const { data, error } = await supabase.storage.from("avatars").download(path);
+        const { data, error } = await supabase.storage
+          .from("avatars")
+          .download(path);
         if (error) {
           throw error;
         }
@@ -26,7 +38,9 @@ export default function Avatar({ uid, url, size, onUpload }: { uid: string | nul
     if (url) downloadImage(url);
   }, [url, supabase]);
 
-  const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (event) => {
+  const uploadAvatar: React.ChangeEventHandler<HTMLInputElement> = async (
+    event
+  ) => {
     try {
       setUploading(true);
 
@@ -38,7 +52,9 @@ export default function Avatar({ uid, url, size, onUpload }: { uid: string | nul
       const fileExt = file.name.split(".").pop();
       const filePath = `${uid}-${Math.random()}.${fileExt}`;
 
-      const { error: uploadError } = await supabase.storage.from("avatars").upload(filePath, file);
+      const { error: uploadError } = await supabase.storage
+        .from("avatars")
+        .upload(filePath, file);
 
       if (uploadError) {
         throw uploadError;
@@ -55,12 +71,30 @@ export default function Avatar({ uid, url, size, onUpload }: { uid: string | nul
   return (
     <div>
       {avatarUrl ? (
-        <Image width={size} height={size} src={avatarUrl} alt="Avatar" className="avatar image" style={{ height: size, width: size }} />
+        <Image
+          width={size}
+          height={size}
+          src={avatarUrl}
+          alt="Avatar"
+          className="avatar image rounded-full"
+          style={{ height: size, width: size }}
+        />
       ) : (
-        <div className="avatar no-image" style={{ height: size, width: size }} />
+        <div className="avatar no-image" style={{ height: size, width: size }}>
+          <Image
+            src="/img/profile.svg"
+            width={size}
+            height={size}
+            alt="No Avatar"
+            style={{ height: size, width: size }}
+          />
+        </div>
       )}
       <div style={{ width: size }}>
-        <label className="button primary block" htmlFor="single">
+        <label
+          className="button primary block w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center mt-5 cursor-pointer"
+          htmlFor="single"
+        >
           {uploading ? "Uploading ..." : "Upload"}
         </label>
         <input

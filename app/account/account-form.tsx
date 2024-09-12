@@ -17,7 +17,11 @@ export default function AccountForm({ user }: { user: User | null }) {
     try {
       setLoading(true);
 
-      const { data, error, status } = await supabase.from("profiles").select(`full_name, username, avatar_url`).eq("id", user?.id).single();
+      const { data, error, status } = await supabase
+        .from("profiles")
+        .select(`full_name, username, avatar_url`)
+        .eq("id", user?.id)
+        .single();
 
       if (error && status !== 406) {
         console.log(error);
@@ -69,47 +73,99 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   return (
     <>
-    <div className="form-widget">
-      <div className="form-widget">
-        {/* Add to the body */}
-        <Avatar
-          uid={user?.id ?? null}
-          url={avatar_url}
-          size={150}
-          onUpload={(url) => {
-            setAvatarUrl(url);
-            updateProfile({ fullname, username, avatar_url: url });
-          }}
-        />
-        {/* ... */}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input id="email" type="text" value={user?.email} disabled />
-      </div>
-      <div>
-        <label htmlFor="fullName">Full Name</label>
-        <input id="fullName" type="text" value={fullname || ""} onChange={(e) => setFullname(e.target.value)} />
-      </div>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input id="username" type="text" value={username || ""} onChange={(e) => setUsername(e.target.value)} />
-      </div>
+      <div className="flex min-h-screen items-center justify-center p-6 bg-gray-100">
+        <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg space-y-6">
+          <div className="flex justify-center">
+            <Avatar
+              uid={user?.id ?? null}
+              url={avatar_url}
+              size={200}
+              onUpload={(url) => {
+                setAvatarUrl(url);
+                updateProfile({ fullname, username, avatar_url: url });
+              }}
+            />
+          </div>
 
-      <div>
-        <button className="button primary block" onClick={() => updateProfile({ fullname, username, avatar_url })} disabled={loading}>
-          {loading ? "Loading ..." : "Update"}
-        </button>
+          <div>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Email
+            </label>
+            <input
+              id="email"
+              type="text"
+              value={user?.email}
+              disabled
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="fullName"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Full Name
+            </label>
+            <input
+              id="fullName"
+              type="text"
+              value={fullname || ""}
+              onChange={(e) => setFullname(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="username"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Username
+            </label>
+            <input
+              id="username"
+              type="text"
+              value={username || ""}
+              onChange={(e) => setUsername(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <div>
+            <button
+              className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              onClick={() => updateProfile({ fullname, username, avatar_url })}
+              disabled={loading}
+            >
+              {loading ? "Loading ..." : "Update"}
+            </button>
+          </div>
+
+          <div>
+            <form action="/auth/signout" method="post">
+              <button
+                className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                type="submit"
+              >
+                Sign out
+              </button>
+            </form>
+          </div>
+
+          <div className="flex justify-center">
+            <button
+              className="text-blue-500 hover:text-blue-700"
+              onClick={() => router.back()}
+            >
+              Go back
+            </button>
+          </div>
+        </div>
       </div>
-      <div>
-        <form action="/auth/signout" method="post">
-          <button className="button block" type="submit">
-            Sign out
-          </button>
-        </form>
-      </div>
-    </div>
-    <button onClick={() => router.back()}>Torna alla Home</button>
     </>
   );
 }
