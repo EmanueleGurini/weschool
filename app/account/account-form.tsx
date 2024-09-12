@@ -11,6 +11,10 @@ export default function AccountForm({ user }: { user: User | null }) {
   const [fullname, setFullname] = useState<string | null>(null);
   const [username, setUsername] = useState<string | null>(null);
   const [avatar_url, setAvatarUrl] = useState<string | null>(null);
+
+  const [newPassword, setNewPassword] = useState<string>(""); 
+  const [confirmPassword, setConfirmPassword] = useState<string>(""); // Aggiunto stato per confermare la password
+
   const router = useRouter();
 
   const getProfile = useCallback(async () => {
@@ -66,6 +70,35 @@ export default function AccountForm({ user }: { user: User | null }) {
       alert("Profile updated!");
     } catch (error) {
       alert("Error updating the data!");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updatePassword() {
+    if (!newPassword || !confirmPassword) {
+      alert("Please enter both password fields!");
+      return;
+    }
+
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+
+    try {
+      setLoading(true);
+      const { error } = await supabase.auth.updateUser({
+        password: newPassword,
+      });
+
+      if (error) throw error;
+
+      alert("Password updated successfully!");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (error) {
+      alert("Error updating password!");
     } finally {
       setLoading(false);
     }
@@ -144,7 +177,33 @@ export default function AccountForm({ user }: { user: User | null }) {
               {loading ? "Loading ..." : "Update"}
             </button>
           </div>
-
+          <div>
+          <label htmlFor="newPassword">New Password</label>
+          <input
+            id="newPassword"
+            type="password"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+        </div>
+        <div>
+          <button
+            className="button primary block"
+            onClick={updatePassword}
+            disabled={loading}
+          >
+            {loading ? "Loading ..." : "Update Password"}
+          </button>
+        </div>
           <div>
             <form action="/auth/signout" method="post">
               <button
