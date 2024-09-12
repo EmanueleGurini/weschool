@@ -178,32 +178,47 @@ export default function AccountForm({ user }: { user: User | null }) {
             </button>
           </div>
           <div>
-          <label htmlFor="newPassword">New Password</label>
-          <input
-            id="newPassword"
-            type="password"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        <div>
-          <button
-            className="button primary block"
-            onClick={updatePassword}
-            disabled={loading}
-          >
-            {loading ? "Loading ..." : "Update Password"}
-          </button>
-        </div>
+            <label
+              htmlFor="newPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              New Password
+            </label>
+            <input
+              id="newPassword"
+              type="password"
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <div>
+            <label
+              htmlFor="confirmPassword"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Confirm Password
+            </label>
+            <input
+              id="confirmPassword"
+              type="password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            />
+          </div>
+
+          <div>
+            <button
+              className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 mt-4"
+              onClick={updatePassword}
+              disabled={loading}
+            >
+              {loading ? "Loading ..." : "Update Password"}
+            </button>
+          </div>
+
           <div>
             <form action="/auth/signout" method="post">
               <button

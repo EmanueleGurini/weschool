@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import { IRole } from "app/page";
+import Navbar from "@/components/Navbar";
 
 interface Class {
   id: number;
@@ -56,5 +57,10 @@ export default async function Page() {
     }
   }
 
-  return <TeacherDashboard classes={data.courses} />;
+  return(
+    <div>
+      <Navbar />
+      <TeacherDashboard classes={data.courses} />
+    </div>
+  )
 }

@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
               className="w-6 h-6 hover:opacity-75"
             />
           </Link>
-          <Link href="">
+          <Link href="/account">
             <img
               src="/img/settings.png"
               alt="Impostazioni"
