@@ -11,22 +11,23 @@ interface TeacherDashboardProps {
 }
 
 export default function TeacherDashboard({ classes }: TeacherDashboardProps) {
-  //     const formattedDate = new Intl.DateTimeFormat("it-IT", {
-  //     day: "2-digit",
-  //     month: "2-digit",
-  //     year: "numeric",
-  //   }).format(new Date());
-  console.log(classes);
+      const formattedDate = new Intl.DateTimeFormat("it-IT", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    }).format(new Date());
 
   return (
     <main className="p-6">
       <section className="class-list">
+        <div className="text-right text-gray-800 text-xl font-bold">
+          {formattedDate} 
+        </div>
         <h2 className="text-2xl font-bold mb-4">Lista Classi</h2>
         <table className="min-w-full border-collapse block md:table">
           <thead className="block md:table-header-group">
             <tr className="border border-grey-500 md:border-none block md:table-row">
               <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Nome Classe</th>
-
               <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Numero Studenti</th>
               <th className="bg-gray-600 p-2 text-white font-bold md:border md:border-grey-500 text-left block md:table-cell">Dettaglio Classe</th>
             </tr>

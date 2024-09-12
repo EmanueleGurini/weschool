@@ -1,10 +1,9 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { useRouter, useParams } from "next/navigation";
-import Navbar from '@/components/Navbar';
-import StudentTable from '../StudentTable';
-import StudentGradeModal from '../StudentGradeModal';
-import StudentAttendanceModal from '../StudentAttendanceModal';
+import StudentTable from './StudentTable';
+import StudentGradeModal from './StudentGradeModal';
+import StudentAttendanceModal from './StudentAttendanceModal';
 
 interface Student {
     id: number;
@@ -78,10 +77,6 @@ const ClassDetailPage: React.FC = () => {
         setGradeModalOpen(true);
     };
 
-    const handleCloseModal = () => {
-        setModalOpen(false);
-    };
-
     const handleCloseAttendanceModal = () => {
         setAttendanceModalOpen(false);
     };
@@ -105,8 +100,6 @@ const ClassDetailPage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <Navbar />
             <div className="p-6">
                 <div className="text-right text-gray-800 text-xl font-bold">
                     {formattedDate} 
@@ -142,7 +135,6 @@ const ClassDetailPage: React.FC = () => {
                     Torna alla Dashboard
                 </button>
             </div>
-        </div>
     );
 };
 
