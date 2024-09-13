@@ -7,3 +7,14 @@
   margin: 0;
   box-sizing: border-box;
 }
+
+:root {
+  --primary-color: #2b4570;
+  --color-0: #ffffff;
+  --color-20: #a8d0db;
+  --color-60: #7180ac;
+  --color-80: #535e7d;
+  --color-100: #1c2c47;
+  --color-contrast: #f18f01;
+  --color-contrast-hover: #f7c06f;
+}

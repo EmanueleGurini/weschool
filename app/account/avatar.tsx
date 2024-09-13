@@ -76,7 +76,7 @@ export default function Avatar({
           height={size}
           src={avatarUrl}
           alt="Avatar"
-          className="avatar image rounded-full"
+          className="avatar image rounded-full object-cover"
           style={{ height: size, width: size }}
         />
       ) : (
@@ -92,10 +92,10 @@ export default function Avatar({
       )}
       <div style={{ width: size }}>
         <label
-          className="button primary block w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 text-center mt-5 cursor-pointer"
+          className="button primary block w-full bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-2 focus:ring-offset-2 text-center mt-5 cursor-pointer"
           htmlFor="single"
         >
-          {uploading ? "Uploading ..." : "Upload"}
+          {uploading ? "Uploading ..." : "Upload Photo"}
         </label>
         <input
           style={{
