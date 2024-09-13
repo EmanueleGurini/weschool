@@ -28,3 +28,21 @@ export const getStudentsList = async (classID: string) => {
     return data;
   }
 };
+
+export const getStudentDetailsByTeacher = async (studentID: string) => {
+  const supabase = createClient();
+  let { data, error } = await supabase.rpc("get_student_attendance", {
+    p_student_id: studentID,
+  });
+  if (error) console.error(error);
+  else return data;
+};
+
+export const getAvatarImg = async (profileID: string) => {
+  const supabase = createClient();
+  let { data, error } = await supabase.rpc("get_profile_avatar", {
+    profile_id: profileID,
+  });
+  if (error) console.error(error);
+  else return data;
+};
