@@ -39,7 +39,6 @@ export default async function TeacherPage() {
   const dataTeacher = await getTeacherDataByID()
 
   const avatarTeacher = await getAvatarImg(dataTeacher.teacher_id)
-
   const { data: imgUrl} = supabase.storage
   .from("avatars")
   .getPublicUrl(`${avatarTeacher.img}`);
@@ -55,8 +54,7 @@ export default async function TeacherPage() {
 
   return (
     <div className="container mx-auto p-6">
-      {imgUrl.publicUrl !== '' && <Image src={imgUrl.publicUrl} alt="Teacher Avatar" width={200} height={200} className="rounded-full mb-4"/>}
-      {imgUrl.publicUrl === '' && <Image src={'/img/profile.svg'} alt="Teacher Avatar" width={200} height={200} className="rounded-full mb-4"/>}
+      {imgUrl.publicUrl !== "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && <Image src={imgUrl.publicUrl} alt="Teacher Avatar" width={200} height={200} className="rounded-full mb-4"/>}
       <div className="w-full flex items-center justify-between font-extrabold">
         <h2 className="text-2xl font-bold mb-4">Hi, {dataTeacher.full_name}!</h2>
         <p>{formatDate(today)}</p>

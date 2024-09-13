@@ -1,19 +1,21 @@
+"use client"
+
 interface ProgressBarProps {
-  title: string;
-  description: React.ReactNode;
+  value: number;  
+  total: number;   
+  color: string;   
 }
 
-const ProgressBar: React.FC<ProgressBarProps> = ({ title, description }) => {
+const ProgressBar: React.FC<ProgressBarProps> = ({ value, total, color }) => {
+  const progress = total > 0 ? (value / total) * 100 : 0;
+
   return (
-    <div className="block w-full h-40 max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow">
-      <div className="w-full max-w-sm">
-        <h1 className="text-2xl font-bold">{title}</h1>
-        <div className="w-full bg-gray-200 rounded-full h-4">
-          <div className="bg-green-500 h-4 rounded-full" />
-        </div>
-        <p className="text-sm mt-2"></p>
-      </div>
-      <p className="font-normal text-gray-700 ">{description}</p>
+    <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
+      <div
+        className={`h-4 rounded-full transition-all duration-300 ${color}`}
+        style={{ width: `${progress}%` }}
+      ></div>
+      <p className="mt-1 text-sm text-gray-500">{value} / {total}</p>
     </div>
   );
 };
