@@ -4,14 +4,19 @@ import { type User } from "@supabase/supabase-js";
 import Avatar from "./avatar";
 import { useRouter } from "next/navigation";
 import { createClient } from "utils/supabase/client";
+import ToastYes from "@/components/ToastYes";
+import ToastNo from "@/components/ToastNo";
 
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
   const [loading, setLoading] = useState(true);
   const [fullname, setFullname] = useState<string | null>(null);
   const [avatar_url, setAvatarUrl] = useState<string | null>(null);
+  const [toastYes, setToastYes] = useState<boolean>(false)
+  const [toastNo, setToastNo] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
 
-  const [newPassword, setNewPassword] = useState<string>(""); 
+  const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
   const router = useRouter();
@@ -36,7 +41,12 @@ export default function AccountForm({ user }: { user: User | null }) {
         setAvatarUrl(data.avatar_url);
       }
     } catch (error) {
-      alert("Error loading user data!");
+      setToastNo(true)
+      setMessage("Error loading user data!");
+      setTimeout(() => {
+        setToastNo(false)
+        setMessage('')
+      }, 3000);
     } finally {
       setLoading(false);
     }
@@ -62,22 +72,54 @@ export default function AccountForm({ user }: { user: User | null }) {
         updated_at: new Date().toISOString(),
       });
       if (error) throw error;
-      alert("Profile updated!");
+      setToastYes(true)
+      setMessage("Profile updated!");
+      setTimeout(() => {
+        setToastYes(false)
+        setMessage('')
+      }, 3000);
     } catch (error) {
-      alert("Error updating the data!");
+      setToastNo(true)
+      setMessage("Error updating the data!");
+      setTimeout(() => {
+        setToastNo(false)
+        setMessage('')
+      }, 3000);
     } finally {
       setLoading(false);
     }
   }
 
+  const passwordRequirementsRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+
   async function updatePassword() {
     if (!newPassword || !confirmPassword) {
-      alert("Please enter both password fields!");
+      setToastNo(true)
+      setMessage("Please enter both password fields!");
+      setTimeout(() => {
+        setToastNo(false)
+        setMessage('')
+      }, 3000);
+      return;
+    }
+
+    if (!passwordRequirementsRegex.test(newPassword)) {
+      setToastNo(true)
+      setMessage("The password must be at least 6 characters long, contain at least one uppercase letter, one number, and one special character.");
+      setTimeout(() => {
+        setToastNo(false)
+        setMessage('')
+      }, 3000);
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      alert("Passwords do not match!");
+      setToastNo(true)
+      setMessage("Passwords do not match!");
+      setTimeout(() => {
+        setToastNo(false)
+        setMessage('')
+      }, 3000);
       return;
     }
 
@@ -89,11 +131,21 @@ export default function AccountForm({ user }: { user: User | null }) {
 
       if (error) throw error;
 
-      alert("Password updated successfully!");
+      setToastYes(true)
+      setMessage("Password updated successfully!");
+      setTimeout(() => {
+        setToastYes(false)
+        setMessage('')
+      }, 3000);
       setNewPassword("");
       setConfirmPassword("");
     } catch (error) {
-      alert("Error updating password!");
+      setToastNo(true)
+      setMessage("Error updating password!");
+      setTimeout(() => {
+        setToastNo(false)
+        setMessage('')
+      }, 3000);
     } finally {
       setLoading(false);
     }
@@ -101,6 +153,8 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   return (
     <>
+      {toastNo && <ToastNo setMessage={setMessage} setClose={setToastNo}>{message}</ToastNo>}
+      {toastYes && <ToastYes setMessage={setMessage} setClose={setToastYes}>{message}</ToastYes>}
       <div className="flex min-h-screen items-center justify-center p-6 bg-gray-100">
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg space-y-6">
           <div className="flex justify-center">

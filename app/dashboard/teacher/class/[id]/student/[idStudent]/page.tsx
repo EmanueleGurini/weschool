@@ -30,7 +30,7 @@ export default async function StudentPageTeacher({ params }: IStudentPageTeacher
 				<h2 className="text-3xl font-bold text-gray-800 mb-2">{student.studentName}</h2>
 				<p className="text-gray-600 text-sm font-semibold">{formatDate(today)}</p>
 			</div>
-			<div className="flex flex-col items-center justify-start min-h-screen mt-16 space-y-6">
+			<div className="flex flex-col items-center justify-start mt-16 space-y-6">
 				<div className="w-full max-w-lg space-y-4">
 					<div className="flex items-center space-x-4">
 						<span className="w-32 text-right">Presenze</span>
