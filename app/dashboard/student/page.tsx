@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import { IRole } from "app/page";
 import ProgressBar from "@/components/ProgressBar";
-import LayoutAfterLogin from "../layoutAfterLogin";
 
 interface StudentData {
   studentName: string;
@@ -57,7 +56,7 @@ async function StudentPage() {
   }
 
   return (
-    <LayoutAfterLogin>
+    <>
       <div>
         <Header
           greeting={`ciao ${data?.studentName}`}
@@ -81,7 +80,7 @@ async function StudentPage() {
             headers={headers} data={students} renderRow={renderRow}/>
         </div> */}
       </div>
-    </LayoutAfterLogin>
+      </>
   );
 }
 
