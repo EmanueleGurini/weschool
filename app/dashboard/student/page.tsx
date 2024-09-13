@@ -47,7 +47,7 @@ async function StudentPage() {
         {imgUrl.publicUrl !== "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && <Image src={imgUrl.publicUrl} alt="Student Avatar" width={200} height={200} className="rounded-full mb-4"/>}
         <Header greeting={`Hi, ${student.studentName}`} text="I hope you have a nice day!"/>
       </div>
-      <div className="flex flex-col items-center justify-start min-h-screen mt-16 space-y-6">
+      <div className="flex flex-col items-center justify-start mt-16 space-y-6">
         <div className="w-full max-w-lg space-y-4">
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right">Presenze</span>
