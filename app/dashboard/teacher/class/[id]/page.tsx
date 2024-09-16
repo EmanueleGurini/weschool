@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { PostgrestSingleResponse } from "@supabase/supabase-js";
 import { IRole } from "app/page";
 import { revalidatePath } from "next/cache";
-import { getStudentsList } from "app/api/supabase/actions";
+import { getStudentsListDetailsByTeacher } from "app/api/supabase/actions";
 import Link from "next/link";
 import TableTeacherClass from "./components/TableTeacherClass";
 
@@ -13,7 +13,7 @@ interface SinglePageClassProps {
 
 export default async function SinglePageClass({ params }: SinglePageClassProps) {
   const { id } = params;
-  
+
   const supabase = createClient();
 
   const {
@@ -35,16 +35,17 @@ export default async function SinglePageClass({ params }: SinglePageClassProps) 
     }
   }
 
-  const classData = await getStudentsList(id);
-
   const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Mese è zero-indexed
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Mese è zero-indexed
     const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  }
+    return `${year}/${month}/${day}`;
+  };
 
   const today = new Date();
+  const todayData = formatDate(today);
+  const classData = await getStudentsListDetailsByTeacher(id, todayData);
+  console.log(classData.students[0].attendance);
 
   return (
     <div className="container mx-auto p-6">
@@ -56,7 +57,12 @@ export default async function SinglePageClass({ params }: SinglePageClassProps) 
       <div className="mb-4">
         <TableTeacherClass id={id} students={classData.students} />
       </div>
-      <Link href="/dashboard/teacher" className="inline-block rounded-lg bg-[#1C2C47] py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">Go Back</Link>
+      <Link
+        href="/dashboard/teacher"
+        className="inline-block rounded-lg bg-[#1C2C47] py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+      >
+        Go Back
+      </Link>
     </div>
-  )
+  );
 }
