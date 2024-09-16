@@ -55,29 +55,32 @@ export default async function StudentPageTeacher({ params }: IStudentPageTeacher
         <p className="text-gray-600 text-sm font-semibold">{formatDate(today)}</p>
       </div>
       <div className="flex flex-col items-center justify-start mt-16 space-y-6">
-        <div className="w-full max-w-lg space-y-4">
+        <div className="w-full max-w-lg space-y-4 bg-white p-4 rounded-lg shadow-lg">
+          
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right">Presence</span>
-            <ProgressBar value={newStudent.attendance["totale presenze"]} total={newStudent.attendance["giorni totali del corso"]} color="bg-green-500" />
+            <ProgressBar value={newStudent.attendance["totale presenze"]} total={newStudent.attendance["giorni totali del corso"]} color="bg-color60" />
           </div>
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right">Absence</span>
-            <ProgressBar value={newStudent.attendance["totale assenze"]} total={newStudent.attendance["giorni totali del corso"]} color="bg-red-500" />
+            <ProgressBar value={newStudent.attendance["totale assenze"]} total={newStudent.attendance["giorni totali del corso"]} color="bg-contrast" />
           </div>
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right">Total Days</span>
             <ProgressBar
               value={newStudent.attendance["giorni totali del corso"]}
               total={newStudent.attendance["giorni totali del corso"]}
-              color="bg-blue-500"
+              color="bg-color20"
             />
           </div>
         </div>
       </div>
       <Charts subjectsArray={newStudent.subjects} />
-      <Link className="text-blue-500 hover:underline" href={`/dashboard/teacher/class/${id}`}>
+      <div className="mb-4">
+      <Link className="inline-block rounded-lg bg-color100 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50" href={`/dashboard/teacher/class/${id}`}>
         Go Back
       </Link>
+      </div>
     </div>
   );
 }

@@ -251,7 +251,14 @@ export default function AccountForm({ user }: { user: User | null }) {
             </div>
 
             <div className="flex justify-center">
-              <Link className="text-sm font-bold text-color100 underline" href="/?cacheBuster=123456">
+            <Link
+                className="text-sm font-bold text-color100 underline"
+                href={`/?cacheBuster=${crypto.randomUUID()}`}
+                onClick={(e) => {
+                  e.preventDefault();
+                  window.location.href = `/?cacheBuster=${crypto.randomUUID()}`;
+                }}
+              >
                 Go back
               </Link>
             </div>

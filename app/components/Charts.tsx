@@ -38,7 +38,7 @@ function Charts({ subjectsArray }: ISubject) {
 
   return (
     <div className="flex flex-col items-center p-6 ">
-      <h2 className="text-xl font-semibold mb-4">Academic Performance </h2>
+      <h2 className="text-xl font-sans font-semibold uppercase mb-4">Academic Performance </h2>
       <ResponsiveContainer width="95%" height={400}>
         <LineChart width={700} height={500} data={data}>
           <XAxis dataKey="date" />

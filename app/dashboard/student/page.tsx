@@ -47,18 +47,18 @@ async function StudentPage() {
       <div className="flex flex-col items-center justify-start mt-16 space-y-6">
         <div className="w-full max-w-lg space-y-4 bg-white p-4 rounded-lg shadow-lg">
           <div className="flex items-center space-x-4">
-            <span className="w-32 text-right text-[#2b4570] font-semibold">Presenze</span>
-            <ProgressBar value={student.attendance["totale presenze"]} total={student.attendance["giorni totali del corso"]} color="bg-green-500" />
+            <span className="w-32 text-right text-[#2b4570] font-semibold">Presence</span>
+            <ProgressBar value={student.attendance["totale presenze"]} total={student.attendance["giorni totali del corso"]} color="bg-color60" />
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="w-32 text-right text-[#2b4570] font-semibold">Assenze</span>
-            <ProgressBar value={student.attendance["totale assenze"]} total={student.attendance["giorni totali del corso"]} color="bg-red-500" />
+            <span className="w-32 text-right text-[#2b4570] font-semibold">Absence</span>
+            <ProgressBar value={student.attendance["totale assenze"]} total={student.attendance["giorni totali del corso"]} color="bg-contrast" />
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="w-32 text-right text-[#2b4570] font-semibold">Giorni Totali</span>
-            <ProgressBar value={student.attendance["giorni totali del corso"]} total={student.attendance["giorni totali del corso"]} color="bg-blue-500" />{" "}
+            <span className="w-32 text-right text-[#2b4570] font-semibold">Total Days</span>
+            <ProgressBar value={student.attendance["giorni totali del corso"]} total={student.attendance["giorni totali del corso"]} color="bg-color20" />{" "}
           </div>
         </div>
       </div>
