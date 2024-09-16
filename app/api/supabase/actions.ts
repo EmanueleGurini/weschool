@@ -73,3 +73,14 @@ export const getFullStudentDetails = async (inputStudentID: string) => {
 
   return data;
 };
+
+//FUNZIONE PER PRENDERE L'ID STATUS
+export const getStatusAttendance = async (studentID: string) => {
+  const supabase = createClient();
+  let { data, error } = await supabase.rpc("get_attendance_id", {
+    student_id: studentID,
+  });
+  if (error) console.error(error);
+  else console.log(data);
+  return data;
+};

@@ -20,31 +20,33 @@ export default async function StudentPageTeacher({ params }: IStudentPageTeacher
 
   const newStudent = await getFullStudentDetails(idStudent);
 
-	const supabase = createClient();
+  const supabase = createClient();
 
-	const {data: { user }} = await supabase.auth.getUser();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
 
-	if (!user) {
-		return redirect("/login");
-	}
+  if (!user) {
+    return redirect("/login");
+  }
 
-	if (user) {
-		const data: PostgrestSingleResponse<IRole> = await supabase.from("profile_roles").select("roles(role)").eq("id", user!.id).single();
+  if (user) {
+    const data: PostgrestSingleResponse<IRole> = await supabase.from("profile_roles").select("roles(role)").eq("id", user!.id).single();
 
-		const userRole = data.data?.roles.role;
+    const userRole = data.data?.roles.role;
 
-		if (userRole === "student") {
-			revalidatePath("/", "layout");
-			redirect("/dashboard/student");
-		}
-	}
+    if (userRole === "student") {
+      revalidatePath("/", "layout");
+      redirect("/dashboard/student");
+    }
+  }
 
-	const formatDate = (date: Date) => {
-		const day = date.getDate().toString().padStart(2, '0');
-		const month = (date.getMonth() + 1).toString().padStart(2, '0');
-		const year = date.getFullYear();
-		return `${year}/${month}/${day}`;
-	}
+  const formatDate = (date: Date) => {
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const year = date.getFullYear();
+    return `${year}/${month}/${day}`;
+  };
 
   const today = new Date();
 
@@ -56,7 +58,6 @@ export default async function StudentPageTeacher({ params }: IStudentPageTeacher
       </div>
       <div className="flex flex-col items-center justify-start mt-16 space-y-6">
         <div className="w-full max-w-lg space-y-4 bg-white p-4 rounded-lg shadow-lg">
-          
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right">Presence</span>
             <ProgressBar value={newStudent.attendance["totale presenze"]} total={newStudent.attendance["giorni totali del corso"]} color="bg-color60" />
@@ -67,19 +68,18 @@ export default async function StudentPageTeacher({ params }: IStudentPageTeacher
           </div>
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right">Total Days</span>
-            <ProgressBar
-              value={newStudent.attendance["giorni totali del corso"]}
-              total={newStudent.attendance["giorni totali del corso"]}
-              color="bg-color20"
-            />
+            <ProgressBar value={newStudent.attendance["giorni totali del corso"]} total={newStudent.attendance["giorni totali del corso"]} color="bg-color20" />
           </div>
         </div>
       </div>
       <Charts subjectsArray={newStudent.subjects} />
       <div className="mb-4">
-      <Link className="inline-block rounded-lg bg-color100 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50" href={`/dashboard/teacher/class/${id}`}>
-        Go Back
-      </Link>
+        <Link
+          className="inline-block rounded-lg bg-color100 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+          href={`/dashboard/teacher/class/${id}`}
+        >
+          Go Back
+        </Link>
       </div>
     </div>
   );
