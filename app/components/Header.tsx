@@ -4,11 +4,14 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ greeting, text }) => {
-  const formattedDate = new Intl.DateTimeFormat("it-IT", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  }).format(new Date());
+  const formatDate = (date: Date) => {
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${year}/${month}/${day}`;
+  }
+
+  const today = new Date();
 
   return (
     <header className="p-6 flex justify-between items-center">
@@ -18,10 +21,8 @@ const Header: React.FC<HeaderProps> = ({ greeting, text }) => {
           <p>{text}</p>
         </div>
       </div>
-      <div className="header-info text-lg font-bold">
-        <p>
-          Data: <strong>{formattedDate}</strong>
-        </p>
+      <div className="header-info text-lg font-semibold">
+        <p>{formatDate(today)}</p>
       </div>
     </header>
   );
