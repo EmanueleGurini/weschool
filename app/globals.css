@@ -2,19 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap");
+
 * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
+
 :root {
-  --primary-color: #2b4570;
+  --primary-color: #2b4570;  
   --color-0: #ffffff;
-  --color-20: #a8d0db;
-  --color-60: #7180ac;
-  --color-80: #535e7d;
+  --color-10: #F7F7F8;
+  --color-20: #a8d0db;      
+  --color-60: #7180ac; 
+  --color-80: #535e7d; 
   --color-100: #1c2c47;
-  --color-contrast: #f18f01;
-  --color-contrast-hover: #f7c06f;
+  --color-contrast: #f18f01; 
+  --color-contrast-hover: #F7C06F;
+
 }
+
+html,
+body {
+  font-family: "Nunito Sans", sans-serif;;
+  max-width: 100vw;
+  overflow-x: hidden;
+  color: var(--color-100);
+  background-color: var(--color-10);
+}
+
+p, h3 {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 500;
+}
+
+h1, h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+}
+

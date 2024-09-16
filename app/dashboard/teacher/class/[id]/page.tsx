@@ -52,11 +52,11 @@ export default async function SinglePageClass({ params }: SinglePageClassProps) 
         <h2 className="text-2xl font-bold mb-4">Class Name: {classData.course}</h2>
         <p>{formatDate(today)}</p>
       </div>
-      <p className="font-semibold">Students Number: {classData.students.length}</p>
+      <p className="text-gray-800 mb-6">Students Number: {classData.students.length}</p>
       <div className="mb-4">
         <TableTeacherClass id={id} students={classData.students} />
       </div>
-      <Link href="/dashboard/teacher" className="text-blue-500 hover:underline">Go Back</Link>
+      <Link href="/dashboard/teacher" className="inline-block rounded-lg bg-[#1C2C47] py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">Go Back</Link>
     </div>
   )
 }

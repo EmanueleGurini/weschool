@@ -9,9 +9,9 @@ export default function LoginPage() {
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg space-y-6">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm flex justify-center">
             <Image
-              width={100}
-              height={100}
-              src={"/img/logoipsum-332.svg"}
+              width={250}
+              height={250}
+              src={"/img/WeSchool/logo_scuro.svg"}
               alt={"logo"}
             />
           </div>
