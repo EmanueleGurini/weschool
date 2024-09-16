@@ -64,7 +64,7 @@ export default async function TeacherPage() {
       <p className="text-gray-600 mb-6">I hope you have a good day.</p>
       <div className="container mx-auto px-4 sm:px-8">
       <div className="py-10">
-      <div className="p-8 bg-lightGray bg-opacity-70 rounded-[10px] shadow-lg">
+      <div className="p-8 bg-lightGray bg-opacity-70 rounded-[10px] ">
                     <div className="overflow-x-auto">
                         <div className="inline-block min-w-full shadow rounded-lg overflow-hidden bg-white">
                             <table className="min-w-full leading-normal">

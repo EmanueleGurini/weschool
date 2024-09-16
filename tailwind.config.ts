@@ -19,6 +19,7 @@ const config: Config = {
         color100: "var(--color-100)",
         contrast: "var(--color-contrast)",
         contrasthover: "var(--color-contrast-hover)",
+        black: "var(--color-black)",
       },
     },
   },
