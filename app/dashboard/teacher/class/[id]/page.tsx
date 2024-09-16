@@ -11,6 +11,11 @@ interface SinglePageClassProps {
   params: { id: string };
 }
 
+interface IStudent {
+  id: string;
+  fullName: string;
+}
+
 export default async function SinglePageClass({ params }: SinglePageClassProps) {
   const { id } = params;
 
@@ -36,25 +41,26 @@ export default async function SinglePageClass({ params }: SinglePageClassProps) 
   }
 
   const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear();
     return `${year}/${month}/${day}`;
-  }
+  };
 
   const today = new Date();
   const todayData = formatDate(today);
   const classData = await getStudentsListDetailsByTeacher(id, todayData);
 
+  const uniqueStudentNames = Array.from(new Set(classData.students.map((student: IStudent) => student.fullName)));
   return (
     <div className="container mx-auto p-6">
       <div className="w-full flex items-center justify-between font-extrabold">
         <h2 className="text-2xl font-bold mb-4">Class Name: {classData.courseName}</h2>
         <p>{formatDate(today)}</p>
       </div>
-      <p className="text-gray-800 mb-6">Students Number: {classData.students.length}</p>
+      <p className="text-gray-800 mb-6">Students Number: {uniqueStudentNames.length}</p>
       <div className="mb-4">
-        <TableTeacherClass id={id} students={classData.students} />
+        <TableTeacherClass id={id} students={classData.students} date={todayData} />
       </div>
       <Link
         href="/dashboard/teacher"
