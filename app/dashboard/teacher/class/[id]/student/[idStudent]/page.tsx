@@ -2,6 +2,11 @@ import ProgressBar from "@/components/ProgressBar";
 import { getFullStudentDetails } from "app/api/supabase/actions";
 import Link from "next/link";
 import Charts from "@/components/Charts";
+import { PostgrestSingleResponse } from "@supabase/supabase-js";
+import { IRole } from "app/page";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
+import { createClient } from "utils/supabase/server";
 
 interface IStudentPageTeacher {
   params: {
@@ -15,12 +20,31 @@ export default async function StudentPageTeacher({ params }: IStudentPageTeacher
 
   const newStudent = await getFullStudentDetails(idStudent);
 
-  const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  };
+	const supabase = createClient();
+
+	const {data: { user }} = await supabase.auth.getUser();
+
+	if (!user) {
+		return redirect("/login");
+	}
+
+	if (user) {
+		const data: PostgrestSingleResponse<IRole> = await supabase.from("profile_roles").select("roles(role)").eq("id", user!.id).single();
+
+		const userRole = data.data?.roles.role;
+
+		if (userRole === "student") {
+			revalidatePath("/", "layout");
+			redirect("/dashboard/student");
+		}
+	}
+
+	const formatDate = (date: Date) => {
+		const day = date.getDate().toString().padStart(2, '0');
+		const month = (date.getMonth() + 1).toString().padStart(2, '0');
+		const year = date.getFullYear();
+		return `${year}/${month}/${day}`;
+	}
 
   const today = new Date();
 

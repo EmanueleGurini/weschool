@@ -36,21 +36,20 @@ export default async function SinglePageClass({ params }: SinglePageClassProps) 
   }
 
   const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Mese è zero-indexed
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
     const year = date.getFullYear();
     return `${year}/${month}/${day}`;
-  };
+  }
 
   const today = new Date();
   const todayData = formatDate(today);
   const classData = await getStudentsListDetailsByTeacher(id, todayData);
-  console.log(classData.students[0].attendance);
 
   return (
     <div className="container mx-auto p-6">
       <div className="w-full flex items-center justify-between font-extrabold">
-        <h2 className="text-2xl font-bold mb-4">Class Name: {classData.course}</h2>
+        <h2 className="text-2xl font-bold mb-4">Class Name: {classData.courseName}</h2>
         <p>{formatDate(today)}</p>
       </div>
       <p className="text-gray-800 mb-6">Students Number: {classData.students.length}</p>
