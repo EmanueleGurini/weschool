@@ -58,7 +58,7 @@ export default async function SinglePageClass({ params }: SinglePageClassProps) 
       </div>
       <Link
         href="/dashboard/teacher"
-        className="inline-block rounded-lg bg-[#1C2C47] py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+        className="inline-block rounded-lg bg-color100 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
       >
         Go Back
       </Link>

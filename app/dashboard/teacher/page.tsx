@@ -52,7 +52,8 @@ export default async function TeacherPage() {
   return (
     <div className="container mx-auto p-6">
       {imgUrl.publicUrl !== "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
-        <Image src={imgUrl.publicUrl} alt="Teacher Avatar" width={150} height={150} className="rounded-full mb-4" />
+        <Image 
+        src={imgUrl.publicUrl} alt="Teacher Avatar" width={150} height={150} className="rounded-full mb-4 border-4 border-contrast" />
       )}
       <div className="w-full flex items-center justify-between font-extrabold">
         <h2 className="text-2xl font-bold mb-4">Hi, {dataTeacher.full_name}!</h2>
@@ -78,7 +79,7 @@ export default async function TeacherPage() {
                         <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">{element.course}</td>
                         <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">{element.totalStudents}</td>
                         <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
-                          <Link href={`/dashboard/teacher/class/${element.id}`} className="text-blue-500 hover:underline">
+                          <Link href={`/dashboard/teacher/class/${element.id}`} className="inline-block rounded-lg bg-contrast py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-contrasthover focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">
                             Go To Details
                           </Link>
                         </td>
