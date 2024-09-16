@@ -29,15 +29,6 @@ export const getStudentsList = async (classID: string) => {
   }
 };
 
-export const getStudentDetailsByTeacher = async (studentID: string) => {
-  const supabase = createClient();
-  let { data, error } = await supabase.rpc("get_student_attendance", {
-    p_student_id: studentID,
-  });
-  if (error) console.error(error);
-  else return data;
-};
-
 export const getAvatarImg = async (profileID: string) => {
   const supabase = createClient();
   let { data, error } = await supabase.rpc("get_profile_avatar", {
@@ -45,4 +36,40 @@ export const getAvatarImg = async (profileID: string) => {
   });
   if (error) console.error(error);
   else return data;
+};
+
+export const getStudentsListDetailsByTeacher = async (courseID: string, attendanceDate: string) => {
+  const supabase = createClient();
+
+  let { data, error } = await supabase.rpc("get_course_students", {
+    attendance_date: attendanceDate,
+    course_id: courseID,
+  });
+  if (error) console.error(error);
+  else console.log(data);
+
+  return data;
+};
+
+export const getStudentsGradeByClassID = async (courseID: string, attendanceDate: string) => {
+  const supabase = createClient();
+  let { data, error } = await supabase.rpc("get_course_students", {
+    attendance_date: attendanceDate,
+    course_id: courseID,
+  });
+  if (error) console.error(error);
+  else console.log(data);
+  return data;
+};
+
+export const getFullStudentDetails = async (inputStudentID: string) => {
+  const supabase = createClient();
+
+  let { data, error } = await supabase.rpc("get_student_summary", {
+    input_student_id: inputStudentID,
+  });
+  if (error) console.error(error);
+  else console.log(data);
+
+  return data;
 };

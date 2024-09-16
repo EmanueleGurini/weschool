@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { createClient } from "utils/supabase/client";
 import ToastYes from "@/components/ToastYes";
 import ToastNo from "@/components/ToastNo";
+import Link from "next/link";
 
 export default function AccountForm({ user }: { user: User | null }) {
   const supabase = createClient();
@@ -25,11 +26,7 @@ export default function AccountForm({ user }: { user: User | null }) {
     try {
       setLoading(true);
 
-      const { data, error, status } = await supabase
-        .from("profiles")
-        .select(`full_name, avatar_url`)
-        .eq("id", user?.id)
-        .single();
+      const { data, error, status } = await supabase.from("profiles").select(`full_name, avatar_url`).eq("id", user?.id).single();
 
       if (error && status !== 406) {
         console.log(error);
@@ -56,12 +53,7 @@ export default function AccountForm({ user }: { user: User | null }) {
     getProfile();
   }, [user, getProfile]);
 
-  async function updateProfile({
-    avatar_url,
-  }: {
-    fullname: string | null;
-    avatar_url: string | null;
-  }) {
+  async function updateProfile({ avatar_url }: { fullname: string | null; avatar_url: string | null }) {
     try {
       setLoading(true);
 
@@ -90,8 +82,7 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
   }
 
-  const passwordRequirementsRegex =
-    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+  const passwordRequirementsRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]).{6,}$/;
 
   async function updatePassword() {
     if (!newPassword || !confirmPassword) {
@@ -106,9 +97,7 @@ export default function AccountForm({ user }: { user: User | null }) {
 
     if (!passwordRequirementsRegex.test(newPassword)) {
       setToastNo(true);
-      setMessage(
-        "The password must be at least 6 characters long, contain at least one uppercase letter, one number, and one special character."
-      );
+      setMessage("The password must be at least 6 characters long, contain at least one uppercase letter, one number, and one special character.");
       setTimeout(() => {
         setToastNo(false);
         setMessage("");
@@ -168,9 +157,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       )}
       <div className="flex min-h-screen items-center justify-center p-6 bg-gray-100">
         <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-center pb-4 text-2xl font-bold leading-9 tracking-tight text-color100">
-            Profile Settings
-          </h2>
+          <h2 className="text-center pb-4 text-2xl font-bold leading-9 tracking-tight text-color100">Profile Settings</h2>
           <div className="flex justify-center">
             <Avatar
               uid={user?.id ?? null}
@@ -183,10 +170,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             />
           </div>
 
-          <label
-            htmlFor="email"
-            className="block pt-4 pb-1 text-sm font-medium text-gray-700"
-          >
+          <label htmlFor="email" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
             Email
           </label>
           <input
@@ -198,10 +182,7 @@ export default function AccountForm({ user }: { user: User | null }) {
           />
 
           <div>
-            <label
-              htmlFor="fullName"
-              className="block pt-4 pb-1 text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="fullName" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
               Full Name
             </label>
             <input
@@ -223,10 +204,7 @@ export default function AccountForm({ user }: { user: User | null }) {
             </button>
           </div>
           <div>
-            <label
-              htmlFor="newPassword"
-              className="block pt-4 pb-1 text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="newPassword" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
               New Password
             </label>
             <input
@@ -239,10 +217,7 @@ export default function AccountForm({ user }: { user: User | null }) {
           </div>
 
           <div>
-            <label
-              htmlFor="confirmPassword"
-              className="block pt-4 pb-1 text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="confirmPassword" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
               Confirm Password
             </label>
             <input
@@ -276,12 +251,9 @@ export default function AccountForm({ user }: { user: User | null }) {
             </div>
 
             <div className="flex justify-center">
-              <button
-                className="text-sm font-bold text-color100 underline"
-                onClick={() => router.back()}
-              >
+              <Link className="text-sm font-bold text-color100 underline" href="/?cacheBuster=123456">
                 Go back
-              </button>
+              </Link>
             </div>
           </div>
         </div>
