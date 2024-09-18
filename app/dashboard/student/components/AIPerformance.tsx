@@ -47,10 +47,10 @@ export default function AIPerformance({ students, subjects }: IAIPerformance) {
 
   return (
     <div className="w-full flex flex-col gap-2 items-end p-10 ">
-      <div className="bg-white w-full h-[450px] flex items-center justify-center font-nunito text-sm text-color100 overflow-y-scroll">
+      <div className="bg-white w-full h-[450px] flex justify-center font-nunito text-sm text-color100 overflow-y-scroll">
         {response && parse(response)}
-        {response === "" && loader && <div className= "h-[40px] w-[40px] rounded-full border-2 border-t-0 border-contrast animate-spin-fast"></div>}
-        {!loader && response ==="" && <Image width={200} height={200} src="/img/ai.png" alt="ai icon"/> }
+        {response === "" && loader && <div className="w-full h-full flex items-center justify-center"><div className= "h-[40px] w-[40px] rounded-full border-2 border-t-0 border-contrast animate-spin-fast"></div></div>}
+        {!loader && response ==="" && <div className="w-full h-full flex items-center justify-center"><Image width={200} height={200} src="/img/ai.png" alt="ai icon"/></div>}
       </div>
       <button 
         className="mb-4 my-4 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50" 
