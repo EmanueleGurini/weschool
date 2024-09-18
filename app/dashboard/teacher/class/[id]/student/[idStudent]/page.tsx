@@ -48,13 +48,6 @@ export default async function StudentPageTeacher({
     }
   }
 
-  // const formatDate = (date: Date) => {
-  //   const day = date.getDate().toString().padStart(2, "0");
-  //   const month = (date.getMonth() + 1).toString().padStart(2, "0");
-  //   const year = date.getFullYear();
-  //   return `${day}-${month}-${year}`;
-  // };
-
   const today = new Date();
 
   return (
@@ -64,7 +57,7 @@ export default async function StudentPageTeacher({
           {newStudent.students}
         </h2>
         <p>
-        <FormattedDate date={today} format="day-month-year" />
+          <FormattedDate date={today} format="day-month-year" />
         </p>
       </div>
       <div className="flex flex-col items-center justify-start mt-16 space-y-6">

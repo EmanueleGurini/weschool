@@ -12,7 +12,6 @@ export const getTeacherDataByID = async () => {
   });
   if (error) console.error(error);
   else {
-    console.log(data);
     return data;
   }
 };
@@ -26,7 +25,10 @@ export const getAvatarImg = async (profileID: string) => {
   else return data;
 };
 
-export const getStudentsListDetailsByTeacher = async (courseID: string, attendanceDate: string) => {
+export const getStudentsListDetailsByTeacher = async (
+  courseID: string,
+  attendanceDate: string
+) => {
   const supabase = createClient();
 
   const { data, error } = await supabase.rpc("get_course_students", {
@@ -34,20 +36,20 @@ export const getStudentsListDetailsByTeacher = async (courseID: string, attendan
     course_id: courseID,
   });
   if (error) console.error(error);
-  else console.log(data);
-
-  return data;
+  else return data;
 };
 
-export const getStudentsGradeByClassID = async (courseID: string, attendanceDate: string) => {
+export const getStudentsGradeByClassID = async (
+  courseID: string,
+  attendanceDate: string
+) => {
   const supabase = createClient();
   const { data, error } = await supabase.rpc("get_course_students", {
     attendance_date: attendanceDate,
     course_id: courseID,
   });
   if (error) console.error(error);
-  else console.log(data);
-  return data;
+  else return data;
 };
 
 export const getFullStudentDetails = async (inputStudentID: string) => {
@@ -57,9 +59,7 @@ export const getFullStudentDetails = async (inputStudentID: string) => {
     input_student_id: inputStudentID,
   });
   if (error) console.error(error);
-  else console.log(data);
-
-  return data;
+  else return data;
 };
 
 export const getStatusAttendance = async (studentID: string) => {
@@ -68,8 +68,7 @@ export const getStatusAttendance = async (studentID: string) => {
     student_id: studentID,
   });
   if (error) console.error(error);
-  else console.log(data);
-  return data;
+  else return data;
 };
 
 export const getTeacherNotes = async (teacherID: string) => {
@@ -78,6 +77,5 @@ export const getTeacherNotes = async (teacherID: string) => {
     teacher_id: teacherID,
   });
   if (error) console.error(error);
-  else console.log(data);
-  return data;
+  else return data;
 };
