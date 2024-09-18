@@ -7,6 +7,7 @@ import { IRole } from "app/page";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
+import FormattedDate from "@/components/FormattedDate";
 
 interface IStudentPageTeacher {
   params: {
@@ -47,12 +48,12 @@ export default async function StudentPageTeacher({
     }
   }
 
-  const formatDate = (date: Date) => {
-    const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const year = date.getFullYear();
-    return `${year}/${month}/${day}`;
-  };
+  // const formatDate = (date: Date) => {
+  //   const day = date.getDate().toString().padStart(2, "0");
+  //   const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  //   const year = date.getFullYear();
+  //   return `${day}-${month}-${year}`;
+  // };
 
   const today = new Date();
 
@@ -62,8 +63,8 @@ export default async function StudentPageTeacher({
         <h2 className="text-3xl font-bold text-gray-800 mb-2">
           {newStudent.students}
         </h2>
-        <p className="text-gray-600 text-sm font-semibold">
-          {formatDate(today)}
+        <p>
+        <FormattedDate date={today} format="day-month-year" />
         </p>
       </div>
       <div className="flex flex-col items-center justify-start mt-16 space-y-6">

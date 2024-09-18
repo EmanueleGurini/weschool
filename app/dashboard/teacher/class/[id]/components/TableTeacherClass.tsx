@@ -94,7 +94,7 @@ export default function TableTeacherClass({
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
                   {student.fullName}
                 </td>
-                <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
+                <td className={`px-6 py-3 whitespace-nowrap border-b border-gray-300 ${student.attendance.status === null ? 'text-[14px] uppercase text-primary' : student.attendance.status === false ? 'text-[14px] text-xs font-bold uppercase text-contrast' : 'text-[14px] text-xs font-bold uppercase text-color100'}`}>
                   {student.attendance.status === null && "To Declare"}
                   {student.attendance.status === false && "Absent"}
                   {student.attendance.status && "Present"}
@@ -129,7 +129,7 @@ export default function TableTeacherClass({
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
                   <Link
                     href={`/dashboard/teacher/class/${id}/student/${student.id}`}
-                    className="inline-block rounded-lg border-2 border-contrast py-3 px-6 text-xs font-bold uppercase text-contrast bg-transparent shadow-md transition-all hover:border-contrasthover hover:text-contrasthover focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-block rounded-lg border-2 border-primary py-3 px-6 text-xs font-bold uppercase text-primary bg-transparent shadow-md transition-all hover:border-color60 hover:text-color60 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
                   >
                     Go To Student Profile
                   </Link>
