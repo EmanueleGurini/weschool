@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import Post from "./components/Post";
-import FormPost from "./components/FormPost";
+import ButtonForm from "./components/ButtonForm";
 
 interface Note {
   date: string;
@@ -13,9 +13,11 @@ interface Note {
   note_id: string;
   class_name: string;
   description: string;
-  teacher_name: string;
+  full_name: string;
+  author_id: string;
 }
-export default async function Notes() {
+
+export default async function Notes({ searchParams }: { searchParams: { date?: string } }) {
   const supabase = createClient();
 
   const {
@@ -38,11 +40,27 @@ export default async function Notes() {
   }
 
   const notes = await getTeacherNotes(user.id);
-  console.log(notes);
+
+  const selectedDate = searchParams.date || "";
+
+  const filteredNotes = selectedDate ? notes.posts.filter((note: Note) => note.date === selectedDate) : notes.posts;
 
   return (
     <>
-      {notes.posts.map((note: Note) => (
+      <div className="w-full flex justify-center items-center p-6">
+        <ButtonForm id={user.id} classes={notes.courses} />
+      </div>
+
+      <div className="w-full flex justify-center items-center p-6">
+        <form method="GET" className="flex items-center">
+          <input type="date" name="date" defaultValue={selectedDate} className="border border-gray-300 rounded-md p-2" />
+          <button type="submit" className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md">
+            Filter Posts
+          </button>
+        </form>
+      </div>
+
+      {filteredNotes.map((note: Note) => (
         <Post
           key={note.note_id}
           date={note.date}
@@ -50,10 +68,11 @@ export default async function Notes() {
           note_id={note.note_id}
           class_name={note.class_name}
           description={note.description}
-          teacher_name={note.teacher_name}
+          full_name={note.full_name}
+          isDelete={note.author_id === user.id}
+          author_id={note.author_id}
         />
       ))}
-      <FormPost id={user.id} classes={notes.courses} />
     </>
   );
 }
