@@ -5,6 +5,9 @@ import ButtonUpload from "./ButtonUpload";
 import ButtonUpdate from "./ButtonUpdate";
 import { MouseEvent } from "react";
 import { createClient } from "utils/supabase/client";
+import ButtonVote, { ISubject } from "./ButtonVote";
+import ButtonChangeVote from "./ButtonChangeVote";
+
 interface IAttendance {
   id: string | null;
   status: boolean | null;
@@ -21,9 +24,11 @@ interface IClassData {
   students: IStudent[];
   id: string;
   date: string;
+  dateSelected: string;
+  subjects: ISubject[];
 }
 
-export default function TableTeacherClass({ students, id, date }: IClassData) {
+export default function TableTeacherClass({ students, id, date, subjects, dateSelected }: IClassData) {
   async function handleClose(e: MouseEvent<HTMLButtonElement>, classID: string, status: boolean, date: string): Promise<void> {
     const supabase = createClient();
     const idStudent = e.currentTarget.id;
@@ -41,6 +46,8 @@ export default function TableTeacherClass({ students, id, date }: IClassData) {
               <th className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Full Name</th>
               <th className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Status</th>
               <th className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Attendance Log</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Evaluation</th>
+              <th className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Change Evaluation</th>
               <th className="px-5 py-3 border-b-2 border-gray-200 text-left text-xs font-semibold uppercase tracking-wider">Profile</th>
             </tr>
           </thead>
@@ -55,7 +62,13 @@ export default function TableTeacherClass({ students, id, date }: IClassData) {
                 </td>
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
                   {student.attendance.status === null && <ButtonUpload id={student.id} classID={id} date={date} onClick={handleClose} />}
-                  {student.attendance.status !== null && <ButtonUpdate />}
+                  {student.attendance.status !== null && <ButtonUpdate id={student.id}/>}
+                </td>
+                <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
+                  <ButtonVote id={student.id} subjects={subjects} classID={id}/>
+                </td>
+                <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
+                  <ButtonChangeVote id={student.id} subjects={subjects} date={dateSelected}/>
                 </td>
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
                   <Link

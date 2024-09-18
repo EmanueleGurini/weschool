@@ -17,18 +17,6 @@ export const getTeacherDataByID = async () => {
   }
 };
 
-// export const getStudentsList = async (classID: string) => {
-//   const supabase = createClient();
-
-//   let { data, error } = await supabase.rpc("get_students_list_by_class_id", {
-//     p_class_id: classID,
-//   });
-//   if (error) console.error(error);
-//   else {
-//     return data;
-//   }
-// };
-
 export const getAvatarImg = async (profileID: string) => {
   const supabase = createClient();
   const { data, error } = await supabase.rpc("get_profile_avatar", {
