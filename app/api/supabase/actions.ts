@@ -7,7 +7,7 @@ export const getTeacherDataByID = async () => {
     data: { user },
   } = await createClient().auth.getUser();
 
-  let { data, error } = await supabase.rpc("get_teacher_courses", {
+  const { data, error } = await supabase.rpc("get_teacher_courses", {
     user_id: user!.id,
   });
   if (error) console.error(error);
@@ -31,7 +31,7 @@ export const getTeacherDataByID = async () => {
 
 export const getAvatarImg = async (profileID: string) => {
   const supabase = createClient();
-  let { data, error } = await supabase.rpc("get_profile_avatar", {
+  const { data, error } = await supabase.rpc("get_profile_avatar", {
     profile_id: profileID,
   });
   if (error) console.error(error);
@@ -41,7 +41,7 @@ export const getAvatarImg = async (profileID: string) => {
 export const getStudentsListDetailsByTeacher = async (courseID: string, attendanceDate: string) => {
   const supabase = createClient();
 
-  let { data, error } = await supabase.rpc("get_course_students", {
+  const { data, error } = await supabase.rpc("get_course_students", {
     attendance_date: attendanceDate,
     course_id: courseID,
   });
@@ -53,7 +53,7 @@ export const getStudentsListDetailsByTeacher = async (courseID: string, attendan
 
 export const getStudentsGradeByClassID = async (courseID: string, attendanceDate: string) => {
   const supabase = createClient();
-  let { data, error } = await supabase.rpc("get_course_students", {
+  const { data, error } = await supabase.rpc("get_course_students", {
     attendance_date: attendanceDate,
     course_id: courseID,
   });
@@ -65,7 +65,7 @@ export const getStudentsGradeByClassID = async (courseID: string, attendanceDate
 export const getFullStudentDetails = async (inputStudentID: string) => {
   const supabase = createClient();
 
-  let { data, error } = await supabase.rpc("get_student_summary", {
+  const { data, error } = await supabase.rpc("get_student_summary", {
     input_student_id: inputStudentID,
   });
   if (error) console.error(error);
@@ -74,11 +74,20 @@ export const getFullStudentDetails = async (inputStudentID: string) => {
   return data;
 };
 
-//FUNZIONE PER PRENDERE L'ID STATUS
 export const getStatusAttendance = async (studentID: string) => {
   const supabase = createClient();
-  let { data, error } = await supabase.rpc("get_attendance_id", {
+  const { data, error } = await supabase.rpc("get_attendance_id", {
     student_id: studentID,
+  });
+  if (error) console.error(error);
+  else console.log(data);
+  return data;
+};
+
+export const getTeacherNotes = async (teacherID: string) => {
+  const supabase = createClient();
+  const { data, error } = await supabase.rpc("get_teacher_courses_and_notes", {
+    teacher_id: teacherID,
   });
   if (error) console.error(error);
   else console.log(data);
