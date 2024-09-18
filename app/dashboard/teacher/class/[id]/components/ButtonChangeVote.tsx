@@ -59,7 +59,7 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 					<select
 						value={selectedSubject}
 						onChange={handleSubjectChange}
-						className="cursor-pointer"
+						className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-color60 focus:border-transparent"
 					>
 						<option hidden value="">
 							Select a Subject...
@@ -77,11 +77,15 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 						step="1"
 						value={rating === null ? '' : rating}
 						onChange={handleRatingChange}
+						className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-color60 focus:border-transparent"
 					/>
 				</div>
 				{(rating !== null && rating >= 0 && rating <= 10) && selectedSubject && (
 				<div className="w-full flex justify-center">
-					<button id={id} onClick={handleSubmit}>
+					<button 
+					    id={id}
+						onClick={handleSubmit}
+						className="mt-4 bg-color60 hover:bg-color80 text-white font-bold py-2 px-4 rounded-lg transition-all">
 						Send
 					</button>
 				</div>

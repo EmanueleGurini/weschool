@@ -55,6 +55,14 @@ const colorPalette = [
   "var(--primary-color)",
 ];
 
+function formatDateForChart(dateString: string) {
+  const date = new Date(dateString);
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}-${month}-${year}`; 
+}
+
 function Charts({ subjectsArray }: ISubject) {
   const data = organizeData(subjectsArray);
   const subjects = getUniqueSubjects(subjectsArray);
@@ -66,7 +74,7 @@ function Charts({ subjectsArray }: ISubject) {
       </h2>
       <ResponsiveContainer width="95%" height={400}>
         <LineChart width={700} height={500} data={data}>
-          <XAxis dataKey="date" stroke="var(--color-100)" />
+          <XAxis dataKey="date" stroke="var(--color-100)" tickFormatter={formatDateForChart}/>
           <YAxis
             domain={[0, 10]}
             ticks={[0, 2, 4, 6, 8, 10]}
@@ -81,6 +89,7 @@ function Charts({ subjectsArray }: ISubject) {
             }}
             labelStyle={{ color: "var(--color-contrast)" }}
             itemStyle={{ color: "var(--color-100)" }}
+            labelFormatter={(label) => formatDateForChart(label)}
           />
           <Legend
             wrapperStyle={{

@@ -19,7 +19,7 @@ export default function ModalVote({ isOpen, onClose, children }: IModal) {
 					>
 						&times;
 					</button>
-					<div className="mt-4">{children}</div>
+					<div className="mt-4 ">{children}</div>
 				</div>
 			</div>
 		)}
