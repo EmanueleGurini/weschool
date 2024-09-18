@@ -1,12 +1,24 @@
 "use client";
 import { useState } from "react";
 import ModalUpdate from "./ModalUpdate";
+import { createClient } from "utils/supabase/client";
 
-export default function ButtonUpdate() {
+interface IButtonUpdate {
+  id: string;
+}
+
+export default function ButtonUpdate({id}: IButtonUpdate) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  function handleClose() {
-    window.location.reload();
+  async function handleUpdate(e: React.MouseEvent<HTMLButtonElement>, status: boolean) {
+    const supabase = createClient()
+    await supabase
+    .from('attendance')
+    .update({ status: status })
+    .eq('student_id', e.currentTarget.id)
+    .eq('date', new Date().toISOString().split('T')[0])
+    .not('status', 'is', null);
+    window.location.reload()
   }
 
   return (
@@ -20,13 +32,15 @@ export default function ButtonUpdate() {
       <ModalUpdate onClose={() => setIsOpen(false)} isOpen={isOpen}>
         <div className="w-full flex justify-around p-7">
           <button
-            onClick={handleClose}
+            id={id}
+            onClick={(e) => handleUpdate(e, true)}
             className="bg-color100 py-3 px-6 rounded-md cursor-pointer hover:bg-color80 font-sans text-xs font-bold uppercase text-white shadow-md"
           >
             Present
           </button>
           <button
-            onClick={handleClose}
+            id={id}
+            onClick={(e) => handleUpdate(e, false)}
             className="bg-contrast py-3 px-6 rounded-md cursor-pointer hover:bg-contrasthover font-sans text-xs font-bold uppercase text-white shadow-md"
           >
             Absent
