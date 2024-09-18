@@ -51,9 +51,8 @@ export default async function TeacherPage() {
 
   return (
     <div>
-      <div className="container mx-auto p-6 flex flex-row justify-between items-center bg-white">
-        <div className="flex items-center space-x-4">
-          <div className="w-48 h-48 border-4 border-contrast rounded-full overflow-hidden">
+      <div className="header-container p-2 bg-white flex justify-between items-center">
+          <div className="avatar-container w-48 h-48 border-4 rounded-full overflow-hidden border-contrast">
             {imgUrl.publicUrl !==
               "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
               <Image
@@ -65,18 +64,10 @@ export default async function TeacherPage() {
               />
             )}
           </div>
-
-          <div className="font-extrabold p-4">
-            <h2 className="text-2xl font-bold mb-4">
-              Hi, {dataTeacher.full_name}!
-            </h2>
-            <p className="text-gray-600 mb-6">I hope you have a good day.</p>
+          <div className="header-info flex-grow text-center">
+            <Header greeting={`Hi, ${dataTeacher.full_name}`} text="I hope you have a nice day!"/>
           </div>
-          <div>
-            <FormattedDate date={today} format="day-month-year" />
-          </div>
-        </div>
-      </div>
+    </div>
 
       <div className="container mx-auto px-4 sm:px-8 bg-color10">
         <div className="py-10">

@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import Post from "./components/Post";
 import ButtonForm from "./components/ButtonForm";
+import Link from "next/link";
 
 interface Note {
   date: string;
@@ -47,14 +48,21 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
 
   return (
     <>
-      <div className="w-full flex justify-center items-center p-6">
+      <div className="w-full flex justify-between items-center p-6">
         <ButtonForm id={user.id} classes={notes.courses} />
+        <Link
+        href="/dashboard/teacher"
+        className="inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+      >
+        Go Back
+      </Link>
       </div>
 
       <div className="w-full flex justify-center items-center p-6">
         <form method="GET" className="flex items-center">
-          <input type="date" name="date" defaultValue={selectedDate} className="border border-gray-300 rounded-md p-2" />
-          <button type="submit" className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md">
+          <label htmlFor="date" className="mr-2">Select Date:</label>
+          <input id="date" type="date" name="date" defaultValue={selectedDate} className="border border-gray-300 rounded-lg p-2" />
+          <button type="submit" className="ml-4 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">
             Filter Posts
           </button>
         </form>

@@ -21,6 +21,10 @@ const config: Config = {
         contrasthover: "var(--color-contrast-hover)",
         black: "var(--color-black)",
       },
+      animation: {
+        'spin-slow': 'spin 3s linear infinite',
+        'spin-fast': 'spin 0.5s linear infinite',
+      },
     },
   },
   plugins: [],
