@@ -69,19 +69,19 @@ export default function Avatar({
   };
 
   return (
-    <div>
+    <div className="relative">
       {avatarUrl ? (
         <Image
           width={size}
           height={size}
           src={avatarUrl}
           alt="Avatar"
-          className="avatar image rounded-full object-cover"
+          className="rounded-full object-cover border-4 border-contrast"
           style={{ height: size, width: size }}
         />
       ) : (
         <div
-          className="avatar no-image rounded-full object-cover"
+          className="rounded-full border-4 border-color-contrast"
           style={{ height: size, width: size }}
         >
           <Image

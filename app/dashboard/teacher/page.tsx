@@ -58,33 +58,39 @@ export default async function TeacherPage() {
 
   return (
     <div>
-      <div className="container mx-auto p-6 flex flex-row justify-between items-center">
-        <div>
-          {imgUrl.publicUrl !==
-            "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
-            <Image
-              src={imgUrl.publicUrl}
-              alt="Teacher Avatar"
-              width={200}
-              height={200}
-              className=" object-fill rounded-full border-4 border-contrast"
-            />
-          )}
-        </div>
-        <div className="flex justify-between">
+      <div className="container mx-auto p-6 flex flex-row justify-between items-center bg-white">
+        
+        <div className="flex items-center space-x-4">
+          
+          <div className="w-48 h-48 border-4 border-contrast rounded-full overflow-hidden">
+            {imgUrl.publicUrl !==
+              "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
+              <Image
+                src={imgUrl.publicUrl}
+                alt="Teacher Avatar"
+                width={200}
+                height={200}
+                className="object-cover w-full h-full"
+              />
+            )}
+          </div>
+
+          
           <div className="font-extrabold p-4">
             <h2 className="text-2xl font-bold mb-4">
               Hi, {dataTeacher.full_name}!
             </h2>
             <p className="text-gray-600 mb-6">I hope you have a good day.</p>
           </div>
-          <div>
-            <p>{formatDate(today)}</p>
-          </div>
+        </div>
+
+      
+        <div className="flex-grow text-right">
+          <p>{formatDate(today)}</p>
         </div>
       </div>
-      {/* TABLE  */}
-      {/* <p className="text-gray-600 mb-6">I hope you have a good day.</p> */}
+
+      
       <div className="container mx-auto px-4 sm:px-8 bg-color10">
         <div className="py-10">
           <div className="p-8 bg-lightGray bg-opacity-70 rounded-[10px] ">
@@ -120,7 +126,7 @@ export default async function TeacherPage() {
                           <td className="px-6 py-4 whitespace-nowrap border-b border-gray-300">
                             <Link
                               href={`/dashboard/teacher/class/${element.id}`}
-                              className="inline-block rounded-lg bg-contrast py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-contrasthover focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+                              className="inline-block rounded-lg bg-contrast py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-contrast-hover focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
                             >
                               Go To Details
                             </Link>

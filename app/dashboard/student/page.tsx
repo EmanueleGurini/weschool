@@ -43,20 +43,20 @@ async function StudentPage() {
 
   return (
     <>
-      <div className="p-2 bg-white flex justify-between items-center">
+      <div className="header-container p-2 bg-white flex justify-between items-center">
         {imgUrl.publicUrl !==
           "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
-          <div className="w-48 h-48 mb-4 border-4 rounded-full overflow-hidden">
+          <div className="avatar-container w-48 h-48 border-4 rounded-full overflow-hidden border-contrast">
             <Image
               src={imgUrl.publicUrl}
               alt="Student Avatar"
               width={200}
               height={200}
-              className="object-cover w-full h-full"
+              className="object-cover w-full h-full "
             />
           </div>
         )}
-        <div className="w-full h-full">
+        <div className="header-info flex-grow text-center">
           <Header
             greeting={`Hi, ${student.students}`}
             text="I hope you have a nice day!"
@@ -65,14 +65,9 @@ async function StudentPage() {
       </div>
 
       <div className="flex flex-col items-center justify-start mt-16 space-y-6">
-        <div
-          className="w-full max-w-lg space-y-4 bg-white p-4 rounded-lg Rounded-lg
-"
-        >
+        <div className="w-full max-w-lg space-y-4 bg-white p-4 rounded-lg">
           <div className="flex items-center space-x-4">
-            <span className="w-32 text-right text-[#2b4570] font-semibold">
-              Presence
-            </span>
+            <span className="w-32 text-right text-[#2b4570] font-semibold">Presence</span>
             <ProgressBar
               value={student.attendance["totale presenze"]}
               total={student.attendance["giorni totali del corso"]}
@@ -81,9 +76,7 @@ async function StudentPage() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="w-32 text-right text-[#2b4570] font-semibold">
-              Absence
-            </span>
+            <span className="w-32 text-right text-[#2b4570] font-semibold">Absence</span>
             <ProgressBar
               value={student.attendance["totale assenze"]}
               total={student.attendance["giorni totali del corso"]}
@@ -92,18 +85,17 @@ async function StudentPage() {
           </div>
 
           <div className="flex items-center space-x-4">
-            <span className="w-32 text-right text-[#2b4570] font-semibold">
-              Total Days
-            </span>
+            <span className="w-32 text-right text-[#2b4570] font-semibold">Total Days</span>
             <ProgressBar
               value={student.attendance["giorni totali del corso"]}
               total={student.attendance["giorni totali del corso"]}
               color="bg-color20"
-            />{" "}
+            />
           </div>
         </div>
       </div>
-      <div className="max-w-[1024px] mx-auto">
+
+      <div className="my-12 max-w-[1024px] mx-auto">
         <Charts subjectsArray={student.subjects} />
       </div>
     </>

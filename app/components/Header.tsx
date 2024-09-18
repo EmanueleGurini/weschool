@@ -15,13 +15,11 @@ const Header: React.FC<HeaderProps> = ({ greeting, text }) => {
 
   return (
     <header className="p-6 flex justify-between items-center">
-      <div className="flex justify-between items-center space-x-4">
-        <div>
-          <h1 className="text-xl font-bold">{greeting}</h1>
-          <p>{text}</p>
-        </div>
+      <div className="flex flex-col">
+        <h1 className="text-xl font-bold">{greeting}</h1>
+        <p>{text}</p>
       </div>
-      <div className="header-info text-lg font-semibold">
+      <div className="text-lg font-semibold">
         <p>{formatDate(today, "day/month/year")}</p>
       </div>
     </header>
