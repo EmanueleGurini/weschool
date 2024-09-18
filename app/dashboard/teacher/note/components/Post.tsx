@@ -2,16 +2,19 @@
 
 import { createClient } from "utils/supabase/client";
 import { MouseEvent } from "react";
+
 interface IPost {
   date: string;
   title: string;
   note_id: string;
   class_name: string;
   description: string;
-  teacher_name: string;
+  full_name: string;
+  isDelete: boolean;
+  author_id: string;
 }
 
-export default function Post({ date, title, note_id, class_name, description, teacher_name }: IPost) {
+export default function Post({ date, title, note_id, class_name, description, full_name, isDelete, author_id }: IPost) {
   const handleDelete = async (e: MouseEvent) => {
     const supabase = createClient();
     await supabase.from("notes").delete().eq("id", e.currentTarget.id);
@@ -20,9 +23,13 @@ export default function Post({ date, title, note_id, class_name, description, te
 
   return (
     <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
-      <button id={note_id} onClick={handleDelete}>
-        DELETE
-      </button>
+      {isDelete && (
+        <div id={author_id}>
+          <button id={note_id} onClick={handleDelete}>
+            DELETE
+          </button>
+        </div>
+      )}
       <div className="md:flex">
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{class_name}</div>
@@ -30,7 +37,7 @@ export default function Post({ date, title, note_id, class_name, description, te
           <p className="mt-2 text-gray-500">{description}</p>
           <div className="mt-4 flex items-center">
             <div className="text-sm text-gray-500">
-              <p className="text-indigo-400">Teacher: {teacher_name}</p>
+              <p className="text-indigo-400">Teacher: {full_name}</p>
               <p className="">{date}</p>
             </div>
           </div>

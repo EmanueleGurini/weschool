@@ -7,7 +7,7 @@ interface IClasses {
   course_id: string;
   course_name: string;
 }
-interface IFormPost {
+export interface IFormPost {
   id: string;
   classes: IClasses[];
 }
@@ -28,8 +28,7 @@ export default function FormPost({ id, classes }: IFormPost) {
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Impedisce il comportamento di default del form (refresh della pagina)
-
+    e.preventDefault();
     const supabase = createClient();
     try {
       const { error } = await supabase
@@ -45,9 +44,8 @@ export default function FormPost({ id, classes }: IFormPost) {
 
       if (error) {
         console.error("Error:", error.message);
-        // Mostra l'errore all'utente o gestiscilo in altro modo
       } else {
-        window.location.reload(); // Solo se l'inserimento ha successo
+        window.location.reload();
       }
     } catch (error) {
       console.error("Unexpected Error:", error);
