@@ -72,7 +72,7 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
           defaultValue={selectedDate}
           className="border p-2 rounded-lg"
         />
-        <button type="submit" className="ml-2 inline-block rounded-lg bg-color100 hover:bg-color80 py-2 px-4 text-white">
+        <button type="submit" className="ml-2 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">
           Load Data
         </button>
       </form>

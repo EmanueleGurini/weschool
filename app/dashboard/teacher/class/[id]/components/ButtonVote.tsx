@@ -57,7 +57,7 @@ export default function ButtonVote({ subjects, id, classID }: IButtonVote) {
 				className="inline-block rounded-lg bg-color60 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
 				onClick={() => setIsOpen(true)}
 			>
-				Add Evaluation
+				Add
 			</button>
 			<ModalVote onClose={() => setIsOpen(false)} isOpen={isOpen}>
 				<div className="w-full flex justify-around p-7">

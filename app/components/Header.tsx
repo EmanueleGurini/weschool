@@ -11,7 +11,7 @@ const Header: React.FC<HeaderProps> = ({ greeting, text }) => {
 
   return (
     <header className="p-6 flex justify-between items-center">
-      <div className="flex flex-col">
+      <div className="flex flex-col items-start">
         <h1 className="text-xl font-bold">{greeting}</h1>
         <p>{text}</p>
       </div>

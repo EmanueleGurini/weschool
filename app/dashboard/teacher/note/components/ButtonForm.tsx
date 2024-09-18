@@ -10,7 +10,7 @@ export default function ButtonForm({ id, classes }: IFormPost) {
   return (
     <>
       <button
-        className="inline-block rounded-lg bg-color60 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+        className="inline-block rounded-lg bg-contrast py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-contrasthover focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
         onClick={() => setIsOpen(true)}
       >
         Create Post

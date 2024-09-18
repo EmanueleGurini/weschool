@@ -2,24 +2,32 @@
 import { GenerateContentCandidate, GoogleGenerativeAI } from "@google/generative-ai";
 import { useState } from "react";
 import parse from "html-react-parser";
+import Image from "next/image";
+
 interface IAIPerformance {
   students: string;
   subjects: string;
 }
 
+
+
 export default function AIPerformance({ students, subjects }: IAIPerformance) {
   const [response, setResponse] = useState<string>("");
+  const [loader, setLoader] = useState<boolean>(false);
 
   const handleGenerate = async () => {
-    const prompt = ` Da questo oggetto ${subjects}, un passo alla volta, mi fai le seguenti operazioni : 
-    1. Calcola la media dei voti associati a ciascuna materia, se il valore è null non mostrami alcun consiglio su quella materia.
-    2. Se la media di ogni materia è pari o superiore a 6, dai comunque dei consigli per migliorare insieme a un messaggio di congratulazioni.
-    3. Se la media per ogni materia è inferiore a 6, restituisci dei consigli per migliorare la situazione in quelle materie, riferisciti a me con il nome ${students}.
-    4. Forniscimi anche dei link dove posso trovare documentazione per migliorare il rendimento in quelle materie
-    5. NOTA BENE : NEL TESTO NON VOGLIO CHE MI RESTITUISCI LE OPERAZIONI FATTE , MA SOLO I CONSIGLI E EVENTUALI LINK DI DOCUMENTAZIONE 
-    6 I link di documentazione devono essere target = _blank con uno style underline
-    7. RESTITUISCIMI IL TUTTO NON IN MARK DOWN MA IN tag html stilizzato in TAILWIND 
-    8. NON MOSTRARMI LA SPIEGAZIONE DEL CODICE e i backtick iniziali con scritto html `;
+    setResponse("")
+    setLoader(true)
+    const prompt = ` From this object ${subjects}, step by step, perform the following operations:
+
+    1. Calculate the average of the grades associated with each subject; if the value is null, do not show me any advice on that subject.
+    2. If the average of each subject is equal to or greater than 6, still provide advice for improvement along with a congratulatory message.
+    3. If the average for each subject is less than 6, give advice to improve the situation in those subjects, referring to me by the name ${students}.
+    4. Also provide me with links where I can find documentation to improve performance in those subjects.
+    5. NOTE: IN THE TEXT, I DO NOT WANT YOU TO RETURN THE OPERATIONS DONE, BUT ONLY THE ADVICE AND ANY DOCUMENTATION LINKS.
+    6. The documentation links should have target=_blank with an underline style.
+    7. RETURN EVERYTHING NOT IN MARKDOWN BUT IN HTML TAGS STYLED WITH TAILWIND.
+    8. DO NOT SHOW ME THE CODE EXPLANATION and the initial backticks with 'html' written.`;
 
     try {
       if (process.env.NEXT_PUBLIC_GEMINI_KEY) {
@@ -29,6 +37,7 @@ export default function AIPerformance({ students, subjects }: IAIPerformance) {
         const output = (result.response.candidates as GenerateContentCandidate[])[0].content.parts[0].text;
         if (output) {
           setResponse(output);
+          setLoader(false);
         }
       }
     } catch (error) {
@@ -37,11 +46,19 @@ export default function AIPerformance({ students, subjects }: IAIPerformance) {
   };
 
   return (
-    <div className="flex justify-center">
-      <div>{parse(response)}</div>
-      <button className="flex justify-center" onClick={handleGenerate}>
-        CLICCAMI TUTTO
+    <div className="w-full flex flex-col gap-2 items-end p-10 ">
+      <div className="bg-white w-full h-[450px] flex items-center justify-center font-nunito text-sm text-color100 overflow-y-scroll">
+        {response && parse(response)}
+        {response === "" && loader && <div className= "h-[40px] w-[40px] rounded-full border-2 border-t-0 border-contrast animate-spin-fast"></div>}
+        {!loader && response ==="" && <Image width={200} height={200} src="/img/ai.png" alt="ai icon"/> }
+      </div>
+      <button 
+        className="mb-4 my-4 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50" 
+        onClick={handleGenerate}
+      >
+        Click here for AI suggestions
       </button>
+
     </div>
   );
 }

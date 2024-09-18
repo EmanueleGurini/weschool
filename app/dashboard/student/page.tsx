@@ -49,7 +49,7 @@ async function StudentPage() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-start mt-16 space-y-6">
+      <div className="my-16 mt-16 max-w-[1300px] mx-auto">
         <div className="w-full max-w-lg space-y-4 bg-white p-4 rounded-lg">
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right text-[#2b4570] font-semibold">Presence</span>
@@ -68,10 +68,15 @@ async function StudentPage() {
         </div>
       </div>
 
-      <div className="my-12 max-w-[1024px] mx-auto">
-        <Charts subjectsArray={student.subjects} />
-      </div>
-      <AIPerformance students={student.students} subjects={JSON.stringify(student.subjects)} />
+      <div className="my-12 max-w-[1300px] bg-white rounded-lg mx-auto flex ">
+  <div className="w-2/4">
+    <Charts subjectsArray={student.subjects} />
+  </div>
+  <div className="w-2/4">
+    <AIPerformance students={student.students} subjects={JSON.stringify(student.subjects)} />
+  </div>
+</div>
+
     </>
   );
 }
