@@ -32,22 +32,52 @@ const getUniqueSubjects = (subjectsArray: IChartsProps[]) => {
   return Array.from(new Set(subjectsArray.map((item) => item.subject).filter(Boolean)));
 };
 
+const colorPalette = [
+  'var(--color-contrast)',
+  'var(--color-contrast-hover)', 
+  'var(--color-100)', 
+  'var(--color-80)', 
+  'var(--color-60)', 
+  'var(--color-20)',
+  'var(--primary-color)',
+];
+
 function Charts({ subjectsArray }: ISubject) {
   const data = organizeData(subjectsArray);
   const subjects = getUniqueSubjects(subjectsArray);
 
   return (
-    <div className="flex flex-col items-center p-6 ">
-      <h2 className="text-xl font-sans font-semibold uppercase mb-4">Academic Performance </h2>
+    <div className="flex flex-col items-center p-8 py-10 bg-white rounded-lg">
+      <h2 className="text-xl font-sans font-bold uppercase mb-4 p-2 text-color100">Academic Performance </h2>
       <ResponsiveContainer width="95%" height={400}>
         <LineChart width={700} height={500} data={data}>
-          <XAxis dataKey="date" />
-          <YAxis domain={[0, 10]} ticks={[0, 2, 4, 6, 8, 10]} />
-          <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-          <Tooltip />
-          <Legend />
-          {subjects.map((subject) => (
-            <Line key={subject} type="monotone" dataKey={subject} stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`} connectNulls={true} />
+          <XAxis dataKey="date" stroke="var(--color-100)"/>
+          <YAxis 
+          domain={[0, 10]} 
+          ticks={[0, 2, 4, 6, 8, 10]} 
+          stroke="var(--color-100)"
+          tick={{ fontSize: 12, fill: 'var(--color-60)' }}
+          />
+          <CartesianGrid stroke="var(--color-20)" strokeDasharray="5 5" />
+          <Tooltip 
+          contentStyle={{ backgroundColor: 'var(--color-0)', border: '1px solid var(--color-20)' }}
+          labelStyle={{ color: 'var(--color-contrast)' }}
+          itemStyle={{ color: 'var(--color-100)'}}/>
+          <Legend wrapperStyle={{
+              color: 'var(--color-100)',
+              fontFamily: "sans-serif",
+              fontWeight: "bold",
+            }}/>
+          {subjects.map((subject, index) => (
+            <Line 
+              key={subject} 
+              type="monotone" 
+              dataKey={subject} 
+              stroke={colorPalette[index % colorPalette.length]} 
+              strokeWidth={3}
+              dot={{r: 4}}
+              activeDot={{ r: 6 }}
+              connectNulls={true} />
           ))}
         </LineChart>
       </ResponsiveContainer>
