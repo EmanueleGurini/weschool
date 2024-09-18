@@ -22,27 +22,28 @@ export default function Post({ date, title, note_id, class_name, description, fu
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4">
-      {isDelete && (
-        <div id={author_id}>
-          <button id={note_id} onClick={handleDelete}>
-            DELETE
-          </button>
-        </div>
-      )}
-      <div className="md:flex">
-        <div className="p-8">
-          <div className="uppercase tracking-wide text-sm text-indigo-500 font-semibold">{class_name}</div>
-          <h1 className="block mt-1 text-lg leading-tight font-medium text-black">{title}</h1>
-          <p className="mt-2 text-gray-500">{description}</p>
-          <div className="mt-4 flex items-center">
-            <div className="text-sm text-gray-500">
-              <p className="text-indigo-400">Teacher: {full_name}</p>
-              <p className="">{date}</p>
-            </div>
-          </div>
+    <div className="relative max-w-md mx-auto py-3 bg-white rounded-xl overflow-hidden md:max-w-2xl my-4">
+  <button 
+    id={note_id} 
+    onClick={handleDelete}
+    className="absolute bottom-4 right-4 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+  >
+    DELETE
+  </button>
+  <div className="md:flex">
+    <div className="p-8">
+      <div className="uppercase tracking-wide text-sm text-primary font-semibold">{class_name}</div>
+      <h1 className="block mt-1 text-lg leading-tight font-medium text-primary">{title}</h1>
+      <p className="mt-2 text-primary">{description}</p>
+      <div className="mt-4 flex items-center">
+        <div className="text-sm text-primary">
+          <p className="text-contrasthover font-bold uppercase">Teacher: {full_name}</p>
+          <p className="">{date}</p>
         </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 }
