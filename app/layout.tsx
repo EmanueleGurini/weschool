@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { nunito, montserrat } from "./fonts";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -13,11 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <>
-    <html lang="en">
-      <body>
-        {children}
-      </body>
-    </html>
+      <html lang="en" className={`${montserrat.variable} ${nunito.variable}`}>
+        <body>{children}</body>
+      </html>
     </>
   );
 }

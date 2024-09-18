@@ -80,7 +80,10 @@ export default function Avatar({
           style={{ height: size, width: size }}
         />
       ) : (
-        <div className="avatar no-image" style={{ height: size, width: size }}>
+        <div
+          className="avatar no-image rounded-full object-cover"
+          style={{ height: size, width: size }}
+        >
           <Image
             src="/img/profile.svg"
             width={size}

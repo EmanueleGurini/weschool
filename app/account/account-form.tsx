@@ -26,7 +26,11 @@ export default function AccountForm({ user }: { user: User | null }) {
     try {
       setLoading(true);
 
-      const { data, error, status } = await supabase.from("profiles").select(`full_name, avatar_url`).eq("id", user?.id).single();
+      const { data, error, status } = await supabase
+        .from("profiles")
+        .select(`full_name, avatar_url`)
+        .eq("id", user?.id)
+        .single();
 
       if (error && status !== 406) {
         console.log(error);
@@ -53,7 +57,12 @@ export default function AccountForm({ user }: { user: User | null }) {
     getProfile();
   }, [user, getProfile]);
 
-  async function updateProfile({ avatar_url }: { fullname: string | null; avatar_url: string | null }) {
+  async function updateProfile({
+    avatar_url,
+  }: {
+    fullname: string | null;
+    avatar_url: string | null;
+  }) {
     try {
       setLoading(true);
 
@@ -82,7 +91,8 @@ export default function AccountForm({ user }: { user: User | null }) {
     }
   }
 
-  const passwordRequirementsRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]).{6,}$/;
+  const passwordRequirementsRegex =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=\[\]{};':"\\|,.<>\/?]).{6,}$/;
 
   async function updatePassword() {
     if (!newPassword || !confirmPassword) {
@@ -97,7 +107,9 @@ export default function AccountForm({ user }: { user: User | null }) {
 
     if (!passwordRequirementsRegex.test(newPassword)) {
       setToastNo(true);
-      setMessage("The password must be at least 6 characters long, contain at least one uppercase letter, one number, and one special character.");
+      setMessage(
+        "The password must be at least 6 characters long, contain at least one uppercase letter, one number, and one special character."
+      );
       setTimeout(() => {
         setToastNo(false);
         setMessage("");
@@ -155,9 +167,11 @@ export default function AccountForm({ user }: { user: User | null }) {
           {message}
         </ToastYes>
       )}
-      <div className="flex min-h-screen items-center justify-center p-6 bg-gray-100">
-        <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
-          <h2 className="text-center pb-4 text-2xl font-bold leading-9 tracking-tight text-color100">Profile Settings</h2>
+      <div className="flex min-h-screen items-center justify-center p-6 bg-color10">
+        <div className="max-w-md w-full p-8 rounded-lg bg-white">
+          <h2 className="text-center pb-4 text-2xl font-bold leading-9 tracking-tight text-color100">
+            Profile Settings
+          </h2>
           <div className="flex justify-center">
             <Avatar
               uid={user?.id ?? null}
@@ -170,7 +184,10 @@ export default function AccountForm({ user }: { user: User | null }) {
             />
           </div>
 
-          <label htmlFor="email" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
+          <label
+            htmlFor="email"
+            className="block pt-4 pb-1 text-sm font-medium text-gray-700"
+          >
             Email
           </label>
           <input
@@ -182,7 +199,10 @@ export default function AccountForm({ user }: { user: User | null }) {
           />
 
           <div>
-            <label htmlFor="fullName" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
+            <label
+              htmlFor="fullName"
+              className="block pt-4 pb-1 text-sm font-medium text-gray-700"
+            >
               Full Name
             </label>
             <input
@@ -190,13 +210,13 @@ export default function AccountForm({ user }: { user: User | null }) {
               type="text"
               value={fullname || ""}
               onChange={(e) => setFullname(e.target.value)}
-              className="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset"
             />
           </div>
 
           <div>
             <button
-              className="w-full mt-4 bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-2  focus:ring-offset-2"
+              className="w-full mt-4 bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-1  focus:ring-offset-2"
               onClick={() => updateProfile({ fullname, avatar_url })}
               disabled={loading}
             >
@@ -204,7 +224,10 @@ export default function AccountForm({ user }: { user: User | null }) {
             </button>
           </div>
           <div>
-            <label htmlFor="newPassword" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
+            <label
+              htmlFor="newPassword"
+              className="block pt-4 pb-1 text-sm font-medium text-gray-700"
+            >
               New Password
             </label>
             <input
@@ -212,12 +235,15 @@ export default function AccountForm({ user }: { user: User | null }) {
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset"
             />
           </div>
 
           <div>
-            <label htmlFor="confirmPassword" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
+            <label
+              htmlFor="confirmPassword"
+              className="block pt-4 pb-1 text-sm font-medium text-gray-700"
+            >
               Confirm Password
             </label>
             <input
@@ -225,13 +251,13 @@ export default function AccountForm({ user }: { user: User | null }) {
               type="password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
-              className="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+              className="mt-1 block w-full rounded-md border-0 py-3 px-4 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-1 focus:ring-inset"
             />
           </div>
           <div className="flex flex-col gap-3">
             <div>
               <button
-                className="w-full bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-2  focus:ring-offset-2 mt-4"
+                className="w-full bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-1  focus:ring-offset-2 mt-4"
                 onClick={updatePassword}
                 disabled={loading}
               >
@@ -242,16 +268,16 @@ export default function AccountForm({ user }: { user: User | null }) {
             <div>
               <form action="/auth/signout" method="post">
                 <button
-                  className="w-full bg-contrast text-color100 py-2 rounded-md hover:bg-contrasthover focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+                  className="w-full bg-contrast text-color100 py-2 rounded-md hover:bg-contrasthover focus:outline-none focus:ring-1"
                   type="submit"
                 >
-                  Sign out
+                  Log out
                 </button>
               </form>
             </div>
 
             <div className="flex justify-center">
-            <Link
+              <Link
                 className="text-sm font-bold text-color100 underline"
                 href={`/?cacheBuster=${crypto.randomUUID()}`}
                 onClick={(e) => {
