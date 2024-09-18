@@ -17,7 +17,10 @@ interface IStudent {
   fullName: string;
 }
 
-export default async function SinglePageClass({ params, searchParams }: SinglePageClassProps) {
+export default async function SinglePageClass({
+  params,
+  searchParams,
+}: SinglePageClassProps) {
   const { id } = params;
 
   const supabase = createClient();
@@ -30,7 +33,11 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
     return redirect("/login");
   }
 
-  const data: PostgrestSingleResponse<IRole> = await supabase.from("profile_roles").select("roles(role)").eq("id", user!.id).single();
+  const data: PostgrestSingleResponse<IRole> = await supabase
+    .from("profile_roles")
+    .select("roles(role)")
+    .eq("id", user!.id)
+    .single();
   const userRole = data.data?.roles.role;
 
   if (userRole === "student") {
@@ -49,19 +56,27 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
   const selectedDate = searchParams.date || formatDate(today);
   const classData = await getStudentsListDetailsByTeacher(id, selectedDate);
 
-  const uniqueStudentNames = Array.from(new Set(classData.students.map((student: IStudent) => student.fullName)));
+  const uniqueStudentNames = Array.from(
+    new Set(classData.students.map((student: IStudent) => student.fullName))
+  );
 
   return (
     <div className="container mx-auto p-6">
       <div className="w-full flex items-center justify-between font-extrabold">
-        <h2 className="text-2xl font-bold mb-4">Class Name: {classData.courseName}</h2>
+        <h2 className="text-2xl font-bold mb-4">
+          Class Name: {classData.courseName}
+        </h2>
         <p>{selectedDate}</p>
       </div>
 
-      <p className="text-gray-800 mb-6">Students Number: {uniqueStudentNames.length}</p>
+      <p className="text-gray-800 mb-6">
+        Students Number: {uniqueStudentNames.length}
+      </p>
 
       <form method="GET" className="mb-4 w-full flex items-center justify-end">
-        <label htmlFor="date" className="mr-2">Select Date:</label>
+        <label htmlFor="date" className="mr-2">
+          Select Date:
+        </label>
         <input
           type="date"
           id="date"
@@ -69,16 +84,25 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
           defaultValue={selectedDate}
           className="border p-2 rounded"
         />
-        <button type="submit" className="ml-2 inline-block rounded-lg bg-color100 py-2 px-4 text-white">
+        <button
+          type="submit"
+          className="ml-2 inline-block rounded-lg bg-color100 py-2 px-4 text-white"
+        >
           Load Data
         </button>
       </form>
 
-      <TableTeacherClass dateSelected={selectedDate} id={id} subjects={classData.subjects} students={classData.students} date={selectedDate} />
+      <TableTeacherClass
+        dateSelected={selectedDate}
+        id={id}
+        subjects={classData.subjects}
+        students={classData.students}
+        date={selectedDate}
+      />
 
       <Link
         href="/dashboard/teacher"
-        className="inline-block rounded-lg bg-color100 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+        className="inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
       >
         Go Back
       </Link>

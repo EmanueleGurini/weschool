@@ -6,17 +6,27 @@ interface IButtonUpload {
   id: string;
   classID: string;
   date: string;
-  onClick: (e: MouseEvent<HTMLButtonElement>, classID: string, status: boolean, date: string) => void;
+  onClick: (
+    e: MouseEvent<HTMLButtonElement>,
+    classID: string,
+    status: boolean,
+    date: string
+  ) => void;
 }
 
-export default function ButtonUpload({ onClick, id, classID, date }: IButtonUpload) {
+export default function ButtonUpload({
+  onClick,
+  id,
+  classID,
+  date,
+}: IButtonUpload) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   return (
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-block rounded-lg bg-contrasthover py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-contrast focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+        className="inline-block rounded-lg bg-contrasthover py-3 px-6  text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-contrast focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
       >
         Upload
       </button>
@@ -25,14 +35,14 @@ export default function ButtonUpload({ onClick, id, classID, date }: IButtonUplo
           <button
             id={id}
             onClick={(e) => onClick(e, classID, true, date)}
-            className="bg-color100 py-3 px-6 rounded-md cursor-pointer hover:bg-color80 font-sans text-xs font-bold uppercase text-white shadow-md"
+            className="bg-color100 py-3 px-6 rounded-md cursor-pointer hover:bg-color80 text-xs font-bold uppercase text-white shadow-md"
           >
             Present
           </button>
           <button
             id={id}
             onClick={(e) => onClick(e, classID, false, date)}
-            className="bg-contrast py-3 px-6 rounded-md cursor-pointer hover:bg-contrasthover font-sans text-xs font-bold uppercase text-white shadow-md"
+            className="bg-contrast py-3 px-6 rounded-md cursor-pointer hover:bg-contrasthover text-xs font-bold uppercase text-white shadow-md"
           >
             Absent
           </button>

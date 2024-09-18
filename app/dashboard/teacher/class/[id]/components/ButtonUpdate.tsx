@@ -7,25 +7,28 @@ interface IButtonUpdate {
   id: string;
 }
 
-export default function ButtonUpdate({id}: IButtonUpdate) {
+export default function ButtonUpdate({ id }: IButtonUpdate) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  async function handleUpdate(e: React.MouseEvent<HTMLButtonElement>, status: boolean) {
-    const supabase = createClient()
+  async function handleUpdate(
+    e: React.MouseEvent<HTMLButtonElement>,
+    status: boolean
+  ) {
+    const supabase = createClient();
     await supabase
-    .from('attendance')
-    .update({ status: status })
-    .eq('student_id', e.currentTarget.id)
-    .eq('date', new Date().toISOString().split('T')[0])
-    .not('status', 'is', null);
-    window.location.reload()
+      .from("attendance")
+      .update({ status: status })
+      .eq("student_id", e.currentTarget.id)
+      .eq("date", new Date().toISOString().split("T")[0])
+      .not("status", "is", null);
+    window.location.reload();
   }
 
   return (
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="inline-block rounded-lg bg-color60 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+        className="inline-block rounded-lg bg-color60 py-3 px-6  text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
       >
         Update
       </button>
