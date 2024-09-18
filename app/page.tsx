@@ -21,10 +21,12 @@ export default async function Home() {
     redirect("/login");
   }
 
-  const data: PostgrestSingleResponse<IRole> = await supabase.from("profile_roles").select("roles(role)").eq("id", user!.id).single();
-  console.log(data);
+  const data: PostgrestSingleResponse<IRole> = await supabase
+    .from("profile_roles")
+    .select("roles(role)")
+    .eq("id", user!.id)
+    .single();
   const userRole = data.data?.roles.role;
-  console.log(userRole);
 
   if (userRole === "teacher") {
     revalidatePath("/", "layout");

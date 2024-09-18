@@ -6,7 +6,6 @@ import { IRole } from "app/page";
 import { getAvatarImg, getTeacherDataByID } from "app/api/supabase/actions";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "@/components/Header";
 import FormattedDate from "@/components/FormattedDate";
 
 interface ICourses {

@@ -2,7 +2,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { type User } from "@supabase/supabase-js";
 import Avatar from "./avatar";
-import { useRouter } from "next/navigation";
 import { createClient } from "utils/supabase/client";
 import ToastYes from "@/components/ToastYes";
 import ToastNo from "@/components/ToastNo";
@@ -19,8 +18,6 @@ export default function AccountForm({ user }: { user: User | null }) {
 
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
-
-  const router = useRouter();
 
   const getProfile = useCallback(async () => {
     try {
