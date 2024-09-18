@@ -53,11 +53,11 @@ export default function FormPost({ id, classes }: IFormPost) {
   };
 
   return (
-    <div className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-bold mb-6 text-gray-700">Create New Post</h2>
+    <div className="max-w-lg mb-4 mx-auto bg-white p-6 rounded-lg">
+      <h2 className="text-2xl font-bold mb-6 text-primary">Create New Post</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="title">
+          <label className="block text-primary text-sm font-bold mb-2" htmlFor="title">
             Title
           </label>
           <input
@@ -66,13 +66,13 @@ export default function FormPost({ id, classes }: IFormPost) {
             name="title"
             value={formData.title}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-color80"
             required
           />
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="class_name">
+          <label className="block text-primary text-sm font-bold mb-2" htmlFor="class_name">
             Class Name
           </label>
           <select
@@ -80,7 +80,7 @@ export default function FormPost({ id, classes }: IFormPost) {
             name="class_name"
             value={formData.class_name}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-color80 focus:ring-1 focus:ring-color80"
             required
           >
             <option value="" hidden>
@@ -95,7 +95,7 @@ export default function FormPost({ id, classes }: IFormPost) {
         </div>
 
         <div className="mb-4">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
+          <label className="block text-primary text-sm font-bold mb-2" htmlFor="description">
             Description
           </label>
           <textarea
@@ -103,7 +103,7 @@ export default function FormPost({ id, classes }: IFormPost) {
             name="description"
             value={formData.description}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-color80 focus:ring-1 focus:ring-color80"
             rows={4}
             required
           />
@@ -119,14 +119,14 @@ export default function FormPost({ id, classes }: IFormPost) {
             name="date"
             value={formData.date}
             onChange={handleChange}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:border-color80 focus:ring-1 focus:ring-color80"
             required
           />
         </div>
 
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg shadow-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          className="w-full bg-contrast text-white py-2 px-4 rounded-lg shadow-lg hover:bg-contrasthover focus:outline-none focus:ring-2 focus:ring-indigo-500"
         >
           Submit
         </button>
