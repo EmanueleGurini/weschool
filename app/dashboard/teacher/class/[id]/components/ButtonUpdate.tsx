@@ -10,11 +10,13 @@ interface IButtonUpdate {
 
 export default function ButtonUpdate({ id, date }: IButtonUpdate) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [successfully, setSuccessfully] = useState(false)
 
   async function handleUpdate(
     e: React.MouseEvent<HTMLButtonElement>,
     status: boolean
   ) {
+    setSuccessfully(false)
     const supabase = createClient();
     await supabase
       .from("attendance")
@@ -22,7 +24,10 @@ export default function ButtonUpdate({ id, date }: IButtonUpdate) {
       .eq("student_id", e.currentTarget.id)
       .eq("date", date)
       .not("status", "is", null);
-    window.location.reload();
+    setSuccessfully(true)
+    setTimeout(() => {
+			window.location.reload();
+		}, 500)
   }
 
   return (
@@ -50,6 +55,9 @@ export default function ButtonUpdate({ id, date }: IButtonUpdate) {
             Absent
           </button>
         </div>
+        {successfully && <div className="w-full text-center font-semibold text-contrast">
+          Update Successfully!
+        </div>}
       </ModalUpdate>
     </>
   );
