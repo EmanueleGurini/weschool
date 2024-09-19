@@ -40,42 +40,44 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
     }
   }
 
-  const notes = await getTeacherNotes(user.id);
-
   const now = new Date();
   const year = now.getFullYear();
-  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Mesi sono basati su zero
-  const day = now.getDate().toString().padStart(2, '0');
+  const month = (now.getMonth() + 1).toString().padStart(2, "0");
+  const day = now.getDate().toString().padStart(2, "0");
 
   const today = `${year}-${month}-${day}`;
 
   const selectedDate = searchParams.date || today;
-
-  const filteredNotes = selectedDate && notes.posts.filter((note: Note) => note.date === selectedDate);
-
+  const notes = await getTeacherNotes(user.id, selectedDate);
+  console.log(notes.courses[0].posts, user.id);
   return (
     <>
       <div className="w-full flex justify-between items-center p-6">
         <ButtonForm id={user.id} classes={notes.courses} />
         <Link
-        href="/dashboard/teacher"
-        className="inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
-      >
-        Go Back
-      </Link>
+          href="/dashboard/teacher"
+          className="inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+        >
+          Go Back
+        </Link>
       </div>
 
       <div className="w-full flex justify-center items-center p-6">
         <form method="GET" className="flex items-center">
-          <label htmlFor="date" className="mr-2">Select Date:</label>
+          <label htmlFor="date" className="mr-2">
+            Select Date:
+          </label>
           <input id="date" type="date" name="date" defaultValue={selectedDate} className="border border-gray-300 rounded-lg p-2" />
-          <button type="submit" className="ml-4 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">
+          <button
+            type="submit"
+            className="ml-4 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+          >
             Filter Posts
           </button>
         </form>
       </div>
-
-      {filteredNotes.map((note: Note) => (
+      {notes.courses[0].posts.length > 0 && <p className="text-center ">You can delete only your own posts</p>}
+      {notes.courses[0].posts.map((note: Note) => (
         <Post
           key={note.note_id}
           date={note.date}
