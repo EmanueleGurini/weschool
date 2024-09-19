@@ -15,7 +15,7 @@ const NavbarStudent: React.FC = () => {
         </div>
         <nav className="flex space-x-4">
           <Link href="/account">
-            <img src="/img/settings.png" alt="Impostazioni" className="w-11 h-11 hover:opacity-75 border border-color-black rounded-full p-2" />
+            <Image width={50} height={50} src="/img/settings.png" alt="Impostazioni" className="w-11 h-11 hover:opacity-75 border border-color-black rounded-full p-2" />
           </Link>
         </nav>
       </div>
