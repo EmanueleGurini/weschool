@@ -55,7 +55,7 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 				Change
 			</button>
 			<ModalChangeVote onClose={() => setIsOpen(false)} isOpen={isOpen}>
-				<div className="w-full flex justify-around p-7">
+				<div className="w-full flex items-center justify-around p-7">
 					<select
 						value={selectedSubject}
 						onChange={handleSubjectChange}
@@ -70,7 +70,9 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 							</option>
 						))}
 					</select>
+					<label htmlFor="changeVote">Vote:</label>
 					<input
+						id="changeVote"
 						type="number"
 						min="0"
 						max="10"

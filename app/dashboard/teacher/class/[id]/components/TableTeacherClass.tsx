@@ -35,26 +35,7 @@ export default function TableTeacherClass({
   subjects,
   dateSelected,
 }: IClassData) {
-  async function handleClose(
-    e: MouseEvent<HTMLButtonElement>,
-    classID: string,
-    status: boolean,
-    date: string
-  ): Promise<void> {
-    const supabase = createClient();
-    const idStudent = e.currentTarget.id;
-    await supabase
-      .from("attendance")
-      .insert({
-        student_id: idStudent,
-        class_id: classID,
-        status: status,
-        date: date,
-      })
-      .select();
 
-    window.location.reload();
-  }
   const uniqueStudents = students.filter(
     (student, index, self) =>
       index === self.findIndex((s) => s.fullName === student.fullName)
@@ -103,13 +84,12 @@ export default function TableTeacherClass({
                   {student.attendance.status === null && (
                     <ButtonUpload
                       id={student.id}
-                      classID={id}
                       date={date}
-                      onClick={handleClose}
+                      classID={id}
                     />
                   )}
                   {student.attendance.status !== null && (
-                    <ButtonUpdate id={student.id} />
+                    <ButtonUpdate date={date} id={student.id} />
                   )}
                 </td>
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
@@ -117,6 +97,7 @@ export default function TableTeacherClass({
                     id={student.id}
                     subjects={subjects}
                     classID={id}
+                    date={date}
                   />
                 </td>
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">

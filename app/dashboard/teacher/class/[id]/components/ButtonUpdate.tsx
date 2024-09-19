@@ -5,9 +5,10 @@ import { createClient } from "utils/supabase/client";
 
 interface IButtonUpdate {
   id: string;
+  date: string;
 }
 
-export default function ButtonUpdate({ id }: IButtonUpdate) {
+export default function ButtonUpdate({ id, date }: IButtonUpdate) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   async function handleUpdate(
@@ -19,7 +20,7 @@ export default function ButtonUpdate({ id }: IButtonUpdate) {
       .from("attendance")
       .update({ status: status })
       .eq("student_id", e.currentTarget.id)
-      .eq("date", new Date().toISOString().split("T")[0])
+      .eq("date", date)
       .not("status", "is", null);
     window.location.reload();
   }

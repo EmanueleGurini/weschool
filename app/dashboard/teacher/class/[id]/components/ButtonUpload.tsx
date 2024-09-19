@@ -1,26 +1,39 @@
 "use client";
 import { useState, MouseEvent } from "react";
 import ModalUpdate from "./ModalUpdate";
+import { createClient } from "utils/supabase/client";
 
 interface IButtonUpload {
   id: string;
-  classID: string;
   date: string;
-  onClick: (
-    e: MouseEvent<HTMLButtonElement>,
-    classID: string,
-    status: boolean,
-    date: string
-  ) => void;
+  classID: string;
 }
 
 export default function ButtonUpload({
-  onClick,
   id,
-  classID,
   date,
+  classID
 }: IButtonUpload) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  async function handleUpload(
+    e: MouseEvent<HTMLButtonElement>,
+    status: boolean,
+    date: string,
+  ): Promise<void> {
+    const supabase = createClient();
+    await supabase
+      .from("attendance")
+      .insert({
+        student_id: e.currentTarget.id,
+        status: status,
+        date: date,
+        class_id: classID
+      })
+      .select();
+
+    window.location.reload();
+  }
 
   return (
     <>
@@ -34,14 +47,14 @@ export default function ButtonUpload({
         <div className="w-full flex justify-around p-7">
           <button
             id={id}
-            onClick={(e) => onClick(e, classID, true, date)}
+            onClick={(e) => handleUpload(e, true, date)}
             className="bg-color100 py-3 px-6 rounded-md cursor-pointer hover:bg-color80 text-xs font-bold uppercase text-white shadow-md"
           >
             Present
           </button>
           <button
             id={id}
-            onClick={(e) => onClick(e, classID, false, date)}
+            onClick={(e) => handleUpload(e, false, date)}
             className="bg-contrast py-3 px-6 rounded-md cursor-pointer hover:bg-contrasthover text-xs font-bold uppercase text-white shadow-md"
           >
             Absent

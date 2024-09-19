@@ -50,14 +50,20 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
   const selectedDate = searchParams.date || formatDate(today);
   const classData = await getStudentsListDetailsByTeacher(id, selectedDate);
 
-  const uniqueStudentNames = Array.from(new Set(classData.students.map((student: IStudent) => student.fullName)));
+  const sortedStudents = classData.students.sort((a: IStudent, b: IStudent) => {
+    if (a.fullName < b.fullName) return -1;
+    if (a.fullName > b.fullName) return 1;
+    return 0;
+  });
+
+  const uniqueStudentNames = Array.from(new Set(sortedStudents.map((student: IStudent) => student.fullName)));
 
   return (
     <div className="container mx-auto p-6">
       <div className="w-full flex items-center justify-between font-extrabold">
         <h2 className="text-2xl font-bold mb-4">Class Name: {classData.courseName}</h2>
         <p>
-        <FormattedDate date={new Date(selectedDate)} format="day-month-year"/>
+          <FormattedDate date={new Date(selectedDate)} format="day-month-year"/>
         </p>
       </div>
 
@@ -77,7 +83,7 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
         </button>
       </form>
 
-      <TableTeacherClass dateSelected={selectedDate} id={id} subjects={classData.subjects} students={classData.students} date={selectedDate} />
+      <TableTeacherClass dateSelected={selectedDate} id={id} subjects={classData.subjects} students={sortedStudents} date={selectedDate} />
 
       <Link
         href="/dashboard/teacher"
