@@ -9,6 +9,7 @@ import { getAvatarImg, getFullStudentDetails } from "app/api/supabase/actions";
 import Image from "next/image";
 import Charts from "@/components/Charts";
 import AIPerformance from "./components/AIPerformance";
+import Link from "next/link";
 
 async function StudentPage() {
   const supabase = createClient();
@@ -31,10 +32,11 @@ async function StudentPage() {
       redirect("/dashboard/teacher");
     }
   }
-
   const student = await getFullStudentDetails(user.id);
   const avatarStudent = await getAvatarImg(user.id);
   const { data: imgUrl } = supabase.storage.from("avatars").getPublicUrl(`${avatarStudent.img}`);
+
+  console.log(student);
 
   return (
     <>
@@ -69,14 +71,14 @@ async function StudentPage() {
       </div>
 
       <div className="my-12 max-w-[1300px] bg-white rounded-lg mx-auto flex ">
-  <div className="w-2/4">
-    <Charts subjectsArray={student.subjects} />
-  </div>
-  <div className="w-2/4">
-    <AIPerformance students={student.students} subjects={JSON.stringify(student.subjects)} />
-  </div>
-</div>
-
+        <div className="w-2/4">
+          <Charts subjectsArray={student.subjects} />
+        </div>
+        <div className="w-2/4">
+          <AIPerformance students={student.students} subjects={JSON.stringify(student.subjects)} />
+        </div>
+      </div>
+      <Link href={`student/${student.class_id}`}>Chat</Link>
     </>
   );
 }

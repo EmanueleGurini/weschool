@@ -63,22 +63,21 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
       <div className="w-full flex items-center justify-between font-extrabold">
         <h2 className="text-2xl font-bold mb-4">Class Name: {classData.courseName}</h2>
         <p>
-          <FormattedDate date={new Date(selectedDate)} format="day-month-year"/>
+          <FormattedDate date={new Date(selectedDate)} format="day-month-year" />
         </p>
       </div>
 
       <p className="text-gray-800 mb-6">Students Number: {uniqueStudentNames.length}</p>
 
       <form method="GET" className="mb-4 w-full flex items-center justify-end">
-        <label htmlFor="date" className="mr-2">Select Date:</label>
-        <input
-          type="date"
-          id="date"
-          name="date"
-          defaultValue={selectedDate}
-          className="border p-2 rounded-lg"
-        />
-        <button type="submit" className="ml-2 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">
+        <label htmlFor="date" className="mr-2">
+          Select Date:
+        </label>
+        <input type="date" id="date" name="date" defaultValue={selectedDate} className="border p-2 rounded-lg" />
+        <button
+          type="submit"
+          className="ml-2 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
+        >
           Load Data
         </button>
       </form>

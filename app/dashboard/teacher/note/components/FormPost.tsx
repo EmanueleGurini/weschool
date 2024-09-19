@@ -19,6 +19,7 @@ export default function FormPost({ id, classes }: IFormPost) {
     class_name: "",
     description: "",
   });
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -29,6 +30,7 @@ export default function FormPost({ id, classes }: IFormPost) {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSuccess(false);
     const supabase = createClient();
     try {
       const { error } = await supabase
@@ -45,7 +47,10 @@ export default function FormPost({ id, classes }: IFormPost) {
       if (error) {
         console.error("Error:", error.message);
       } else {
-        window.location.reload();
+        setSuccess(true);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
       }
     } catch (error) {
       console.error("Unexpected Error:", error);
@@ -131,6 +136,7 @@ export default function FormPost({ id, classes }: IFormPost) {
           Submit
         </button>
       </form>
+      {success && <p className="text-center text-contrast font-semibold mt-2 ">Post Created!</p>}
     </div>
   );
 }

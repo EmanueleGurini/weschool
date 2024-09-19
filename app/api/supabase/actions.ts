@@ -25,10 +25,7 @@ export const getAvatarImg = async (profileID: string) => {
   else return data;
 };
 
-export const getStudentsListDetailsByTeacher = async (
-  courseID: string,
-  attendanceDate: string
-) => {
+export const getStudentsListDetailsByTeacher = async (courseID: string, attendanceDate: string) => {
   const supabase = createClient();
 
   const { data, error } = await supabase.rpc("get_course_students", {
@@ -39,10 +36,7 @@ export const getStudentsListDetailsByTeacher = async (
   else return data;
 };
 
-export const getStudentsGradeByClassID = async (
-  courseID: string,
-  attendanceDate: string
-) => {
+export const getStudentsGradeByClassID = async (courseID: string, attendanceDate: string) => {
   const supabase = createClient();
   const { data, error } = await supabase.rpc("get_course_students", {
     attendance_date: attendanceDate,
@@ -71,9 +65,10 @@ export const getStatusAttendance = async (studentID: string) => {
   else return data;
 };
 
-export const getTeacherNotes = async (teacherID: string) => {
+export const getTeacherNotes = async (teacherID: string, filterDate: string) => {
   const supabase = createClient();
   const { data, error } = await supabase.rpc("get_teacher_courses_and_notes", {
+    filter_date: filterDate,
     teacher_id: teacherID,
   });
   if (error) console.error(error);
