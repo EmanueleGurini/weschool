@@ -8,8 +8,17 @@ interface ChatMessageProps {
 const ChatMessage = ({ fromCurrentUser, content, created_at, studentName }: ChatMessageProps) => {
   return (
     <div className={`flex flex-row w-full ${fromCurrentUser && "justify-end"}`}>
-      {created_at}{studentName}
-      <div className={`max-w-xl break-words break-all rounded rounded-tr-none p-3 ${fromCurrentUser ? "bg-blue-200" : "bg-slate-200"}`}>{content}</div>
+      <div className={`relative max-w-xl break-words break-all rounded-lg p-3 ${fromCurrentUser ? "bg-contrasthover rounded-tr-none" : "bg-color20 rounded-tl-none"}`}>
+        <div className="font-bold">
+          {studentName}
+        </div>
+
+        {content}
+
+        <div className="absolute -bottom-6 text-sm right-1">
+          {created_at}
+        </div>
+      </div>
     </div>
   );
 };
