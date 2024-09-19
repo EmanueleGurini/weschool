@@ -4,8 +4,8 @@ import { nunito, montserrat } from "./fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "weSchool",
-  description: "School management web site",
+  title: "WeSchool",
+  description: "School management site",
 };
 
 export default function RootLayout({
