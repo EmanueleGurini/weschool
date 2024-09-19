@@ -6,9 +6,11 @@ import { createClient } from "utils/supabase/server";
 import Chat from "../components/Chat";
 interface IChatPage {
   params: { chat_id: string };
+  searchParams: { student_name?: string };
 }
-export default async function ChatPage({ params }: IChatPage) {
+export default async function ChatPage({ params, searchParams }: IChatPage) {
   const { chat_id } = params;
+  const studentName = searchParams.student_name || "Student";
 
   const supabase = createClient();
 
@@ -30,6 +32,6 @@ export default async function ChatPage({ params }: IChatPage) {
       redirect("/dashboard/teacher");
     }
   }
-  // console.log(session.user);
-  return <Chat key={session.user.id} session={session} class_id={chat_id} />;
+
+  return <Chat key={session.user.id} session={session} class_id={chat_id} studentName={studentName}/>;
 }

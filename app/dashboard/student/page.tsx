@@ -78,7 +78,7 @@ async function StudentPage() {
           <AIPerformance students={student.students} subjects={JSON.stringify(student.subjects)} />
         </div>
       </div>
-      <Link href={`student/${student.class_id}`}>Chat</Link>
+      <Link href={`student/${student.class_id}?student_name=${encodeURIComponent(student.students)}`}>Chat</Link>
     </>
   );
 }
