@@ -12,13 +12,15 @@ interface Message {
   user_id: string;
   id: string;
   created_at: string;
+  studentName: string;
 }
 interface ChatProps {
   session: Session;
   class_id: string;
+  studentName: string;
 }
 
-const Chat = ({ session, class_id }: ChatProps) => {
+const Chat = ({ session, class_id, studentName }: ChatProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -32,7 +34,7 @@ const Chat = ({ session, class_id }: ChatProps) => {
     try {
       setIsLoading(true);
       const supabase = createClient();
-      await supabase.from("messages").insert([{ content: message, user_id: session.user.id, class_id }]);
+      await supabase.from("messages").insert([{ content: message, user_id: session.user.id, class_id, studentName }]);
 
       // Reset message input field
       setMessage("");
@@ -102,7 +104,7 @@ const Chat = ({ session, class_id }: ChatProps) => {
 
         {messages.length > 0 &&
           messages.map((msg) => (
-            <ChatMessage key={msg.id} fromCurrentUser={msg.user_id === session!.user!.id} content={msg.content ?? ""} created_at={time(msg.created_at)} />
+            <ChatMessage key={msg.id} fromCurrentUser={msg.user_id === session!.user!.id} content={msg.content ?? ""} created_at={time(msg.created_at)} studentName={msg.studentName}/>
           ))}
       </div>
 
