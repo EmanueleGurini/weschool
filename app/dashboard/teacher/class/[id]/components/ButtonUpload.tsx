@@ -15,12 +15,14 @@ export default function ButtonUpload({
   classID
 }: IButtonUpload) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [successfully, setSuccessfully] = useState(false)
 
   async function handleUpload(
     e: MouseEvent<HTMLButtonElement>,
     status: boolean,
     date: string,
   ): Promise<void> {
+    setSuccessfully(false)
     const supabase = createClient();
     await supabase
       .from("attendance")
@@ -31,8 +33,10 @@ export default function ButtonUpload({
         class_id: classID
       })
       .select();
-
-    window.location.reload();
+    setSuccessfully(true)
+    setTimeout(() => {
+			window.location.reload();
+		}, 500)
   }
 
   return (
@@ -60,6 +64,9 @@ export default function ButtonUpload({
             Absent
           </button>
         </div>
+        {successfully && <div className="w-full text-center font-semibold text-contrast">
+          Upload Successfully!
+        </div>}
       </ModalUpdate>
     </>
   );

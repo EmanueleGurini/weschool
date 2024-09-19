@@ -18,6 +18,7 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedSubject, setSelectedSubject] = useState<string>('');
 	const [rating, setRating] = useState<number | null>(null);
+	const [successfully, setSuccessfully] = useState(false)
 
 	function handleSubjectChange(e: React.ChangeEvent<HTMLSelectElement>) {
 		setSelectedSubject(e.target.value);
@@ -29,6 +30,7 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 	}
 
 	async function handleSubmit(e: MouseEvent) {
+		setSuccessfully(false)
 		const supabase = createClient();
 		await supabase
 		.from('grades')
@@ -37,8 +39,10 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 		.eq('student_id', e.currentTarget.id)
 		.eq('date', date)
 		.select()
-		setIsOpen(false);
-		window.location.reload();
+		setSuccessfully(true)
+		setTimeout(() => {
+			window.location.reload();
+		}, 500)
 	}
 
 	const uniqueSubjects = subjects.filter(
@@ -82,6 +86,9 @@ export default function ButtonChangeVote({ subjects, id, date }: IButtonChangeVo
 						className="p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-color60 focus:border-transparent"
 					/>
 				</div>
+				{successfully && <div className="w-full text-center font-semibold text-contrast">
+					Change Successfully!
+				</div>}
 				{(rating !== null && rating >= 0 && rating <= 10) && selectedSubject && (
 				<div className="w-full flex justify-center">
 					<button 
