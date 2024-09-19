@@ -12,9 +12,10 @@ interface IButtonVote {
 	subjects: ISubject[];
 	id: string;
 	classID: string;
+	date: string;
 }
 
-export default function ButtonVote({ subjects, id, classID }: IButtonVote) {
+export default function ButtonVote({ subjects, id, classID, date }: IButtonVote) {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [selectedSubject, setSelectedSubject] = useState<string>('');
 	const [rating, setRating] = useState<number | null>(null);
@@ -28,7 +29,7 @@ export default function ButtonVote({ subjects, id, classID }: IButtonVote) {
 		setRating(isNaN(value) ? null : value);
 	}
 
-	async function handleSubmit(e: MouseEvent) {
+	async function handleSubmit(e: MouseEvent, date: string) {
 		const supabase = createClient();
 		await supabase
 			.from('grades')
@@ -38,7 +39,7 @@ export default function ButtonVote({ subjects, id, classID }: IButtonVote) {
 					class_id: classID,
 					subjects: selectedSubject,
 					grade: rating,
-					date: new Date().toISOString().split('T')[0],
+					date: date,
 				},
 			])
 			.select();
@@ -60,7 +61,7 @@ export default function ButtonVote({ subjects, id, classID }: IButtonVote) {
 				Add
 			</button>
 			<ModalVote onClose={() => setIsOpen(false)} isOpen={isOpen}>
-				<div className="w-full flex justify-around p-7">
+				<div className="w-full flex items-center justify-around p-7">
 					<select
 						value={selectedSubject}
 						onChange={handleSubjectChange}
@@ -75,7 +76,9 @@ export default function ButtonVote({ subjects, id, classID }: IButtonVote) {
 							</option>
 						))}
 					</select>
+					<label htmlFor="vote">Vote:</label>
 					<input
+						id="vote"
 						type="number"
 						min="0"
 						max="10"
@@ -89,7 +92,7 @@ export default function ButtonVote({ subjects, id, classID }: IButtonVote) {
 				<div className="w-full flex justify-center">
 					<button 
 					    id={id} 
-					    onClick={handleSubmit}
+					    onClick={(e) => handleSubmit(e, date)}
 						className="mt-4 bg-color60 hover:bg-color80 text-white font-bold py-2 px-4 rounded-lg transition-all">
 						Send
 					</button>

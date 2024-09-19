@@ -42,9 +42,16 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
 
   const notes = await getTeacherNotes(user.id);
 
-  const selectedDate = searchParams.date || "";
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = (now.getMonth() + 1).toString().padStart(2, '0'); // Mesi sono basati su zero
+  const day = now.getDate().toString().padStart(2, '0');
 
-  const filteredNotes = selectedDate ? notes.posts.filter((note: Note) => note.date === selectedDate) : notes.posts;
+  const today = `${year}-${month}-${day}`;
+
+  const selectedDate = searchParams.date || today;
+
+  const filteredNotes = selectedDate && notes.posts.filter((note: Note) => note.date === selectedDate);
 
   return (
     <>
