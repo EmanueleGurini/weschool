@@ -38,7 +38,7 @@ export default function Post({ date, title, note_id, class_name, description, fu
       <div className="md:flex">
         <div className="p-8">
           <div className="uppercase tracking-wide text-sm text-primary font-semibold">{class_name}</div>
-          <h1 className="block mt-1 text-lg leading-tight font-medium text-primary">{title}</h1>
+          <h1 className="block mt-1 leading-tight text-primary font-bold text-xl">{title}</h1>
           <p className="mt-2 text-primary">{description}</p>
           <div className="mt-4 flex items-center">
             <div className="text-sm text-primary">

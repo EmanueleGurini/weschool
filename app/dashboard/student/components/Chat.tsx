@@ -6,6 +6,7 @@ import AlwaysScrollIntoView from "./AlwaysScrollIntoView";
 import type { FormEvent, ChangeEvent, TouchEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import Link from "next/link";
+import Image from "next/image";
 
 interface Message {
   content: string;
@@ -13,6 +14,7 @@ interface Message {
   id: string;
   created_at: string;
   studentName: string;
+  timeCreate: string;
 }
 interface ChatProps {
   session: Session;
@@ -34,7 +36,7 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
     try {
       setIsLoading(true);
       const supabase = createClient();
-      await supabase.from("messages").insert([{ content: message, user_id: session.user.id, class_id, studentName }]);
+      await supabase.from("messages").insert([{ content: message, user_id: session.user.id, class_id, studentName, timeCreate: time(new Date().toISOString()) }]);
 
 
       setMessage("");
@@ -83,27 +85,29 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
     const data = new Date(timestamp);
 
 
-    const ore = data.getUTCHours().toString().padStart(2, "0"); 
-    const minuti = data.getUTCMinutes().toString().padStart(2, "0"); 
+    const ore = data.getHours().toString().padStart(2, "0"); 
+    const minuti = data.getMinutes().toString().padStart(2, "0"); 
 
 
     return `${ore}:${minuti}`;
   }
-  console.log(messages);
+console.log(time(new Date().toISOString()))
   return (
-    <div className="w-screen h-screen flex flex-col bg-slate-50">
-
+    <div className="relative w-screen h-screen flex flex-col bg-white">
+      <div className="absolute top-0 left-0 w-full h-full">
+        <Image className="w-full h-full object-cover -z-10" width={2000} height={2000} src='/img/bg-chat.png' alt="Background chat" />
+      </div>
 
       <div className="flex flex-col-reverse flex-auto p-6 overflow-y-auto space-y-6 space-y-reverse min-h-[0px] text-slate-900">
         <AlwaysScrollIntoView />
 
         {messages.length > 0 &&
           messages.map((msg) => (
-            <ChatMessage key={msg.id} fromCurrentUser={msg.user_id === session!.user!.id} content={msg.content ?? ""} created_at={time(msg.created_at)} studentName={msg.studentName}/>
+            <ChatMessage key={msg.id} fromCurrentUser={msg.user_id === session!.user!.id} content={msg.content ?? ""} created_at={msg.timeCreate} studentName={msg.studentName}/>
           ))}
       </div>
 
-      <form className="p-2 px-6 items-center flex flex-row flex-none bg-color60 gap-x-3" onSubmit={handleSendMessage}>
+      <form className="relative p-2 px-6 items-center flex flex-row flex-none bg-color60 gap-x-3" onSubmit={handleSendMessage}>
       <Link className="bg-color100 text-white p-2 rounded hover:bg-color80" href="/dashboard/student">Go Back</Link>
         <input
           className={`flex-grow bg-white rounded p-2 focus:outline-none ${isLoading ? "text-slate-600" : "text-slate-900"}`}
