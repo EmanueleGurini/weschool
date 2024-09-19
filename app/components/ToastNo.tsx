@@ -27,7 +27,7 @@ const ToastNo = (props: IToast) => {
 				/>
 			</svg>
 		</div>
-		<div className="ml-3 text-sm font-normal">
+		<div className="ml-3 text-sm font-normal pr-3">
 			{children}
 		</div>
 		<button
