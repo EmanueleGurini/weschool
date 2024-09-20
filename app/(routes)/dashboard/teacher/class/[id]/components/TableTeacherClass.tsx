@@ -3,8 +3,6 @@
 import Link from "next/link";
 import ButtonUpload from "./ButtonUpload";
 import ButtonUpdate from "./ButtonUpdate";
-import { MouseEvent } from "react";
-import { createClient } from "utils/supabase/client";
 import ButtonVote, { ISubject } from "./ButtonVote";
 import ButtonChangeVote from "./ButtonChangeVote";
 
@@ -35,7 +33,6 @@ export default function TableTeacherClass({
   subjects,
   dateSelected,
 }: IClassData) {
-
   const uniqueStudents = students.filter(
     (student, index, self) =>
       index === self.findIndex((s) => s.fullName === student.fullName)
@@ -75,18 +72,22 @@ export default function TableTeacherClass({
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
                   {student.fullName}
                 </td>
-                <td className={`px-6 py-3 whitespace-nowrap border-b border-gray-300 ${student.attendance.status === null ? 'text-[14px] uppercase text-primary' : student.attendance.status === false ? 'text-[14px] text-xs font-bold uppercase text-contrast' : 'text-[14px] text-xs font-bold uppercase text-color100'}`}>
+                <td
+                  className={`px-6 py-3 whitespace-nowrap border-b border-gray-300 ${
+                    student.attendance.status === null
+                      ? "text-[14px] uppercase text-primary"
+                      : student.attendance.status === false
+                      ? "text-[14px] text-xs font-bold uppercase text-contrast"
+                      : "text-[14px] text-xs font-bold uppercase text-color100"
+                  }`}
+                >
                   {student.attendance.status === null && "To Declare"}
                   {student.attendance.status === false && "Absent"}
                   {student.attendance.status && "Present"}
                 </td>
                 <td className="px-6 py-3 whitespace-nowrap border-b border-gray-300">
                   {student.attendance.status === null && (
-                    <ButtonUpload
-                      id={student.id}
-                      date={date}
-                      classID={id}
-                    />
+                    <ButtonUpload id={student.id} date={date} classID={id} />
                   )}
                   {student.attendance.status !== null && (
                     <ButtonUpdate date={date} id={student.id} />

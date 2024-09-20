@@ -6,7 +6,6 @@ import AlwaysScrollIntoView from "./AlwaysScrollIntoView";
 import type { FormEvent, ChangeEvent, TouchEvent } from "react";
 import type { Session } from "@supabase/supabase-js";
 import Link from "next/link";
-import Image from "next/image";
 
 interface Message {
   content: string;
@@ -27,7 +26,9 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
   const [message, setMessage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSendMessage = async (e: FormEvent<HTMLFormElement> | TouchEvent<HTMLButtonElement>) => {
+  const handleSendMessage = async (
+    e: FormEvent<HTMLFormElement> | TouchEvent<HTMLButtonElement>
+  ) => {
     e.preventDefault();
 
     if (isLoading || !session?.user) return false;
@@ -37,7 +38,15 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
       const supabase = createClient();
       await supabase
         .from("messages")
-        .insert([{ content: message, user_id: session.user.id, class_id, studentName, timeCreate: time(new Date().toISOString()) }]);
+        .insert([
+          {
+            content: message,
+            user_id: session.user.id,
+            class_id,
+            studentName,
+            timeCreate: time(new Date().toISOString()),
+          },
+        ]);
 
       setMessage("");
     } catch (error: any) {
@@ -51,7 +60,11 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
     const fetchMessages = async () => {
       const supabase = createClient();
 
-      const { data: messages, error } = await supabase.from("messages").select().eq("class_id", class_id).order("created_at", { ascending: false });
+      const { data: messages, error } = await supabase
+        .from("messages")
+        .select()
+        .eq("class_id", class_id)
+        .order("created_at", { ascending: false });
 
       if (!error) {
         setMessages(messages);
@@ -68,9 +81,13 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
 
     const messagesChannel = supabase
       .channel("public:messages")
-      .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, (payload: any) => {
-        setMessages((m) => [payload.new as Message, ...m]);
-      })
+      .on(
+        "postgres_changes",
+        { event: "INSERT", schema: "public", table: "messages" },
+        (payload: any) => {
+          setMessages((m) => [payload.new as Message, ...m]);
+        }
+      )
       .subscribe();
 
     return () => {
@@ -116,17 +133,27 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
           ))}
       </div>
 
-      <form className="relative p-2 px-6 items-center flex flex-row flex-none bg-color60 gap-x-3" onSubmit={handleSendMessage}>
-        <Link className="bg-color100 text-white p-2 rounded hover:bg-color80" href="/dashboard/student">
+      <form
+        className="relative p-2 px-6 items-center flex flex-row flex-none bg-color60 gap-x-3"
+        onSubmit={handleSendMessage}
+      >
+        <Link
+          className="bg-color100 text-white p-2 rounded hover:bg-color80"
+          href="/dashboard/student"
+        >
           Go Back
         </Link>
         <input
-          className={`flex-grow bg-white rounded p-2 focus:outline-none ${isLoading ? "text-slate-600" : "text-slate-900"}`}
+          className={`flex-grow bg-white rounded p-2 focus:outline-none ${
+            isLoading ? "text-slate-600" : "text-slate-900"
+          }`}
           autoFocus
           type="text"
           value={message}
           required
-          onChange={(e: ChangeEvent<HTMLInputElement>) => setMessage(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+            setMessage(e.target.value)
+          }
         />
 
         <button
