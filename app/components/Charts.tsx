@@ -16,31 +16,15 @@ const organizeData = (subjectsArray: IChartsProps[]) => {
     .filter((item) => item.grade !== null && item.date !== null)
     .sort((a, b) => new Date(a.date!).getTime() - new Date(b.date!).getTime());
 
-  const allDates = Array.from(new Set(validData.map((item) => item.date!)));
-
-  const dataByDateAndSubject: { [date: string]: { [subject: string]: number | null } } = {};
-
-  validData.forEach(({ subject, grade, date }) => {
-    if (date !== null) {
-      if (!dataByDateAndSubject[date]) {
-        dataByDateAndSubject[date] = {};
-      }
-      dataByDateAndSubject[date][subject] = grade;
-    }
-  });
+  const allDates = Array.from(new Set(validData.map((item) => item.date)));
 
   return allDates.map((date) => {
-    return {
-      date,
-      JavaScript: dataByDateAndSubject[date]?.JavaScript ?? null,
-      React: dataByDateAndSubject[date]?.React ?? null,
-      HTML: dataByDateAndSubject[date]?.HTML ?? null,
-      CSS: dataByDateAndSubject[date]?.CSS ?? null,
-      "Next.js": dataByDateAndSubject[date]?.["Next.js"] ?? null,
-      SASS: dataByDateAndSubject[date]?.SASS ?? null,
-      TypeScript: dataByDateAndSubject[date]?.TypeScript ?? null,
-      TAILWIND: dataByDateAndSubject[date]?.TAILWIND ?? null,
-    };
+    const entry: any = { date };
+    subjectsArray.forEach((subject) => {
+      const dataForSubject = validData.find((item) => item.date === date && item.subject === subject.subject);
+      entry[subject.subject] = dataForSubject ? dataForSubject.grade : null;
+    });
+    return entry;
   });
 };
 
