@@ -1,45 +1,55 @@
-# We School
+# 🎓 **We School** 📚
 
-Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in un bootcamp di programmazione, dove sia i professori che gli studenti possono accedere alla loro dashboard tramite login. L'applicazione è realizzata con **Tailwind CSS** **Next.js**, **TypeScript**, e **Supabase**, per offrire un'interfaccia moderna e responsiva all'utente, oltre a funzionalità di gestione dei dati tramite CRUD e autenticazione sicura.
+**We School** è un CMS sviluppato per la gestione di voti e assenze all'interno di un bootcamp di programmazione. Sia i professori che gli studenti possono accedere alla loro dashboard tramite login. L'applicazione è costruita con **Tailwind CSS**, **Next.js**, **TypeScript**, e **Supabase**, per offrire un'interfaccia moderna, responsiva e funzionalità avanzate di gestione dati tramite operazioni CRUD e autenticazione sicura.
 
+---
 
-## Dashboard Insegnante
+## 🚪 **Dashboard Insegnante**
 
 ![screenshot teacher page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-teacher.png)
 
-## Dettaglio Classe Insegnante
+---
+
+## 📝 **Dettaglio Classe Insegnante**
 
 ![screenshot teacher detail page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-teacher-detail.png)
 
+---
 
-## Dashboard Studente
+## 🧑‍🎓 **Dashboard Studente**
 
 ![screenshot student page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-stuent.png)
 
-## Sezione Chat
+---
+
+## 💬 **Sezione Chat**
 
 ![screenshot chat page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-chat.png)
 
-## Descrizione dell'app
+---
 
-### Parte insegnante:
+## 📖 **Descrizione dell'App**
+
+### 👩‍🏫 **Parte insegnante**:
 
 - I professori possono accedere alla loro home, dove trovano una tabella dei corsi.
 - Cliccando su una classe, il professore può vedere il dettaglio degli studenti del corso.
-- Ogni professore può:
-  - Segnalare la presenza o l'assenza di un alunno.
-  - Aggiungere e modificare le votazioni per i vari linguaggi di programmazione.
-  - Filtrare gli studenti per giorno e accedere ai loro profili personali.
-- Esiste la sezione comunicazioni dedicata agli insegnanti, dove si possono lasciare note interne.
+- Funzionalità chiave per i professori:
+  - ✅ Segnalare la presenza o l'assenza di un alunno.
+  - ✏️ Aggiungere e modificare le votazioni per i vari linguaggi di programmazione.
+  - 🔍 Filtrare gli studenti per giorno e accedere ai loro profili personali.
+  - 📋 Sezione comunicazioni dedicata agli insegnanti per lasciare note interne.
 
-### Parte studente:
+### 👨‍🎓 **Parte studente**:
 
 - Gli studenti accedono con un login personalizzato per visualizzare il proprio profilo.
 - Gli studenti possono visualizzare le informazioni inserite dai professori nella loro pagina personalizzata attraverso un grafico.
-- **AI Assistant:** Gli studenti hanno accesso a un assistente basato su intelligenza artificiale che analizza la loro media dei voti; L'AI suggerisce aree di studio specifiche per migliorare i risultati, fornendo anche link a risorse online rilevanti.
-- È anche disponibile una chat aperta a tutti gli studenti di ogni classe.
+- **AI Assistant:** Gli studenti hanno accesso a un assistente basato su intelligenza artificiale che analizza la loro media dei voti. L'AI suggerisce aree di studio specifiche per migliorare i risultati, fornendo anche link a risorse online rilevanti.
+- 💬 È anche disponibile una chat aperta a tutti gli studenti di ogni classe.
 
-## Funzionalità
+---
+
+## 🔧 **Funzionalità**
 
 1. **Autenticazione Utente (Supabase)**
 
@@ -81,11 +91,13 @@ Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in 
    - Suggerimenti personalizzati per migliorare i risultati accademici.
    - Collegamenti a risorse esterne utili basate sulla media dei voti individuale.
 
-## Il nostro TEAM
+---
 
-- **Chiara Rapisarda** [https://github.com/Ciaranatalie](#) | [https://www.linkedin.com/in/chiara-rapisarda/](#)
-- **Erica Caruso** [https://github.com/Ericaruso](#) | [https://www.linkedin.com/in/erica-caruso-680883284/](#)
-- **Giada Antioco** [https://github.com/giadantioco](#) | [https://www.linkedin.com/in/giada-antioco/](#)
-- **Giulia Gabriele** [https://github.com/Jiyuunn](#) | [https://www.linkedin.com/in/giuliagabriele97/](#)
-- **Nicola Marmugi** [https://github.com/nmarmugi](#) | [https://www.linkedin.com/in/nicola-marmugi-2860b022a/](#)
-- **Simone Grillo** [https://github.com/SimonJ933](#) | [https://www.linkedin.com/in/simone-grillo/](#)
+## 👥 **Il nostro TEAM**
+
+- **Chiara Rapisarda** [GitHub](https://github.com/Ciaranatalie) | [LinkedIn](https://www.linkedin.com/in/chiara-rapisarda/)
+- **Erica Caruso** [GitHub](https://github.com/Ericaruso) | [LinkedIn](https://www.linkedin.com/in/erica-caruso-680883284/)
+- **Giada Antioco** [GitHub](https://github.com/giadantioco) | [LinkedIn](https://www.linkedin.com/in/giada-antioco/)
+- **Giulia Gabriele** [GitHub](https://github.com/Jiyuunn) | [LinkedIn](https://www.linkedin.com/in/giuliagabriele97/)
+- **Nicola Marmugi** [GitHub](https://github.com/nmarmugi) | [LinkedIn](https://www.linkedin.com/in/nicola-marmugi-2860b022a/)
+- **Simone Grillo** [GitHub](https://github.com/SimonJ933) | [LinkedIn](https://www.linkedin.com/in/simone-grillo/)
