@@ -30,14 +30,14 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
   const handleSendMessage = async (e: FormEvent<HTMLFormElement> | TouchEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-
     if (isLoading || !session?.user) return false;
 
     try {
       setIsLoading(true);
       const supabase = createClient();
-      await supabase.from("messages").insert([{ content: message, user_id: session.user.id, class_id, studentName, timeCreate: time(new Date().toISOString()) }]);
-
+      await supabase
+        .from("messages")
+        .insert([{ content: message, user_id: session.user.id, class_id, studentName, timeCreate: time(new Date().toISOString()) }]);
 
       setMessage("");
     } catch (error: any) {
@@ -46,7 +46,6 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
       setIsLoading(false);
     }
   };
-
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -70,7 +69,6 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
     const messagesChannel = supabase
       .channel("public:messages")
       .on("postgres_changes", { event: "INSERT", schema: "public", table: "messages" }, (payload: any) => {
-
         setMessages((m) => [payload.new as Message, ...m]);
       })
       .subscribe();
@@ -82,41 +80,46 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
 
   function time(timestamp: string) {
     const date = new Date(timestamp);
-  
+
     const hours = date.getHours().toString().padStart(2, "0");
     const minutes = date.getMinutes().toString().padStart(2, "0");
-    
+
     const day = date.getDate().toString().padStart(2, "0");
-    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // +1 perché i mesi partono da 0
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear();
-  
+
     return `${day}/${month}/${year} ${hours}:${minutes}`;
-  }  
+  }
 
   return (
-    <div className="relative w-screen h-screen flex flex-col bg-white">
-      <div className="absolute top-0 left-0 w-full h-full">
-        <Image
-        className="w-full h-full object-cover -z-10"
-        width={2000}
-        height={2000}
-        src="/img/bg-chat.svg"
-        alt="Background chat"
-        />
-        <div className="absolute top-0 left-0 w-full h-full bg-white opacity-65 z-0"></div>
-      </div>
-
+    <div
+      className="w-screen h-screen flex flex-col"
+      style={{
+        backgroundImage: "url(/img/bg-chat.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       <div className="flex flex-col-reverse flex-auto p-6 overflow-y-auto space-y-6 space-y-reverse min-h-[0px] text-slate-900">
         <AlwaysScrollIntoView />
 
         {messages.length > 0 &&
           messages.map((msg) => (
-            <ChatMessage key={msg.id} fromCurrentUser={msg.user_id === session!.user!.id} content={msg.content ?? ""} created_at={msg.timeCreate} studentName={msg.studentName}/>
+            <ChatMessage
+              key={msg.id}
+              fromCurrentUser={msg.user_id === session!.user!.id}
+              content={msg.content ?? ""}
+              created_at={msg.timeCreate}
+              studentName={msg.studentName}
+            />
           ))}
       </div>
 
       <form className="relative p-2 px-6 items-center flex flex-row flex-none bg-color60 gap-x-3" onSubmit={handleSendMessage}>
-      <Link className="bg-color100 text-white p-2 rounded hover:bg-color80" href="/dashboard/student">Go Back</Link>
+        <Link className="bg-color100 text-white p-2 rounded hover:bg-color80" href="/dashboard/student">
+          Go Back
+        </Link>
         <input
           className={`flex-grow bg-white rounded p-2 focus:outline-none ${isLoading ? "text-slate-600" : "text-slate-900"}`}
           autoFocus
