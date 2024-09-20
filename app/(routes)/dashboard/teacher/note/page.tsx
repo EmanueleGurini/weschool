@@ -49,7 +49,7 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
 
   const selectedDate = searchParams.date || today;
   const notes = await getTeacherNotes(user.id, selectedDate);
-  console.log(notes.courses[0].posts, user.id);
+
   return (
     <>
       <div className="w-full flex justify-between items-center p-6">
