@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function NotFound() {
 	return (
@@ -16,11 +17,13 @@ export default function NotFound() {
 				  <h4 className="mb-4 text-2xl font-bold leading-9 tracking-tight text-color0">
 					404 PAGE NOT FOUND!
 				  </h4>
-				  <img 
-				  src="/img/sad-circle.svg" 
+				  <Image 
+				  width={50}
+				  height={50}
+				  src="/img/sad.png" 
 				  alt="Sad face" 
 				  className="mx-auto mb-4 w-16 h-16" 
-				  style={{ filter: 'invert(1)' }}/>
+				  />
 				  <Link href="/" className='w-full bg-contrast text-color100 font-bold py-3 px-6 rounded-md hover:bg-contrasthover focus:outline-none focus:ring-2 focus:ring-offset-2'>
 					Go Back
 				  </Link>
