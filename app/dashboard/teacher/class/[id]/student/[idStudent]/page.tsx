@@ -51,16 +51,16 @@ export default async function StudentPageTeacher({
   const today = new Date();
 
   return (
-    <div className="max-w-4xl mx-auto p-6 flex flex-col gap-6">
-      <div className="bg-white rounded-lg p-6 mb-6 flex justify-between items-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-2">
+    <div className=" w-full">
+      <div className="bg-white px-32 py-14 flex justify-between items-center">
+        <h2 className="text-3xl font-bold text-color100 mb-4">
           {newStudent.students}
         </h2>
         <p>
           <FormattedDate date={today} format="day-month-year" />
         </p>
       </div>
-      <div className="flex flex-col items-center justify-start mt-16 space-y-6">
+      <div className="flex flex-col items-center pb-8 justify-start mt-14 space-y-6">
         <div className="w-full max-w-lg space-y-4 bg-white p-4 rounded-lg">
           <div className="flex items-center space-x-4">
             <span className="w-32 text-right">Presence</span>
@@ -88,7 +88,9 @@ export default async function StudentPageTeacher({
           </div>
         </div>
       </div>
+      <div className="max-w-4xl mx-auto p-6 flex flex-col gap-6">
       <Charts subjectsArray={newStudent.subjects} />
+      
       <div className="mb-4">
         <Link
           className="inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-[#2B4570] focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
@@ -96,6 +98,7 @@ export default async function StudentPageTeacher({
         >
           Go Back
         </Link>
+      </div>
       </div>
     </div>
   );

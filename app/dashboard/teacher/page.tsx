@@ -51,20 +51,20 @@ export default async function TeacherPage() {
 
   return (
     <div>
-      <div className="header-container p-2 bg-white flex justify-between items-center">
-          <div className="avatar-container w-48 h-48 border-4 rounded-full overflow-hidden border-contrast">
+      <div className="header-container px-36 p-4 bg-white flex flex-col md:flex-row justify-between items-center">
+          <div className="avatar-container w-48 h-48 border-4 rounded-full overflow-hidden border-contrast flex-shrink-0 ">
             {imgUrl.publicUrl !==
               "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
               <Image
                 src={imgUrl.publicUrl}
                 alt="Teacher Avatar"
-                width={200}
-                height={200}
+                width={150}
+                height={150}
                 className="object-cover w-full h-full"
               />
             )}
           </div>
-          <div className="header-info flex-grow text-center">
+          <div className="header-info flex-grow text-center mt-4 md:mt-0 md:flex-grow">
             <Header greeting={`Hi, ${dataTeacher.full_name}`} text="I hope you have a nice day!"/>
           </div>
     </div>
