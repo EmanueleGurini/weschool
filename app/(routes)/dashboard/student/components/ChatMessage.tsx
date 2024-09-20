@@ -12,9 +12,7 @@ const ChatMessage = ({ fromCurrentUser, content, created_at, studentName }: Chat
         <div className="font-bold">
           {studentName}
         </div>
-
-        {content}
-
+          {content}
         <div className="absolute -bottom-6 text-sm right-1">
           {created_at}
         </div>

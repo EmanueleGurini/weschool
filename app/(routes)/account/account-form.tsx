@@ -15,7 +15,6 @@ export default function AccountForm({ user }: { user: User | null }) {
   const [toastYes, setToastYes] = useState<boolean>(false);
   const [toastNo, setToastNo] = useState<boolean>(false);
   const [message, setMessage] = useState<string>("");
-
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 

@@ -17,7 +17,6 @@ export default function Loading() {
           </div>
         </div>
   
-        {/* Skeleton for charts */}
         <div className="w-full h-64 bg-gray-300 rounded-lg"></div>
   
         <div className="mb-4">

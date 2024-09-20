@@ -36,8 +36,6 @@ async function StudentPage() {
   const avatarStudent = await getAvatarImg(user.id);
   const { data: imgUrl } = supabase.storage.from("avatars").getPublicUrl(`${avatarStudent.img}`);
 
-  console.log(student);
-
   return (
     <>
       <div className="header-container px-28 p-6 bg-white flex flex-col md:flex-row justify-between items-center">

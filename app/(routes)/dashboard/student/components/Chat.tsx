@@ -82,16 +82,14 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
 
   function time(timestamp: string) {
 
-    const data = new Date(timestamp);
+    const date = new Date(timestamp);
 
+    const hours = date.getHours().toString().padStart(2, "0"); 
+    const minutes = date.getMinutes().toString().padStart(2, "0"); 
 
-    const ore = data.getHours().toString().padStart(2, "0"); 
-    const minuti = data.getMinutes().toString().padStart(2, "0"); 
-
-
-    return `${ore}:${minuti}`;
+    return `${hours}:${minutes}`;
   }
-console.log(time(new Date().toISOString()))
+
   return (
     <div className="relative w-screen h-screen flex flex-col bg-white">
       <div className="absolute top-0 left-0 w-full h-full">

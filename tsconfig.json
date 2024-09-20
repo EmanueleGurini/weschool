@@ -21,7 +21,7 @@
     "paths": {
       "@/components/*": ["app/components/*"],
       "@/teacher/*": ["app/teacher/*"],
-      "@/dashboard/*": ["app/dashboard/*"],
+      "@/dashboard/*": ["app/(routes)/dashboard/*"],
       "@/pages/*": ["app/pages/*"] 
     }
   },
