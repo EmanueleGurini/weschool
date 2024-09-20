@@ -68,18 +68,22 @@ function Charts({ subjectsArray }: ISubject) {
   const subjects = getUniqueSubjects(subjectsArray);
 
   return (
-    <div className="flex flex-col items-center p-8 py-10 bg-white rounded-lg">
-      <h2 className="text-xl font-sans font-bold uppercase mb-4 p-2 text-color100">
+    <div className="flex flex-col items-center py-10 bg-white rounded-lg">
+      <h2 className="text-xl font-bold uppercase mb-4 p-2 text-color100">
         Academic Performance{" "}
       </h2>
       <ResponsiveContainer width="95%" height={400}>
         <LineChart width={700} height={500} data={data}>
-          <XAxis dataKey="date" stroke="var(--color-100)" tickFormatter={formatDateForChart}/>
+          <XAxis 
+            dataKey="date" 
+            stroke="var(--color-100)" 
+            fontSize={13}
+            tickFormatter={formatDateForChart}/>
           <YAxis
             domain={[0, 10]}
             ticks={[0, 2, 4, 6, 8, 10]}
             stroke="var(--color-100)"
-            tick={{ fontSize: 12, fill: "var(--color-60)" }}
+            tick={{ fontSize: 10, fill: "var(--color-60)" }}
           />
           <CartesianGrid stroke="var(--color-20)" strokeDasharray="5 5" />
           <Tooltip
@@ -94,7 +98,8 @@ function Charts({ subjectsArray }: ISubject) {
           <Legend
             wrapperStyle={{
               color: "var(--color-100)",
-              fontFamily: "sans-serif",
+              fontFamily: "montserrat",
+              fontSize: "13px",
               fontWeight: "bold",
             }}
           />

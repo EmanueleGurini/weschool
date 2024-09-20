@@ -59,37 +59,43 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
   const uniqueStudentNames = Array.from(new Set(sortedStudents.map((student: IStudent) => student.fullName)));
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="w-full">
+      <div className="w-screen bg-white px-32 py-6">
       <div className="w-full flex items-center justify-between font-extrabold">
-        <h2 className="text-2xl font-bold mb-4">Class Name: {classData.courseName}</h2>
+        <h2 className="text-2xl font-bold mt-4">Class Name: {classData.courseName}</h2>
         <p>
           <FormattedDate date={new Date(selectedDate)} format="day-month-year" />
         </p>
       </div>
 
-      <p className="text-gray-800 mb-6">Students Number: {uniqueStudentNames.length}</p>
+      <p className="text-gray-800 ">Students Number: {uniqueStudentNames.length}</p>
 
-      <form method="GET" className="mb-4 w-full flex items-center justify-end">
-        <label htmlFor="date" className="mr-2">
-          Select Date:
-        </label>
-        <input type="date" id="date" name="date" defaultValue={selectedDate} className="border p-2 rounded-lg" />
-        <button
-          type="submit"
-          className="ml-2 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
-        >
+      <form method="GET" className=" w-full flex items-center justify-end">
+        <label htmlFor="date" className="mr-2 font-bold text-sm uppercase">Select Date:</label>
+        <input
+          type="date"
+          id="date"
+          name="date"
+          defaultValue={selectedDate}
+          className="border p-2 rounded-lg"
+        />
+        <button type="submit" className="ml-2 inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50">
           Load Data
         </button>
       </form>
-
+      </div>
+      
+      <div className="container mx-auto p-6 items-center">
       <TableTeacherClass dateSelected={selectedDate} id={id} subjects={classData.subjects} students={sortedStudents} date={selectedDate} />
-
+      <div className="container mx-auto pt-3 items-center"></div>
       <Link
         href="/dashboard/teacher"
         className="inline-block rounded-lg bg-color100 py-3 px-6 text-xs font-bold uppercase text-white shadow-md transition-all hover:bg-color80 focus:opacity-85 active:opacity-85 disabled:pointer-events-none disabled:opacity-50"
       >
         Go Back
       </Link>
+      </div>
+
     </div>
   );
 }
