@@ -18,7 +18,7 @@ Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in 
 
 ## Sezione Chat
 
-![screenshot chat page]
+![screenshot chat page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-chat.png)
 
 ## Descrizione dell'app
 
