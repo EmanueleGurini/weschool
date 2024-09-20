@@ -6,7 +6,7 @@ Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in 
 
 ## Dashboard Insegnante
 
-![screenshot teacher page](./pubblic/img/screenshot-teacher.png)
+![screenshot teacher page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-stuent.png)
 
 ## Dettaglio Classe Insegnante
 
