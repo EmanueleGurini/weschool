@@ -1,9 +1,10 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ErrorPage() {
   return (
     <>
-    <section className="relative z-10 bg-[#f7f7f7] py-[120px] flex justify-center items-center">
+    <section className="relative z-10 bg-[#f7f7f7] py-[120px] flex justify-center items-center min-h-dvh">
     <div className="px-12 p-16 bg-white rounded-lg shadow-md">
     <div className="w-[600px] h-[400px] mx-auto bg-color100 border border-gray-200 rounded-lg shadow-md p-6">
       <div className="container mx-auto">
@@ -16,7 +17,9 @@ export default function ErrorPage() {
               <h4 className="mb-4 text-2xl font-bold leading-9 tracking-tight text-color0">
                 Maybe you got the credentials wrong
               </h4>
-              <img 
+              <Image 
+              width={50}
+              height={50}
               src="/img/sad.png" 
               alt="Sad face" 
               className="mx-auto mb-4 w-16 h-16" 

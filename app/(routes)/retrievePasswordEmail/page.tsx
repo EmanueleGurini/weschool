@@ -2,6 +2,7 @@
 
 import ToastNo from '@/components/ToastNo';
 import ToastYes from '@/components/ToastYes';
+import Link from 'next/link';
 import { useState } from 'react';
 import { createClient } from 'utils/supabase/client';
 
@@ -43,7 +44,7 @@ export default function RetrievePassword() {
       {toastYes && <ToastYes setMessage={setMessage} setClose={setToastYes}>{message}</ToastYes>}
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
         <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-color100">Retrieve Password</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4 mb-4">
           <div>
             <label htmlFor="email" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
               Email address
@@ -65,6 +66,9 @@ export default function RetrievePassword() {
             Send password reset email
           </button>
         </form>
+        <div className='w-full flex'>
+          <Link className="w-full bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-2  focus:ring-offset-2 text-center" href='/'>Go Back</Link>
+        </div>
       </div>
     </div>
   );

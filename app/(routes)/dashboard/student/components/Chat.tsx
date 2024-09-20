@@ -93,7 +93,14 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
   return (
     <div className="relative w-screen h-screen flex flex-col bg-white">
       <div className="absolute top-0 left-0 w-full h-full">
-        <Image className="w-full h-full object-cover -z-10" width={2000} height={2000} src='/img/bg-chat.png' alt="Background chat" />
+        <Image
+        className="w-full h-full object-cover -z-10"
+        width={2000}
+        height={2000}
+        src="/img/bg-chat.svg"
+        alt="Background chat"
+        />
+        <div className="absolute top-0 left-0 w-full h-full bg-white opacity-65 z-0"></div>
       </div>
 
       <div className="flex flex-col-reverse flex-auto p-6 overflow-y-auto space-y-6 space-y-reverse min-h-[0px] text-slate-900">
