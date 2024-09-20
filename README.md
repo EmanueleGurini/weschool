@@ -2,7 +2,6 @@
 
 Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in un bootcamp di programmazione, dove sia i professori che gli studenti possono accedere alla loro dashboard tramite login. L'applicazione è realizzata con **Tailwind CSS** **Next.js**, **TypeScript**, e **Supabase**, per offrire un'interfaccia moderna e responsiva all'utente, oltre a funzionalità di gestione dei dati tramite CRUD e autenticazione sicura.
 
-<div>
 
 ## Dashboard Insegnante
 
@@ -10,10 +9,8 @@ Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in 
 
 ## Dettaglio Classe Insegnante
 
-<img src="/img/screenshot-teacher-detail.png" alt="Screenshot Dettaglio Classe" width="300">
-</div>
+![screenshot teacher detail page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-teacher-detail.png)
 
-<div>
 
 ## Dashboard Studente
 
