@@ -4,10 +4,12 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import Chat from "../components/Chat";
+
 interface IChatPage {
   params: { chat_id: string };
   searchParams: { student_name?: string };
 }
+
 export default async function ChatPage({ params, searchParams }: IChatPage) {
   const { chat_id } = params;
   const studentName = searchParams.student_name || "Student";
