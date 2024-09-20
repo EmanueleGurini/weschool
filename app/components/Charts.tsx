@@ -1,14 +1,5 @@
 "use client";
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
-  ResponsiveContainer,
-} from "recharts";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 
 interface IChartsProps {
   subject: string;
@@ -25,24 +16,36 @@ const organizeData = (subjectsArray: IChartsProps[]) => {
     .filter((item) => item.grade !== null && item.date !== null)
     .sort((a, b) => new Date(a.date!).getTime() - new Date(b.date!).getTime());
 
-  const allDates = Array.from(new Set(validData.map((item) => item.date)));
+  const allDates = Array.from(new Set(validData.map((item) => item.date!)));
+
+  const dataByDateAndSubject: { [date: string]: { [subject: string]: number | null } } = {};
+
+  validData.forEach(({ subject, grade, date }) => {
+    if (date !== null) {
+      if (!dataByDateAndSubject[date]) {
+        dataByDateAndSubject[date] = {};
+      }
+      dataByDateAndSubject[date][subject] = grade;
+    }
+  });
 
   return allDates.map((date) => {
-    const entry: any = { date };
-    subjectsArray.forEach((subject) => {
-      const dataForSubject = validData.find(
-        (item) => item.date === date && item.subject === subject.subject
-      );
-      entry[subject.subject] = dataForSubject ? dataForSubject.grade : null;
-    });
-    return entry;
+    return {
+      date,
+      JavaScript: dataByDateAndSubject[date]?.JavaScript ?? null,
+      React: dataByDateAndSubject[date]?.React ?? null,
+      HTML: dataByDateAndSubject[date]?.HTML ?? null,
+      CSS: dataByDateAndSubject[date]?.CSS ?? null,
+      "Next.js": dataByDateAndSubject[date]?.["Next.js"] ?? null,
+      SASS: dataByDateAndSubject[date]?.SASS ?? null,
+      TypeScript: dataByDateAndSubject[date]?.TypeScript ?? null,
+      TAILWIND: dataByDateAndSubject[date]?.TAILWIND ?? null,
+    };
   });
 };
 
 const getUniqueSubjects = (subjectsArray: IChartsProps[]) => {
-  return Array.from(
-    new Set(subjectsArray.map((item) => item.subject).filter(Boolean))
-  );
+  return Array.from(new Set(subjectsArray.map((item) => item.subject).filter(Boolean)));
 };
 
 const colorPalette = [
@@ -60,7 +63,7 @@ function formatDateForChart(dateString: string) {
   const day = date.getDate().toString().padStart(2, "0");
   const month = (date.getMonth() + 1).toString().padStart(2, "0");
   const year = date.getFullYear();
-  return `${day}-${month}-${year}`; 
+  return `${day}-${month}-${year}`;
 }
 
 function Charts({ subjectsArray }: ISubject) {
@@ -69,22 +72,11 @@ function Charts({ subjectsArray }: ISubject) {
 
   return (
     <div className="flex flex-col items-center py-10 bg-white rounded-lg">
-      <h2 className="text-xl font-bold uppercase mb-4 p-2 text-color100">
-        Academic Performance{" "}
-      </h2>
+      <h2 className="text-xl font-bold uppercase mb-4 p-2 text-color100">Academic Performance </h2>
       <ResponsiveContainer width="95%" height={400}>
         <LineChart width={700} height={500} data={data}>
-          <XAxis 
-            dataKey="date" 
-            stroke="var(--color-100)" 
-            fontSize={13}
-            tickFormatter={formatDateForChart}/>
-          <YAxis
-            domain={[0, 10]}
-            ticks={[0, 2, 4, 6, 8, 10]}
-            stroke="var(--color-100)"
-            tick={{ fontSize: 10, fill: "var(--color-60)" }}
-          />
+          <XAxis dataKey="date" stroke="var(--color-100)" fontSize={13} tickFormatter={formatDateForChart} />
+          <YAxis domain={[0, 10]} ticks={[0, 2, 4, 6, 8, 10]} stroke="var(--color-100)" tick={{ fontSize: 10, fill: "var(--color-60)" }} />
           <CartesianGrid stroke="var(--color-20)" strokeDasharray="5 5" />
           <Tooltip
             contentStyle={{
