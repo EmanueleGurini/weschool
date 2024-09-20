@@ -1,32 +1,95 @@
-## Configurazione e Avvio del Progetto
+# We School
 
-Dopo aver clonato il repository o effettuato un `git pull`, segui i passaggi seguenti per configurare e avviare l'applicazione.
+Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in un bootcamp di programmazione, dove sia i professori che gli studenti possono accedere alla loro dashboard tramite login. L'applicazione è realizzata con **Tailwind CSS** **Next.js**, **TypeScript**, e **Supabase**, per offrire un'interfaccia moderna e responsiva all'utente, oltre a funzionalità di gestione dei dati tramite CRUD e autenticazione sicura.
 
-### 1. Creazione del file `.env.local`
+<div>
 
-All'interno della root del progetto, è necessario creare un file `.env.local` che conterrà le variabili d'ambiente per la connessione a Supabase. Esegui i seguenti passaggi:
+## Dashboard Insegnante
 
-1. Nella root del progetto, crea un nuovo file chiamato `.env.local`.
-2. Inserisci al suo interno le seguenti stringhe:
+<img src="path_to_screenshot/screenshot-teacher.png" alt="Screenshot Insegnante" width="300">
 
-```bash
-   NEXT_PUBLIC_SUPABASE_URL=https://ihymhmvbzbgzrnlusnxj.supabase.co/
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImloeW1obXZiemJnenJubHVzbnhqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjU4Nzk2MzMsImV4cCI6MjA0MTQ1NTYzM30._mtUPXpudpf1-zMBK2gDk0ddvZJmVch4G3MSd9e6V6E
-   NEXT_PUBLIC_GEMINI_KEY=AIzaSyCZqHnQ3Bv8NlyiSftcyTxMZcvNEvxa734
-```
+## Dettaglio Classe Insegnante
 
-### 2. Installazione delle dipendenze
+<img src="public/img/screenshot-teacher-detail.png/screenshot-teacher-detail.png" alt="Screenshot Dettaglio Classe" width="300">
+</div>
 
-Prima di avviare il progetto, assicurati di installare tutte le dipendenze necessarie. Nella root del progetto, esegui il seguente comando:
+<div>
 
-```bash
-npm install
-```
+## Dashboard Studente
 
-### 3. Avvio dell'applicazione
+<img src="public/img/screenshot-stuent.png/screenshot-student.png" alt="Screenshot Studente" width="300">
 
-Una volta installati i moduli, puoi avviare l'applicazione in modalità di sviluppo con il seguente comando:
+## Sezione Chat
 
-```bash
-npm run dev
-```
+<img src="public/img/screenshot-teacher.png/screenshot-chat.png" alt="Screenshot Chat" width="300">
+</div>
+
+## Descrizione dell'app
+
+### Parte insegnante:
+
+- I professori possono accedere alla loro home, dove trovano una tabella dei corsi.
+- Cliccando su una classe, il professore può vedere il dettaglio degli studenti del corso.
+- Ogni professore può:
+  - Segnalare la presenza o l'assenza di un alunno.
+  - Aggiungere e modificare le votazioni per i vari linguaggi di programmazione.
+  - Filtrare gli studenti per giorno e accedere ai loro profili personali.
+- Esiste la sezione comunicazioni dedicata agli insegnanti, dove si possono lasciare note interne.
+
+### Parte studente:
+
+- Gli studenti accedono con un login personalizzato per visualizzare il proprio profilo.
+- Gli studenti possono visualizzare le informazioni inserite dai professori nella loro pagina personalizzata attraverso un grafico.
+- **AI Assistant:** Gli studenti hanno accesso a un assistente basato su intelligenza artificiale che analizza la loro media dei voti; L'AI suggerisce aree di studio specifiche per migliorare i risultati, fornendo anche link a risorse online rilevanti.
+- È anche disponibile una chat aperta a tutti gli studenti di ogni classe.
+
+## Funzionalità
+
+1. **Autenticazione Utente (Supabase)**
+
+   - Funzionalità di registrazione e login per gli utenti (studenti e insegnanti).
+   - Autenticazione tramite email e password.
+   - Mantiene la sessione dell'utente anche dopo il ricaricamento della pagina.
+
+2. **Gestione del Profilo**
+
+   - Gli utenti possono aggiornare il proprio profilo.
+   - I dati del profilo vengono memorizzati e recuperati da Supabase.
+
+3. **Operazioni CRUD**
+
+   - Creazione, Lettura, Modifica e Cancellazione (CRUD) dei dati per la gestione delle informazioni di studenti e corsi.
+   - I dati vengono dinamicamente recuperati da Supabase e visualizzati nell'interfaccia utente.
+
+4. **Routing Dinamico con App Router**
+
+   - Routing dinamico di Next.js per transizioni fluide tra le pagine.
+   - Rotte protette: le pagine sono accessibili solo previa autenticazione.
+
+5. **Interfaccia Responsiva (Tailwind CSS)**
+
+   - Design completamente responsivo grazie a Tailwind CSS.
+   - Componenti UI moderni e accessibili per un'esperienza utente ottimale.
+
+6. **Dashboard e Visualizzazione Dati**
+
+   - Panoramica dei dati degli studenti attraverso un'interfaccia dashboard.
+   - Barre di progresso visive per mostrare metriche come la presenza e il progresso delle classi.
+
+7. **Chat Studenti**
+
+   - Sezione di chat aperta agli studenti di tutte le classi per la comunicazione interna.
+
+8. **AI Assistant per Studenti**
+
+   - Suggerimenti personalizzati per migliorare i risultati accademici.
+   - Collegamenti a risorse esterne utili basate sulla media dei voti individuale.
+
+## Il nostro TEAM
+
+- **Chiara Rapisarda** [https://github.com/Ciaranatalie](#) | [https://www.linkedin.com/in/chiara-rapisarda/](#)
+- **Erica Caruso** [https://github.com/Ericaruso](#) | [https://www.linkedin.com/in/erica-caruso-680883284/](#)
+- **Giada Antioco** [https://github.com/giadantioco](#) | [https://www.linkedin.com/in/giada-antioco/](#)
+- **Giulia Gabriele** [https://github.com/Jiyuunn](#) | [https://www.linkedin.com/in/giuliagabriele97/](#)
+- **Nicola Marmugi** [https://github.com/nmarmugi](#) | [https://www.linkedin.com/in/nicola-marmugi-2860b022a/](#)
+- **Simone Grillo** [https://github.com/SimonJ933](#) | [https://www.linkedin.com/in/simone-grillo/](#)
