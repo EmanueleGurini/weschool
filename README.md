@@ -6,7 +6,7 @@ Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in 
 
 ## Dashboard Insegnante
 
-<img src="/img/screenshot-teacher.png" alt="Screenshot Insegnante" width="300">
+<img src="./pubblic/img/screenshot-teacher.png" alt="Screenshot Insegnante" width="300">
 
 ## Dettaglio Classe Insegnante
 
