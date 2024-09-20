@@ -1,52 +1,64 @@
-'use client';
+"use client";
 
-import ToastNo from '@/components/ToastNo';
-import ToastYes from '@/components/ToastYes';
-import Link from 'next/link';
-import { useState } from 'react';
-import { createClient } from 'utils/supabase/client';
+import ToastNo from "@/components/ToastNo";
+import ToastYes from "@/components/ToastYes";
+import Link from "next/link";
+import { useState } from "react";
+import { createClient } from "utils/supabase/client";
 
 export default function RetrievePassword() {
-  const [input, setInput] = useState<string>('');
-  const [message, setMessage] = useState<string>('');
-  const [toastYes, setToastYes] = useState<boolean>(false)
-  const [toastNo, setToastNo] = useState<boolean>(false)
+  const [input, setInput] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [toastYes, setToastYes] = useState<boolean>(false);
+  const [toastNo, setToastNo] = useState<boolean>(false);
 
   const supabase = createClient();
-
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { error } = await supabase.auth.resetPasswordForEmail(input, {
-      redirectTo: 'http://localhost:3000/changePassword'
+      redirectTo: "https://weschool-ten.vercel.app/changePassword",
     });
     if (error) {
-      setToastNo(true)
-      setMessage('Error resetting password: ' + error.message);
+      setToastNo(true);
+      setMessage("Error resetting password: " + error.message);
       setTimeout(() => {
-        setToastNo(false)
-        setMessage('')
+        setToastNo(false);
+        setMessage("");
       }, 3000);
     } else {
-      setMessage('Password reset email sent.');
-      setToastYes(true)
-      setMessage('Password reset email sent.');
+      setMessage("Password reset email sent.");
+      setToastYes(true);
+      setMessage("Password reset email sent.");
       setTimeout(() => {
-        setToastYes(false)
-        setMessage('')
+        setToastYes(false);
+        setMessage("");
       }, 3000);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
-      {toastNo && <ToastNo setMessage={setMessage} setClose={setToastNo}>{message}</ToastNo>}
-      {toastYes && <ToastYes setMessage={setMessage} setClose={setToastYes}>{message}</ToastYes>}
+      {toastNo && (
+        <ToastNo setMessage={setMessage} setClose={setToastNo}>
+          {message}
+        </ToastNo>
+      )}
+      {toastYes && (
+        <ToastYes setMessage={setMessage} setClose={setToastYes}>
+          {message}
+        </ToastYes>
+      )}
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-color100">Retrieve Password</h2>
+        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-color100">
+          Retrieve Password
+        </h2>
         <form onSubmit={handleSubmit} className="space-y-4 mb-4">
           <div>
-            <label htmlFor="email" className="block pt-4 pb-1 text-sm font-medium text-gray-700">
+            <label
+              htmlFor="email"
+              className="block pt-4 pb-1 text-sm font-medium text-gray-700"
+            >
               Email address
             </label>
             <input
@@ -66,8 +78,13 @@ export default function RetrievePassword() {
             Send password reset email
           </button>
         </form>
-        <div className='w-full flex'>
-          <Link className="w-full bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-2  focus:ring-offset-2 text-center" href='/'>Go Back</Link>
+        <div className="w-full flex">
+          <Link
+            className="w-full bg-color100 text-color0 py-2 rounded-md hover:bg-color80 focus:outline-none focus:ring-2  focus:ring-offset-2 text-center"
+            href="/"
+          >
+            Go Back
+          </Link>
         </div>
       </div>
     </div>
