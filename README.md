@@ -6,22 +6,22 @@ Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in 
 
 ## Dashboard Insegnante
 
-<img src="path_to_screenshot/screenshot-teacher.png" alt="Screenshot Insegnante" width="300">
+<img src="/img/screenshot-teacher.png" alt="Screenshot Insegnante" width="300">
 
 ## Dettaglio Classe Insegnante
 
-<img src="public/img/screenshot-teacher-detail.png/screenshot-teacher-detail.png" alt="Screenshot Dettaglio Classe" width="300">
+<img src="/img/screenshot-teacher-detail.png" alt="Screenshot Dettaglio Classe" width="300">
 </div>
 
 <div>
 
 ## Dashboard Studente
 
-<img src="public/img/screenshot-stuent.png/screenshot-student.png" alt="Screenshot Studente" width="300">
+<img src="/img/screenshot-student.png" alt="Screenshot Studente" width="300">
 
 ## Sezione Chat
 
-<img src="public/img/screenshot-teacher.png/screenshot-chat.png" alt="Screenshot Chat" width="300">
+<img src="/img/screenshot-chat.png" alt="Screenshot Chat" width="300">
 </div>
 
 ## Descrizione dell'app
