@@ -81,14 +81,17 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
   }, []);
 
   function time(timestamp: string) {
-
     const date = new Date(timestamp);
-
-    const hours = date.getHours().toString().padStart(2, "0"); 
-    const minutes = date.getMinutes().toString().padStart(2, "0"); 
-
-    return `${hours}:${minutes}`;
-  }
+  
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
+    
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0"); // +1 perché i mesi partono da 0
+    const year = date.getFullYear();
+  
+    return `${day}/${month}/${year} ${hours}:${minutes}`;
+  }  
 
   return (
     <div className="relative w-screen h-screen flex flex-col bg-white">
