@@ -49,7 +49,7 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
 
   const selectedDate = searchParams.date || today;
   const notes = await getTeacherNotes(user.id, selectedDate);
-
+console.log(notes)
   return (
     <>
       <div className="w-full flex justify-between items-center p-6">
@@ -76,8 +76,8 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
           </button>
         </form>
       </div>
-      {notes.courses[0].posts.length > 0 && <p className="text-center ">You can delete only your own posts</p>}
-      {notes.courses[0].posts.map((note: Note) => (
+      {notes.posts.length > 0 && <p className="text-center ">You can delete only your own posts</p>}
+      {notes.posts.map((note: Note) => (
         <Post
           key={note.note_id}
           date={note.date}
