@@ -41,7 +41,13 @@ async function StudentPage() {
       <div className="header-container px-28 p-6 bg-white flex flex-col md:flex-row justify-between items-center">
         {imgUrl.publicUrl !== "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
           <div className="avatar-container w-48 h-48 border-4 rounded-full overflow-hidden border-contrast flex-shrink-0">
-            <Image src={imgUrl.publicUrl} alt="Student Avatar" width={200} height={200} className="object-cover w-full h-full " />
+            <Image src={imgUrl.publicUrl} alt="Student Avatar" width={150} height={150} className="object-cover w-full h-full " />
+          </div>
+        )}
+
+        {imgUrl.publicUrl === "https://ihymhmvbzbgzrnlusnxj.supabase.co/storage/v1/object/public/avatars/null" && (
+          <div className="avatar-container w-48 h-48 border-4 rounded-full overflow-hidden border-contrast flex-shrink-0">
+            <Image src="/img/profile.svg" alt="Teacher Avatar" width={150} height={150} className="object-cover w-full h-full" />
           </div>
         )}
         <div className="header-info flex-grow text-center mt-4 md:mt-0 md:flex-grow ">
@@ -76,7 +82,10 @@ async function StudentPage() {
           <AIPerformance students={student.students} subjects={JSON.stringify(student.subjects)} />
         </div>
       </div>
-      <Link className="fixed right-5 bottom-5 bg-white border-2 border-contrast rounded-full p-1" href={`student/${student.class_id}?student_name=${encodeURIComponent(student.students)}`}>
+      <Link
+        className="fixed right-5 bottom-5 bg-white border-2 border-contrast rounded-full p-1"
+        href={`student/${student.class_id}?student_name=${encodeURIComponent(student.students)}`}
+      >
         <Image width={50} height={50} src="/img/chat.png" alt="Chat icon" />
       </Link>
     </>
