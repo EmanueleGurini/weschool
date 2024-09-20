@@ -14,12 +14,11 @@ Questo progetto è un CMS sviluppato per la registrazione di voti ed assenze in 
 
 ## Dashboard Studente
 
-<img src="/img/screenshot-student.png" alt="Screenshot Studente" width="300">
+![screenshot student page](https://github.com/giadantioco/weschool/blob/main/public/img/screenshot-stuent.png)
 
 ## Sezione Chat
 
-<img src="/img/screenshot-chat.png" alt="Screenshot Chat" width="300">
-</div>
+![screenshot chat page]
 
 ## Descrizione dell'app
 
