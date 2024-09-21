@@ -18,14 +18,25 @@ export default function FormPost({ id, classes }: IFormPost) {
     title: "",
     class_name: "",
     description: "",
+    name: ''
   });
   const [success, setSuccess] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    if (e.target.tagName === 'SELECT') {
+      const target = e.target as HTMLSelectElement;
+      const selectedOption = target.options[target.selectedIndex];
+      setFormData({
+        ...formData,
+        class_name: target.value,
+        name: selectedOption.textContent ?? '',
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -41,6 +52,7 @@ export default function FormPost({ id, classes }: IFormPost) {
           title: formData.title,
           description: formData.description,
           date: formData.date,
+          name: formData.name
         })
         .select();
 
