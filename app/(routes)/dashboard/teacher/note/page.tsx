@@ -77,6 +77,7 @@ console.log(notes)
         </form>
       </div>
       {notes.posts.length > 0 && <p className="text-center ">You can delete only your own posts</p>}
+      {notes.posts.length === 0 && <p className="text-center ">There are still no posts for today</p>}
       {notes.posts.map((note: Note) => (
         <Post
           key={note.note_id}

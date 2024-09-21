@@ -74,16 +74,16 @@ async function StudentPage() {
         </div>
       </div>
 
-      <div className="my-12 max-w-[1300px] bg-white rounded-lg mx-auto flex ">
-        <div className="w-2/4">
+      <div className="my-12 max-w-[1300px] bg-white rounded-lg mx-auto flex flex-col md:flex-row">
+        <div className="w-full md:w-1/2">
           <Charts subjectsArray={student.subjects} />
         </div>
-        <div className="w-2/4">
+        <div className="w-full md:w-1/2">
           <AIPerformance students={student.students} subjects={JSON.stringify(student.subjects)} />
         </div>
       </div>
       <Link
-        className="fixed right-5 bottom-5 bg-white border-2 border-contrast rounded-full p-1"
+        className="fixed right-5 bottom-5 bg-white border-2 border-contrast rounded-full p-1 w-12 md:w-16"
         href={`student/${student.class_id}?student_name=${encodeURIComponent(student.students)}`}
       >
         <Image width={50} height={50} src="/img/chat.png" alt="Chat icon" />

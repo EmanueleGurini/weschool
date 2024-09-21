@@ -138,13 +138,13 @@ const Chat = ({ session, class_id, studentName }: ChatProps) => {
         onSubmit={handleSendMessage}
       >
         <Link
-          className="bg-color100 text-white p-2 rounded hover:bg-color80"
+          className="bg-color100 text-white p-2 rounded hover:bg-color80 min-w-24 flex justify-center"
           href="/dashboard/student"
         >
           Go Back
         </Link>
         <input
-          className={`flex-grow bg-white rounded p-2 focus:outline-none ${
+          className={`flex-grow bg-white rounded p-2 focus:outline-none w-1 md:w-full ${
             isLoading ? "text-slate-600" : "text-slate-900"
           }`}
           autoFocus

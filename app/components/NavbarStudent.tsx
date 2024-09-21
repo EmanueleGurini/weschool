@@ -4,8 +4,8 @@ import Image from "next/image";
 
 const NavbarStudent: React.FC = () => {
   return (
-    <div className="w-full text-white bg-[#1C2C47] ">
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-between p-4">
+    <div className="w-full text-white bg-[#1C2C47]">
+      <div className="container mx-auto flex md:flex-row items-center justify-between p-4">
         <div className="text-lg font-semibold tracking-widest text-white-900 uppercase rounded-lg ">
           <Link href="/">
             <div className="h-full flex items-center">

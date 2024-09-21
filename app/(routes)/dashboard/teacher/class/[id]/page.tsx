@@ -60,17 +60,17 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
 
   return (
     <div className="w-full">
-      <div className="w-screen bg-white px-32 py-6">
+      <div className="w-screen bg-white px-10 py-6">
       <div className="w-full flex items-center justify-between font-extrabold">
-        <h2 className="text-2xl font-bold mt-4">Class Name: {classData.courseName}</h2>
-        <p>
+        <h2 className="text-2xl font-bold mt-4 min-w-52">Class Name: {classData.courseName}</h2>
+        <p className="min-w-48">
           <FormattedDate date={new Date(selectedDate)} format="day-month-year" />
         </p>
       </div>
 
       <p className="text-gray-800 ">Students Number: {uniqueStudentNames.length}</p>
 
-      <form method="GET" className=" w-full flex items-center justify-end">
+      <form method="GET" className=" w-full flex items-center justify-center md:justify-end">
         <label htmlFor="date" className="mr-2 font-bold text-sm uppercase">Select Date:</label>
         <input
           type="date"
