@@ -52,11 +52,11 @@ export default async function StudentPageTeacher({
 
   return (
     <div className=" w-full">
-      <div className="bg-white px-32 py-14 flex justify-between items-center">
+      <div className="bg-white px-10 py-14 flex gap-16 md:gap-0 justify-between items-center">
         <h2 className="text-3xl font-bold text-color100 mb-4">
           {newStudent.students}
         </h2>
-        <p>
+        <p className="min-w-40">
           <FormattedDate date={today} format="day-month-year" />
         </p>
       </div>
