@@ -13,7 +13,7 @@ interface Note {
   date: string;
   title: string;
   note_id: string;
-  class_name: string;
+  name: string;
   description: string;
   full_name: string;
   author_id: string;
@@ -89,7 +89,7 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
           date={note.date}
           title={note.title}
           note_id={note.note_id}
-          class_name={note.class_name}
+          name={note.name}
           description={note.description}
           full_name={note.full_name}
           isDelete={note.author_id === user.id}

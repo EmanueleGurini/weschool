@@ -17,7 +17,7 @@ export default function RetrievePassword() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const { error } = await supabase.auth.resetPasswordForEmail(input, {
-      redirectTo: "https://weschool-ten.vercel.app/changePassword",
+      redirectTo: "https://www.weschool-app.it/changePassword",
     });
     if (error) {
       setToastNo(true);
