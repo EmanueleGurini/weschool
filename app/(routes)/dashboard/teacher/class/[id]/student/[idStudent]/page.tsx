@@ -8,6 +8,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "utils/supabase/server";
 import FormattedDate from "@/components/FormattedDate";
+import ErrorPage from "@/components/Error";
 
 interface IStudentPageTeacher {
   params: {
@@ -22,6 +23,10 @@ export default async function StudentPageTeacher({
   const { idStudent, id } = params;
 
   const newStudent = await getFullStudentDetails(idStudent);
+
+  if (newStudent === null) {
+    return <ErrorPage />
+  }
 
   const supabase = createClient();
 

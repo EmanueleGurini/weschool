@@ -7,6 +7,7 @@ import { getStudentsListDetailsByTeacher } from "app/api/supabase/actions";
 import Link from "next/link";
 import TableTeacherClass from "./components/TableTeacherClass";
 import FormattedDate from "@/components/FormattedDate";
+import ErrorPage from "@/components/Error";
 
 interface SinglePageClassProps {
   params: { id: string };
@@ -49,6 +50,10 @@ export default async function SinglePageClass({ params, searchParams }: SinglePa
   const today = new Date();
   const selectedDate = searchParams.date || formatDate(today);
   const classData = await getStudentsListDetailsByTeacher(id, selectedDate);
+
+  if (classData === null) {
+    return <ErrorPage />
+  }
 
   const sortedStudents = classData.students.sort((a: IStudent, b: IStudent) => {
     if (a.fullName < b.fullName) return -1;

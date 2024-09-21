@@ -7,6 +7,7 @@ import { createClient } from "utils/supabase/server";
 import Post from "./components/Post";
 import ButtonForm from "./components/ButtonForm";
 import Link from "next/link";
+import ErrorPage from "@/components/Error";
 
 interface Note {
   date: string;
@@ -49,7 +50,11 @@ export default async function Notes({ searchParams }: { searchParams: { date?: s
 
   const selectedDate = searchParams.date || today;
   const notes = await getTeacherNotes(user.id, selectedDate);
-console.log(notes)
+
+  if (notes === null) {
+    return <ErrorPage />
+  }
+
   return (
     <>
       <div className="w-full flex justify-between items-center p-6">

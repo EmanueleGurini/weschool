@@ -7,6 +7,7 @@ import { getAvatarImg, getTeacherDataByID } from "app/api/supabase/actions";
 import Link from "next/link";
 import Image from "next/image";
 import Header from "@/components/Header";
+import ErrorPage from "@/components/Error";
 
 interface ICourses {
   course: string;
@@ -41,6 +42,10 @@ export default async function TeacherPage() {
   }
 
   const dataTeacher = await getTeacherDataByID();
+
+  if (dataTeacher === null) {
+    return <ErrorPage />
+  }
 
   const avatarTeacher = await getAvatarImg(dataTeacher.teacher_id);
   const { data: imgUrl } = supabase.storage
