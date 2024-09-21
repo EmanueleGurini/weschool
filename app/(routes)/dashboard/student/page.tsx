@@ -10,6 +10,7 @@ import Image from "next/image";
 import Charts from "@/components/Charts";
 import AIPerformance from "./components/AIPerformance";
 import Link from "next/link";
+import ErrorPage from "@/components/Error";
 
 async function StudentPage() {
   const supabase = createClient();
@@ -33,6 +34,11 @@ async function StudentPage() {
     }
   }
   const student = await getFullStudentDetails(user.id);
+
+  if (student === null) {
+    return <ErrorPage />
+  }
+
   const avatarStudent = await getAvatarImg(user.id);
   const { data: imgUrl } = supabase.storage.from("avatars").getPublicUrl(`${avatarStudent.img}`);
 
