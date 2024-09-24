@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import { createClient } from "utils/supabase/client";
 
@@ -69,6 +67,10 @@ export default function FormPost({ id, classes }: IFormPost) {
     }
   };
 
+  const uniqueClasses = Array.from(new Set(classes.map(item => item.course_id)))
+    .map(id => classes.find(item => item.course_id === id))
+    .filter((classItem): classItem is IClasses => classItem !== undefined); // Filtriamo i valori undefined
+
   return (
     <div className="max-w-lg mb-4 mx-auto bg-white p-6 rounded-lg">
       <h2 className="text-2xl font-bold mb-6 text-primary">Create New Post</h2>
@@ -103,7 +105,7 @@ export default function FormPost({ id, classes }: IFormPost) {
             <option value="" hidden>
               Select Class...
             </option>
-            {classes.map((classItem, index) => (
+            {uniqueClasses.map((classItem, index) => (
               <option key={index} value={classItem.course_id}>
                 {classItem.course_name}
               </option>
