@@ -101,3 +101,20 @@
 - **Giulia Gabriele** [GitHub](https://github.com/Jiyuunn) | [LinkedIn](https://www.linkedin.com/in/giuliagabriele97/)
 - **Nicola Marmugi** [GitHub](https://github.com/nmarmugi) | [LinkedIn](https://www.linkedin.com/in/nicola-marmugi-2860b022a/)
 - **Simone Grillo** [GitHub](https://github.com/SimonJ933) | [LinkedIn](https://www.linkedin.com/in/simone-grillo/)
+
+---
+
+## Prova il Progetto
+
+Per accedere al sistema e testare le funzionalità, puoi utilizzare le seguenti credenziali di prova:
+
+### Account Teacher:
+- **Email**: senettone@gmail.com
+- **Password**: 1234
+
+### Account Student:
+- **Email**: lollo@gmail.com
+- **Password**: 1234
+
+> **Attenzione**: Questi account sono stati creati solo a scopo di test. Non sono mail esistenti!
+
